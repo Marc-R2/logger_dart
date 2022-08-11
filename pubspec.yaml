@@ -1,7 +1,8 @@
-name: logger_dart
-description: A sample command-line application.
-version: 1.0.0
-# homepage: https://www.example.com
+name: logger
+description: Global logging system
+version: 0.1.0
+
+publish_to: 'none'
 
 environment:
   sdk: '>=2.18.0-271.4.beta <3.0.0'
@@ -10,5 +11,5 @@ environment:
 #   path: ^1.8.0
 
 dev_dependencies:
-  lints: ^2.0.0
   test: ^1.16.0
+  very_good_analysis: 3.0.1
