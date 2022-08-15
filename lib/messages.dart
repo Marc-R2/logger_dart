@@ -14,6 +14,7 @@ class Message {
     List<String>? tags,
     Object? klasse,
     String? function,
+    this.templateValues = const {},
   })  : type = 0,
         tags = tags ?? [],
         time = DateTime.now() {
@@ -31,6 +32,7 @@ class Message {
     List<String>? tags,
     Object? klasse,
     String? function,
+    this.templateValues = const {},
   })  : type = 1,
         tags = tags ?? [],
         time = DateTime.now() {
@@ -48,6 +50,7 @@ class Message {
     List<String>? tags,
     Object? klasse,
     String? function,
+    this.templateValues = const {},
   })  : type = 2,
         tags = tags ?? [],
         time = DateTime.now() {
@@ -65,6 +68,7 @@ class Message {
     List<String>? tags,
     Object? klasse,
     String? function,
+    this.templateValues = const {},
   })  : type = 3,
         tags = tags ?? [],
         time = DateTime.now() {
@@ -82,6 +86,7 @@ class Message {
     List<String>? tags,
     Object? klasse,
     String? function,
+    this.templateValues = const {},
   })  : type = 0,
         tags = tags ?? [],
         time = DateTime.now() {
@@ -97,15 +102,38 @@ class Message {
         time = DateTime.fromMillisecondsSinceEpoch((map['time'] ?? 0) as int),
         level = (map['level'] ?? 0) as int,
         type = (map['type'] ?? 0) as int,
+        templateValues = ((map['templates'] ?? <dynamic, dynamic>{}) as Map)
+            .map((key, value) => MapEntry(key.toString(), value.toString())),
         tags = ((map['tags'] ?? <String>[]) as List)
             .map<String>((dynamic e) => e.toString())
             .toList();
 
   /// Name or Title of the message
+  ///
+  /// Do not use variables in the title,
+  /// use [templateValues] instead
+  ///
+  /// Define a template with {_key_} to insert the value
+  /// of the given key in [templateValues]
+  ///
+  /// When the key is not found in [templateValues],
+  /// the bracket will be replaced: <_key_>
   final String title;
 
   /// Content of the message
+  ///
+  /// Do not use variables in the text,
+  /// use [templateValues] instead
+  ///
+  /// Define a template with {_key_} to insert the value
+  /// of the given key in [templateValues]
+  ///
+  /// When the key is not found in [templateValues],
+  /// the bracket will be replaced: <_key_>
   final String text;
+
+  /// Values for templates in the [text] of the message
+  final Map<String, String> templateValues;
 
   /// Time of the message
   ///
@@ -162,6 +190,7 @@ class Message {
     map['level'] = level;
     map['tags'] = tags;
     map['time'] = time.millisecondsSinceEpoch;
+    map['templates'] = templateValues;
 
     if (includeStackTrace && stackTrace != null) {
       map['stackTrace'] = stackTrace.toString();
@@ -184,6 +213,60 @@ class Message {
     return '';
   }
 
+  /// Removes all curly brackets from a given [text]
+  String removeCurlyBrackets(String? text) {
+    if (text == null) return '';
+    return text.replaceAll('{', '').replaceAll('}', '');
+  }
+
+  /// Replaces the templates in a given [text]
+  /// with the values in [templateValues]
+  ///
+  /// Curly brackets are not allowed in values and will be deleted
+  ///
+  /// Using regex
+  String replaceTemplates(String text, {bool? recursion}) {
+    // RegEx to find "{key}"
+    final regExp = RegExp('{([a-zA-Z0-9]+)}');
+
+    // Check if there is a 2 opening curly brackets
+    // without a closing one in between
+    // TODO(Marc-R2): Improve recursion detection
+    // final regExp2 = RegExp('{{([a-zA-Z0-9]+)}}');
+
+    final disableRecursion =
+        !(recursion ?? (text.contains('{{') || text.contains('}}')));
+
+    if (disableRecursion) {
+      return text.replaceAllMapped(regExp, (match) {
+        final key = match.group(1);
+        return templateValues[key] ?? '<$key>';
+      });
+    }
+
+    var resultText = text;
+
+    var done = false;
+    while (!done) {
+      final match = regExp.allMatches(resultText);
+
+      if (match.isEmpty) {
+        done = true;
+      } else {
+        final key = removeCurlyBrackets(match.last.group(1));
+        final value = templateValues[key];
+
+        if (value != null) {
+          resultText = resultText.replaceFirst('{$key}', value);
+        } else {
+          resultText = resultText.replaceFirst('{$key}', '<$key>');
+        }
+      }
+    }
+
+    return resultText;
+  }
+
   @override
   String toString({
     bool time = true,
@@ -203,9 +286,10 @@ class Message {
       str.write(_typeToString());
     }
 
-    if (title) {
+    if (title && this.title.isNotEmpty) {
       if (str.isNotEmpty) str.write(' ');
-      str.write('${this.title}:');
+      str.write(replaceTemplates(this.title));
+      if (level || (tags && this.tags.isNotEmpty)) str.write(':');
     }
 
     if (level) {
@@ -213,14 +297,14 @@ class Message {
       str.write('(${this.level})');
     }
 
-    if (tags) {
+    if (tags && this.tags.isNotEmpty) {
       if (str.isNotEmpty) str.write(' ');
       str.write('[${this.tags.join(', ')}]');
     }
 
-    if (text) {
+    if (text && this.text.isNotEmpty) {
       if (str.isNotEmpty) str.write(' => ');
-      str.write(this.text);
+      str.write(replaceTemplates(this.text));
     }
 
     if (stackTrace && this.stackTrace != null) {
