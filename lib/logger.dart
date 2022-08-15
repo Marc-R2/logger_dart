@@ -10,7 +10,7 @@ class Logger {
   factory Logger() => _logger;
 
   Logger._internal() {
-    logMessage(Message.warning(title: 'Init Com', log: false));
+    logMessage(Message.warning(title: 'Init Logger', log: false));
   }
 
   static final Logger _logger = Logger._internal();
