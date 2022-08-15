@@ -2,21 +2,39 @@ import 'package:logger/logger.dart';
 import 'package:test/test.dart';
 
 Future<void> main() async {
-  group('Testing Message class util/message.dart', () {
-    late Message log;
-    late Message info;
-    late Message warning;
-    late Message error;
-
-    setUp(() {
-      log = Message.log(title: 'logName', text: 'logText', level: 5);
-      info = Message.info(title: 'infoName', text: 'infoText', level: 9);
-      warning =
-          Message.warning(title: 'warningName', text: 'warningText', level: 2);
-      error = Message.error(title: 'errorName', text: 'errorText', level: 4);
-    });
-
+  group('Testing Message class util/message.dart - Fields', () {
     group('<fields>', () {
+      late Message log;
+      late Message info;
+      late Message warning;
+      late Message error;
+
+      setUp(() {
+        log = Message.log(
+          title: 'logName',
+          text: 'logText',
+          level: 5,
+        );
+
+        info = Message.info(
+          title: 'infoName',
+          text: 'infoText',
+          level: 9,
+        );
+
+        warning = Message.warning(
+          title: 'warningName',
+          text: 'warningText',
+          level: 2,
+        );
+
+        error = Message.error(
+          title: 'errorName',
+          text: 'errorText',
+          level: 4,
+        );
+      });
+
       group('log', () {
         test('log name', () => expect(log.title, 'logName'));
         test('log text', () => expect(log.text, 'logText'));
