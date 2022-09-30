@@ -87,7 +87,7 @@ class Message {
     Object? klasse,
     String? function,
     this.templateValues = const {},
-  })  : type = 0,
+  })  : type = 9,
         tags = tags ?? [],
         time = DateTime.now() {
     _handleClassFunc(klasse, function);
@@ -120,6 +120,9 @@ class Message {
   /// the bracket will be replaced: <_key_>
   final String title;
 
+  /// Gets the title with the replaced template values
+  String get titleString => replaceTemplates(title);
+
   /// Content of the message
   ///
   /// Do not use variables in the text,
@@ -131,6 +134,9 @@ class Message {
   /// When the key is not found in [templateValues],
   /// the bracket will be replaced: <_key_>
   final String text;
+
+  /// Gets the text with the replaced template values
+  String get textString => replaceTemplates(text);
 
   /// Values for templates in the [text] of the message
   final Map<String, String> templateValues;
@@ -199,7 +205,8 @@ class Message {
     return map;
   }
 
-  String _typeToString() {
+  /// Turns the type of the message into a string
+  String typeToString() {
     switch (type) {
       case 0:
         return 'Log:';
@@ -214,7 +221,7 @@ class Message {
   }
 
   /// Removes all curly brackets from a given [text]
-  String removeCurlyBrackets(String? text) {
+  static String removeCurlyBrackets(String? text) {
     if (text == null) return '';
     return text.replaceAll('{', '').replaceAll('}', '');
   }
@@ -283,12 +290,12 @@ class Message {
 
     if (type) {
       if (str.isNotEmpty) str.write(' ');
-      str.write(_typeToString());
+      str.write(typeToString());
     }
 
     if (title && this.title.isNotEmpty) {
       if (str.isNotEmpty) str.write(' ');
-      str.write(replaceTemplates(this.title));
+      str.write(titleString);
       if (level || (tags && this.tags.isNotEmpty)) str.write(':');
     }
 
@@ -304,7 +311,7 @@ class Message {
 
     if (text && this.text.isNotEmpty) {
       if (str.isNotEmpty) str.write(' => ');
-      str.write(replaceTemplates(this.text));
+      str.write(textString);
     }
 
     if (stackTrace && this.stackTrace != null) {
