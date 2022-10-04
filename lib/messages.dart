@@ -158,20 +158,23 @@ class Message {
   /// Can provide stacktrace information when available
   StackTrace? stackTrace;
 
+  /// A marker used to stop coloring
+  static const _endColorMarker = '\x1B[0m';
+
   /// toString with type-matching color
   String prettyString({bool stackTrace = false}) {
     final string = toString(stackTrace: stackTrace);
     switch (type) {
       case 0:
-        return '\x1B[37m$string';
+        return '\x1B[37m$string$_endColorMarker';
       case 1:
-        return '\x1B[34m$string';
+        return '\x1B[34m$string$_endColorMarker';
       case 2:
-        return '\x1B[33m$string';
+        return '\x1B[33m$string$_endColorMarker';
       case 3:
-        return '\x1B[31m$string';
+        return '\x1B[31m$string$_endColorMarker';
     }
-    return '';
+    return string;
   }
 
   void _handleClassFunc(Object? klasse, String? function) {
