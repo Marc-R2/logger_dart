@@ -201,7 +201,7 @@ class Message {
     map['time'] = time.millisecondsSinceEpoch;
     map['templates'] = templateValues;
 
-    if (includeStackTrace && stackTrace != null) {
+    if (includeStackTrace || stackTrace != null) {
       map['stackTrace'] = stackTrace.toString();
     }
 
