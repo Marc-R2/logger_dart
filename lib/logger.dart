@@ -2,7 +2,11 @@ import 'dart:async';
 
 import 'dart:developer' as developer;
 
+part 'mixin/logging.dart';
+
 part 'messages.dart';
+
+part 'message_templates.dart';
 
 /// Handles Logs
 class Logger {
@@ -22,8 +26,14 @@ class Logger {
 
   final _controller = StreamController<Message>.broadcast();
 
+  late final _logIt = MessageTemplate(klasse: this);
+
   /// Stream of incoming Messages
   Stream<Message> get stream => _controller.stream;
+
+  /// Returns a stream of messages filtered by the given [test].
+  Stream<Message> where(bool Function(Message event) test) =>
+      stream.where(test);
 
   /// Disable the Logger
   static void disable() => _logger._active = false;
@@ -32,28 +42,25 @@ class Logger {
   static void enable() => _logger._active = true;
 
   set _active(bool active) {
+    final log = _logIt.child(function: 'set._active');
+
     if (active == _activeLogging) {
-      Message.info(
+      log.info(
         title: 'Logging state not changed',
-        text: 'The logging state is already ${active ? 'enabled' : 'disabled'}',
-        klasse: this,
-        function: 'set._active',
+        message: 'The logging state is already {active}',
+        values: {'active': active ? 'enabled' : 'disabled'},
       );
       return;
     }
     if (active) {
-      Message.info(
+      log.info(
         title: 'Enabled Logging',
-        text: 'Set the logging state to enabled',
-        klasse: this,
-        function: 'set._active',
+        message: 'Set the logging state to enabled',
       );
     } else {
-      Message.info(
+      log.info(
         title: 'Disabled Logging',
-        text: 'Set the logging state to disabled',
-        klasse: this,
-        function: 'set._active',
+        message: 'Set the logging state to disabled',
       );
     }
     _activeLogging = active;
@@ -64,12 +71,12 @@ class Logger {
 
   /// Logs a Message
   void logMessage(
-      Message message, {
-        bool queue = true,
-        bool notifyListeners = true,
-        bool devLog = false,
-        bool println = true,
-      }) {
+    Message message, {
+    bool queue = true,
+    bool notifyListeners = true,
+    bool devLog = false,
+    bool println = true,
+  }) {
     if (!_activeLogging) return;
     if (queue) messages[message.time.millisecondsSinceEpoch] = message;
     if (notifyListeners) _controller.sink.add(message);
