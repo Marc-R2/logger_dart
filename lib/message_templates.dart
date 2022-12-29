@@ -11,18 +11,18 @@ class MessageTemplate {
   /// created with this template.
   const MessageTemplate({
     this.tags = const [],
-    this.klasse,
-    this.function,
-  });
+    Object? klasse,
+    String? function,
+  }) : _classValue = klasse, _functionValue = function;
 
   /// Groups
   final List<String> tags;
 
   /// Class
-  final Object? klasse;
+  final Object? _classValue;
 
   /// Function
-  final String? function;
+  final String? _functionValue;
 
   /// Create a MessageTemplate with the given values
   /// and inherit the template values of the parent template.
@@ -37,16 +37,22 @@ class MessageTemplate {
   }) {
     return MessageTemplate(
       tags: [...this.tags, ...tags],
-      klasse: klasse ?? this.klasse,
-      function: function ?? this.function,
+      klasse: klasse ?? _classValue,
+      function: function ?? _functionValue,
     );
   }
 
-  Object? _class(Object? klasse) => klasse ?? this.klasse;
+  /// Create a child template with the given [klasse]
+  MessageTemplate klasse(Object klasse) => child(klasse: klasse);
+
+  /// Create a child template with the given [function]
+  MessageTemplate function(String function) => child(function: function);
+
+  Object? _class(Object? klasse) => klasse ?? _classValue;
 
   List<String> _tags(List<String>? tags) => [...this.tags, ...tags ?? []];
 
-  String? _function(String? function) => function ?? this.function;
+  String? _function(String? function) => function ?? _functionValue;
 
   Map<String, String> _templateValues(Map<String, dynamic> templateValues) {
     return templateValues.map((key, value) => MapEntry(key, value.toString()));
