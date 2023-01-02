@@ -57,13 +57,13 @@ jobs:
           files: ./coverage/lcov.info
 
         # Merge the commit into master if all the previous steps did not fail
-      - name: Merge into master
-        if: github.event.ref != 'refs/heads/master' && github.event.ref != 'refs/tags/*'
-        run: |
-          git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git config --global user.name "GitHub Actions"
-          git remote add upstream "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git"
-          git fetch upstream
-          git merge upstream/master
-          git push upstream HEAD:master
-          git push upstream HEAD:${GITHUB_REF}
+      #       - name: Merge into master
+      #        if: github.event.ref != 'refs/heads/master' && github.event.ref != 'refs/tags/*'
+      #        run: |
+      #          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+      #          git config --global user.name "GitHub Actions"
+      #          git remote add upstream "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git"
+      #          git fetch upstream
+      #          git merge upstream/master
+      #          git push upstream HEAD:master
+      #          git push upstream HEAD:${GITHUB_REF}
