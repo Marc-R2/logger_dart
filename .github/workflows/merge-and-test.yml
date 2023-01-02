@@ -3,7 +3,7 @@
 # separate terms of service, privacy policy, and support
 # documentation.
 
-name: Dart
+name: Merge to Master
 
 on: [push, pull_request]
 
@@ -13,17 +13,6 @@ jobs:
     if: github.event.ref != 'refs/heads/master'
     steps:
       - uses: actions/checkout@v3
-
-      # Note: This workflow uses the latest stable version of the Dart SDK.
-      # You can specify other versions if desired, see documentation here:
-      # https://github.com/dart-lang/setup-dart/blob/main/README.md
-      # - uses: dart-lang/setup-dart@v1
-      - uses: dart-lang/setup-dart@v1.3
-        with:
-          sdk: "2.19.0-146.2.beta"
-
-      - name: Install dependencies
-        run: dart pub get
 
       - name: Fetch master and current branch
         run: |
@@ -38,6 +27,17 @@ jobs:
         
       - name: Pull master
         run: git merge upstream/master
+
+      # Note: This workflow uses the latest stable version of the Dart SDK.
+      # You can specify other versions if desired, see documentation here:
+      # https://github.com/dart-lang/setup-dart/blob/main/README.md
+      # - uses: dart-lang/setup-dart@v1
+      - uses: dart-lang/setup-dart@v1.3
+        with:
+          sdk: "2.19.0-146.2.beta"
+
+      - name: Install dependencies
+        run: dart pub get
 
       # Consider passing '--fatal-infos' for slightly stricter analysis.
       - name: Analyze project source
