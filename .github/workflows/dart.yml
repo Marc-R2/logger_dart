@@ -39,7 +39,7 @@ jobs:
         shell: bash
         id: test_files
 
-        # Create a step for each test file
+      # Create a step for each test file
       - name: Run tests
         run: dart pub run test ${{ steps.test_files.outputs.tests }}
         shell: bash
