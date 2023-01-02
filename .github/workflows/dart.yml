@@ -83,11 +83,11 @@ jobs:
       - name: Get test files
         run: tests=$(find test -name "*_test.dart")
         shell: bash
-        id: test_files
+        id: test_files_master
 
       # Create a step for each test file
       - name: Run tests
-        run: dart pub run test ${{ steps.test_files.outputs.tests }}
+        run: dart pub run test ${{ steps.test_files_master.outputs.tests }}
         shell: bash
         # loop: ${{ steps.test_files.outputs.tests.split() }}
 
