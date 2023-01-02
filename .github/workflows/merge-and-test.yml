@@ -14,6 +14,11 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
+      - name: Extract branch name
+        shell: bash
+        run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
+        id: extract_branch
+
       - name: Fetch master and current branch
         run: |
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
@@ -23,7 +28,7 @@ jobs:
           git fetch origin
           
       - name: Check out current branch
-        run: git checkout ${{ github.event.before }}
+        run: git checkout ${{ steps.extract_branch.outputs.branch }}
         
       - name: Pull master
         run: git merge upstream/master
