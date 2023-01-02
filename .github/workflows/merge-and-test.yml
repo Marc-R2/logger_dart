@@ -25,15 +25,22 @@ jobs:
       - name: Install dependencies
         run: dart pub get
 
-      - name: Pull master
+      - name: Fetch master and current branch
         run: |
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git config --global user.name "GitHub Actions"
           git remote add upstream "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git"
           git fetch upstream
-          git fetch --all
-          git merge upstream/master #--allow-unrelated-histories
-          git pull
+          git fetch origin
+          
+      - name: Ensure current branch is not master
+        if: github.event.ref == 'refs/heads/master'
+          
+      - name: Check out current branch
+        run: git checkout ${{ github.event.before }}
+        
+      - name: Pull master
+        run: git merge upstream/master
 
       # Consider passing '--fatal-infos' for slightly stricter analysis.
       - name: Analyze project source
