@@ -31,7 +31,8 @@ jobs:
           git config --global user.name "GitHub Actions"
           git remote add upstream "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git"
           git fetch upstream
-          git merge upstream/master --allow-unrelated-histories
+          git fetch --all
+          git merge upstream/master #--allow-unrelated-histories
           git pull
 
       # Consider passing '--fatal-infos' for slightly stricter analysis.
