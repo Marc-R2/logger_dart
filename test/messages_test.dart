@@ -3,6 +3,10 @@ import 'package:test/test.dart';
 
 Future<void> main() async {
   group('Testing Message class util/message.dart - Fields', () {
+    setUp(Logger.test);
+    final startTime = DateTime.now();
+    final stMC = startTime.microsecondsSinceEpoch;
+
     group('<fields>', () {
       late Message log;
       late Message info;
@@ -40,24 +44,32 @@ Future<void> main() async {
         test('log text', () => expect(log.text, 'logText'));
         test('log level', () => expect(log.level, 5));
         test('log type', () => expect(log.type, 0));
+        test('log time', () => expect(log.timeMC, greaterThan(stMC)));
+        test('log test', () => expect(log.testModeCount, 2));
       });
       group('info', () {
         test('info name', () => expect(info.title, 'infoName'));
         test('info text', () => expect(info.text, 'infoText'));
         test('info level', () => expect(info.level, 9));
         test('info type', () => expect(info.type, 1));
+        test('info time', () => expect(info.timeMC, greaterThan(stMC)));
+        test('info test', () => expect(info.testModeCount, 3));
       });
       group('warning', () {
         test('warning name', () => expect(warning.title, 'warningName'));
         test('warning text', () => expect(warning.text, 'warningText'));
         test('warning level', () => expect(warning.level, 2));
         test('warning type', () => expect(warning.type, 2));
+        test('warning time', () => expect(warning.timeMC, greaterThan(stMC)));
+        test('warning test', () => expect(warning.testModeCount, 4));
       });
       group('error', () {
         test('error name', () => expect(error.title, 'errorName'));
         test('error text', () => expect(error.text, 'errorText'));
         test('error level', () => expect(error.level, 4));
         test('error type', () => expect(error.type, 3));
+        test('error time', () => expect(error.timeMC, greaterThan(stMC)));
+        test('error test', () => expect(error.testModeCount, 5));
       });
     });
   });

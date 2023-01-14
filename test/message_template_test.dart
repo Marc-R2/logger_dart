@@ -2,6 +2,8 @@ import 'package:log_message/logger.dart';
 import 'package:test/test.dart';
 
 Future<void> main() async {
+  setUp(Logger.test);
+
   group('Testing Message class util/message.dart - Templates', () {
     group('templates', () {
       group('templates in titles', () {
@@ -14,8 +16,16 @@ Future<void> main() async {
             );
 
             expect(
+              message.toString(),
+              'TestMode: 2 Log: logName - John:(2)',
+            );
+            expect(
               message.toString(time: false),
               'Log: logName - John:(2)',
+            );
+            expect(
+              message.toString(time: false, type: false),
+              'logName - John:(2)',
             );
             expect(
               message.toString(time: false, type: false, level: false),
@@ -26,12 +36,20 @@ Future<void> main() async {
           test('templates.title.Log no template', () {
             final message = Message.log(
               title: 'logName',
-              level: 2,
+              level: 3,
             );
 
             expect(
+              message.toString(),
+              'TestMode: 2 Log: logName:(3)',
+            );
+            expect(
               message.toString(time: false),
-              'Log: logName:(2)',
+              'Log: logName:(3)',
+            );
+            expect(
+              message.toString(time: false, type: false),
+              'logName:(3)',
             );
             expect(
               message.toString(time: false, type: false, level: false),
@@ -42,12 +60,20 @@ Future<void> main() async {
           test('templates.title.Log no template value', () {
             final message = Message.log(
               title: 'logName - {name}',
-              level: 2,
+              level: 4,
             );
 
             expect(
+              message.toString(),
+              'TestMode: 2 Log: logName - <name>:(4)',
+            );
+            expect(
               message.toString(time: false),
-              'Log: logName - <name>:(2)',
+              'Log: logName - <name>:(4)',
+            );
+            expect(
+              message.toString(time: false, type: false),
+              'logName - <name>:(4)',
             );
             expect(
               message.toString(time: false, type: false, level: false),
@@ -58,13 +84,21 @@ Future<void> main() async {
           test('templates.title.Log nested', () {
             final message = Message.log(
               title: 'logName - {na{dyn}}',
-              level: 2,
+              level: 5,
               templateValues: {'name': 'John', 'dyn': 'me'},
             );
 
             expect(
+              message.toString(),
+              'TestMode: 2 Log: logName - John:(5)',
+            );
+            expect(
               message.toString(time: false),
-              'Log: logName - John:(2)',
+              'Log: logName - John:(5)',
+            );
+            expect(
+              message.toString(time: false, type: false),
+              'logName - John:(5)',
             );
             expect(
               message.toString(time: false, type: false, level: false),
