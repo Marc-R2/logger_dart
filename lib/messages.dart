@@ -230,7 +230,7 @@ class Message {
   /// Removes all curly brackets from a given [text]
   static String removeCurlyBrackets(String? text) {
     if (text == null) return '';
-    return text.replaceAll('{', '').replaceAll( '','}');
+    return text.replaceAll('{', '').replaceAll('}', '');
   }
 
   /// Replaces the templates in a given [text]

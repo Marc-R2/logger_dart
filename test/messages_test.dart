@@ -7,6 +7,37 @@ Future<void> main() async {
     final startTime = DateTime.now();
     final stMC = startTime.microsecondsSinceEpoch;
 
+    group('removeCurlyBrackets', () {
+      test('char', () {
+        expect(Message.removeCurlyBrackets(''), '');
+        expect(Message.removeCurlyBrackets('a'), 'a');
+        expect(Message.removeCurlyBrackets('b'), 'b');
+        expect(Message.removeCurlyBrackets('{'), '');
+        expect(Message.removeCurlyBrackets('}'), '');
+      });
+
+      test('word', () {
+        expect(Message.removeCurlyBrackets('word'), 'word');
+        expect(Message.removeCurlyBrackets('{word'), 'word');
+        expect(Message.removeCurlyBrackets('word}'), 'word');
+        expect(Message.removeCurlyBrackets('{word}'), 'word');
+        expect(Message.removeCurlyBrackets('wo{rd'), 'word');
+        expect(Message.removeCurlyBrackets('wo}rd'), 'word');
+        expect(Message.removeCurlyBrackets('wo{rd}'), 'word');
+        expect(Message.removeCurlyBrackets('{wo}rd'), 'word');
+        expect(Message.removeCurlyBrackets('{wo}rd{'), 'word');
+        expect(Message.removeCurlyBrackets('{wo}rd}'), 'word');
+        expect(Message.removeCurlyBrackets('{wo}{rd}'), 'word');
+      });
+
+      test('sentence', () {
+        expect(
+          Message.removeCurlyBrackets('This is a {test} with {curly} brackets'),
+          'This is a test with curly brackets',
+        );
+      });
+    });
+
     group('<fields>', () {
       late Message log;
       late Message info;
