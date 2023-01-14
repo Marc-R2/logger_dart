@@ -146,6 +146,8 @@ class Message {
   /// Usually the DateTime from the creation of the message
   final DateTime time;
 
+  int get timeMC => time.microsecondsSinceEpoch;
+
   /// The higher the worse
   final int level;
 
@@ -157,6 +159,8 @@ class Message {
 
   /// Can provide stacktrace information when available
   StackTrace? stackTrace;
+
+  late final int testModeCount = Logger.testModeCounter;
 
   /// A marker used to stop coloring
   static const _endColorMarker = '\x1B[0m';
@@ -226,7 +230,7 @@ class Message {
   /// Removes all curly brackets from a given [text]
   static String removeCurlyBrackets(String? text) {
     if (text == null) return '';
-    return text.replaceAll('{', '').replaceAll('}', '');
+    return text.replaceAll('{', '').replaceAll( '','}');
   }
 
   /// Replaces the templates in a given [text]
@@ -289,7 +293,13 @@ class Message {
   }) {
     final str = StringBuffer();
 
-    if (time) str.write('${this.time}');
+    if (time) {
+      if (!Logger.testMode) {
+        str.write('${this.time}');
+      } else {
+        str.write('TestMode: $testModeCount');
+      }
+    }
 
     if (type) {
       if (str.isNotEmpty) str.write(' ');

@@ -17,12 +17,31 @@ class Logger {
     logMessage(Message.warning(title: 'Init Logger', log: false));
   }
 
+  /// Enable testMode for Logger and reset testModeCounter to 0
+  static void test() {
+    Logger();
+    _testModeCounter = 0;
+    _testMode = true;
+    Message.warning(title: 'Enter Testmode');
+  }
+
   static final Logger _logger = Logger._internal();
 
   /// Message queue
   static final Map<int, Message> messages = {};
 
   static bool _activeLogging = true;
+
+  static bool _testMode = false;
+
+  static bool get testMode => _testMode;
+
+  static int _testModeCounter = 0;
+
+  static int get testModeCounter {
+    if (!testMode) return 0;
+    return _testModeCounter += 1;
+  }
 
   final _controller = StreamController<Message>.broadcast();
 
