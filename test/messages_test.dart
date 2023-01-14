@@ -119,7 +119,7 @@ Future<void> main() async {
       });
     });
 
-    group('fromMap', (){
+    group('fromMap', () {
       test('fromMap creates a valid message from a valid map', () {
         final testMap = <String, dynamic>{
           'title': 'Test Title',
@@ -169,8 +169,189 @@ Future<void> main() async {
           expect(e, isA<TypeError>());
         }
       });
+    });
 
+    group('toMap', () {
+      final message = Message.log(
+        title: 'Test Title',
+        text: 'Test Text',
+        level: 2,
+        tags: ['tag1', 'tag2'],
+      );
 
+      test('toMap and fromMap with no data loss', () {
+        final map = message.toMap();
+        final messageFromMap = Message.fromMap(map);
+        expect(messageFromMap.title, message.title);
+        expect(messageFromMap.text, message.text);
+        expect(messageFromMap.timeMS, message.timeMS);
+        expect(messageFromMap.level, message.level);
+        expect(messageFromMap.type, message.type);
+        expect(messageFromMap.templateValues, message.templateValues);
+        expect(messageFromMap.tags, message.tags);
+      });
+
+      test('toMap returns a map with all required fields', () {
+        final map = message.toMap();
+        expect(map.containsKey('title'), true);
+        expect(map.containsKey('text'), true);
+        expect(map.containsKey('time'), true);
+        expect(map.containsKey('level'), true);
+        expect(map.containsKey('type'), true);
+        expect(map.containsKey('templates'), true);
+        expect(map.containsKey('tags'), true);
+      });
+
+      test('toMap returns a map with all fields in the correct data type', () {
+        final map = message.toMap();
+        expect(map['title'], isA<String>());
+        expect(map['text'], isA<String>());
+        expect(map['time'], isA<int>());
+        expect(map['level'], isA<int>());
+        expect(map['type'], isA<int>());
+        expect(map['templates'], isA<Map>());
+        expect(map['tags'], isA<List>());
+      });
+    });
+
+    group('stackTrace', () {
+      final stackTrace = StackTrace.fromString('Stack Trace');
+
+      test('StackTrace is added to message correctly', () {
+        final message = Message.error(
+          title: 'Test Title',
+          text: 'Test Text',
+          level: 2,
+          stackTrace: stackTrace,
+        );
+        expect(message.stackTrace, stackTrace);
+      });
+
+      test('StackTrace is saved and loaded correctly in map', () {
+        final message = Message.error(
+          title: 'Test Title',
+          text: 'Test Text',
+          level: 2,
+          stackTrace: stackTrace,
+        );
+        final map = message.toMap();
+        expect(map['stackTrace'], isNull);
+        final messageFromMap = Message.fromMap(map);
+        expect(messageFromMap.stackTrace, isNull);
+      });
+
+      test('Message is created with stack trace without any issues', () {
+        final message = Message.error(
+          title: 'Test Title',
+          text: 'Test Text',
+          level: 2,
+          stackTrace: stackTrace,
+        );
+        expect(message.title, 'Test Title');
+        expect(message.text, 'Test Text');
+        expect(message.level, 2);
+        expect(message.stackTrace, stackTrace);
+      });
+
+      test('StackTrace is not present in map if not passed', () {
+        final message = Message.error(
+          title: 'Test Title',
+          text: 'Test Text',
+          level: 2,
+        );
+        final map = message.toMap();
+        expect(map.containsKey('stackTrace'), false);
+      });
+    });
+
+    group('klasse', () {
+      test('Class is added to tags correctly', () {
+        final message = Message.error(
+          title: 'Test Title',
+          text: 'Test Text',
+          level: 2,
+          klasse: 'Message',
+        );
+        expect(message.tags, contains('class:Message'));
+      });
+
+      test('Class is saved and loaded correctly in map', () {
+        final message = Message.error(
+          title: 'Test Title',
+          text: 'Test Text',
+          level: 2,
+          klasse: Logger(),
+        );
+        final map = message.toMap();
+        expect(map['tags'], contains('class:Logger'));
+        final messageFromMap = Message.fromMap(map);
+        expect(messageFromMap.tags, contains('class:Logger'));
+      });
+
+      test('Class is not added to tags if not passed', () {
+        final message = Message.error(
+          title: 'Test Title',
+          text: 'Test Text',
+          level: 2,
+        );
+        expect(message.tags, isNot(contains('class:Any')));
+      });
+
+      test('Class is not present in map if not passed', () {
+        final message = Message.error(
+          title: 'Test Title',
+          text: 'Test Text',
+          level: 2,
+        );
+        final map = message.toMap();
+        expect(map.containsKey('tags'), true);
+        expect(map['tags'], isNot(contains('class:MyClass')));
+      });
+    });
+
+    group('function', () {
+      test('Class is added to tags correctly', () {
+        final message = Message.error(
+          title: 'Test Title',
+          text: 'Test Text',
+          level: 2,
+          function: 'my_function',
+        );
+        expect(message.tags, contains('func:my_function'));
+      });
+
+      test('Class is saved and loaded correctly in map', () {
+        final message = Message.error(
+          title: 'Test Title',
+          text: 'Test Text',
+          level: 2,
+          function: 'my_function',
+        );
+        final map = message.toMap();
+        expect(map['tags'], contains('func:my_function'));
+        final messageFromMap = Message.fromMap(map);
+        expect(messageFromMap.tags, contains('func:my_function'));
+      });
+
+      test('Class is not added to tags if not passed', () {
+        final message = Message.error(
+          title: 'Test Title',
+          text: 'Test Text',
+          level: 2,
+        );
+        expect(message.tags, isNot(contains('func:my_function')));
+      });
+
+      test('Class is not present in map if not passed', () {
+        final message = Message.error(
+          title: 'Test Title',
+          text: 'Test Text',
+          level: 2,
+        );
+        final map = message.toMap();
+        expect(map.containsKey('tags'), true);
+        expect(map['tags'], isNot(contains('func:my_function')));
+      });
     });
   });
 }

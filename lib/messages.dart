@@ -149,6 +149,9 @@ class Message {
   /// Time of the message in microseconds
   int get timeMC => time.microsecondsSinceEpoch;
 
+  /// Time of the message in milliseconds
+  int get timeMS => time.millisecondsSinceEpoch;
+
   /// The higher the worse
   final int level;
 
