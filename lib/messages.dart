@@ -314,7 +314,7 @@ class Message {
     }
 
     if (level) {
-      if (!title) str.write(' ');
+      if (!title && str.isNotEmpty) str.write(' ');
       str.write('(${this.level})');
     }
 

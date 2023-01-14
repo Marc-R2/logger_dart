@@ -31,6 +31,10 @@ Future<void> main() async {
               message.toString(time: false, type: false, level: false),
               'logName - John',
             );
+            expect(
+              message.toString(type: false, level: false, title: false),
+              'TestMode: 2',
+            );
           });
 
           test('templates.title.Log no template', () {
@@ -55,6 +59,10 @@ Future<void> main() async {
               message.toString(time: false, type: false, level: false),
               'logName',
             );
+            expect(
+              message.toString(time: false, level: false, title: false),
+              'Log:',
+            );
           });
 
           test('templates.title.Log no template value', () {
@@ -78,6 +86,10 @@ Future<void> main() async {
             expect(
               message.toString(time: false, type: false, level: false),
               'logName - <name>',
+            );
+            expect(
+              message.toString(time: false, type: false, title: false),
+              '(4)',
             );
           });
 
@@ -104,6 +116,10 @@ Future<void> main() async {
               message.toString(time: false, type: false, level: false),
               'logName - John',
             );
+            expect(
+              message.toString(time: false, type: false, title: false),
+              '(5)',
+            );
           });
         });
       });
@@ -119,8 +135,28 @@ Future<void> main() async {
             );
 
             expect(
+              message.toString(),
+              'TestMode: 2 Log: logName:(5) => logText (John)',
+            );
+            expect(
               message.toString(time: false),
               'Log: logName:(5) => logText (John)',
+            );
+            expect(
+              message.toString(time: false, type: false),
+              'logName:(5) => logText (John)',
+            );
+            expect(
+              message.toString(time: false, type: false, level: false),
+              'logName => logText (John)',
+            );
+            expect(
+              message.toString(time: false, type: false, title: false),
+              '(5) => logText (John)',
+            );
+            expect(
+              message.toString(type: false, title: false, level: false),
+              'TestMode: 2 => logText (John)',
             );
           });
 
@@ -132,8 +168,24 @@ Future<void> main() async {
             );
 
             expect(
+              message.toString(),
+              'TestMode: 2 Log: logName:(5) => logText (<name>)',
+            );
+            expect(
               message.toString(time: false),
               'Log: logName:(5) => logText (<name>)',
+            );
+            expect(
+              message.toString(time: false, type: false),
+              'logName:(5) => logText (<name>)',
+            );
+            expect(
+              message.toString(time: false, type: false, level: false),
+              'logName => logText (<name>)',
+            );
+            expect(
+              message.toString(time: false, type: false, title: false),
+              '(5) => logText (<name>)',
             );
           });
 
@@ -146,8 +198,24 @@ Future<void> main() async {
             );
 
             expect(
+              message.toString(),
+              'TestMode: 2 Log: logName:(5) => logText (John, 30)',
+            );
+            expect(
               message.toString(time: false),
               'Log: logName:(5) => logText (John, 30)',
+            );
+            expect(
+              message.toString(time: false, type: false),
+              'logName:(5) => logText (John, 30)',
+            );
+            expect(
+              message.toString(time: false, type: false, level: false),
+              'logName => logText (John, 30)',
+            );
+            expect(
+              message.toString(time: false, type: false, title: false),
+              '(5) => logText (John, 30)',
             );
           });
 
@@ -160,8 +228,24 @@ Future<void> main() async {
             );
 
             expect(
+              message.toString(),
+              'TestMode: 2 Log: logName:(5) => logText (John)',
+            );
+            expect(
               message.toString(time: false),
               'Log: logName:(5) => logText (John)',
+            );
+            expect(
+              message.toString(time: false, type: false),
+              'logName:(5) => logText (John)',
+            );
+            expect(
+              message.toString(time: false, type: false, level: false),
+              'logName => logText (John)',
+            );
+            expect(
+              message.toString(time: false, type: false, title: false),
+              '(5) => logText (John)',
             );
           });
         });
@@ -176,8 +260,28 @@ Future<void> main() async {
             );
 
             expect(
+              message.toString(),
+              'TestMode: 2 Info: infoName:(9) => infoText (John)',
+            );
+            expect(
               message.toString(time: false),
               'Info: infoName:(9) => infoText (John)',
+            );
+            expect(
+              message.toString(time: false, type: false),
+              'infoName:(9) => infoText (John)',
+            );
+            expect(
+              message.toString(time: false, type: false, level: false),
+              'infoName => infoText (John)',
+            );
+            expect(
+              message.toString(time: false, type: false, title: false),
+              '(9) => infoText (John)',
+            );
+            expect(
+              message.toString(type: false, title: false, level: false),
+              'TestMode: 2 => infoText (John)',
             );
           });
 
@@ -189,8 +293,28 @@ Future<void> main() async {
             );
 
             expect(
+              message.toString(),
+              'TestMode: 2 Info: infoName:(9) => infoText (<name>)',
+            );
+            expect(
               message.toString(time: false),
               'Info: infoName:(9) => infoText (<name>)',
+            );
+            expect(
+              message.toString(time: false, type: false),
+              'infoName:(9) => infoText (<name>)',
+            );
+            expect(
+              message.toString(time: false, type: false, level: false),
+              'infoName => infoText (<name>)',
+            );
+            expect(
+              message.toString(time: false, type: false, title: false),
+              '(9) => infoText (<name>)',
+            );
+            expect(
+              message.toString(time: false, type: false, text: false),
+              'infoName:(9)',
             );
           });
 
@@ -203,8 +327,28 @@ Future<void> main() async {
             );
 
             expect(
+              message.toString(),
+              'TestMode: 2 Info: infoName:(9) => infoText (John, 30)',
+            );
+            expect(
               message.toString(time: false),
               'Info: infoName:(9) => infoText (John, 30)',
+            );
+            expect(
+              message.toString(time: false, type: false),
+              'infoName:(9) => infoText (John, 30)',
+            );
+            expect(
+              message.toString(time: false, type: false, level: false),
+              'infoName => infoText (John, 30)',
+            );
+            expect(
+              message.toString(time: false, type: false, title: false),
+              '(9) => infoText (John, 30)',
+            );
+            expect(
+              message.toString(time: false, type: false, text: false),
+              'infoName:(9)',
             );
           });
 
@@ -217,8 +361,28 @@ Future<void> main() async {
             );
 
             expect(
+              message.toString(),
+              'TestMode: 2 Info: infoName:(9) => infoText (John)',
+            );
+            expect(
               message.toString(time: false),
               'Info: infoName:(9) => infoText (John)',
+            );
+            expect(
+              message.toString(time: false, type: false),
+              'infoName:(9) => infoText (John)',
+            );
+            expect(
+              message.toString(time: false, type: false, level: false),
+              'infoName => infoText (John)',
+            );
+            expect(
+              message.toString(time: false, type: false, title: false),
+              '(9) => infoText (John)',
+            );
+            expect(
+              message.toString(time: false, type: false, text: false),
+              'infoName:(9)',
             );
           });
         });
@@ -233,8 +397,28 @@ Future<void> main() async {
             );
 
             expect(
+              message.toString(),
+              'TestMode: 2 Warning: warningName:(2) => warningText (John)',
+            );
+            expect(
               message.toString(time: false),
               'Warning: warningName:(2) => warningText (John)',
+            );
+            expect(
+              message.toString(time: false, type: false),
+              'warningName:(2) => warningText (John)',
+            );
+            expect(
+              message.toString(time: false, type: false, level: false),
+              'warningName => warningText (John)',
+            );
+            expect(
+              message.toString(time: false, type: false, title: false),
+              '(2) => warningText (John)',
+            );
+            expect(
+              message.toString(type: false, title: false, level: false),
+              'TestMode: 2 => warningText (John)',
             );
           });
 
@@ -246,8 +430,28 @@ Future<void> main() async {
             );
 
             expect(
+              message.toString(),
+              'TestMode: 2 Warning: warningName:(2) => warningText (<name>)',
+            );
+            expect(
               message.toString(time: false),
               'Warning: warningName:(2) => warningText (<name>)',
+            );
+            expect(
+              message.toString(time: false, type: false),
+              'warningName:(2) => warningText (<name>)',
+            );
+            expect(
+              message.toString(time: false, type: false, level: false),
+              'warningName => warningText (<name>)',
+            );
+            expect(
+              message.toString(time: false, type: false, title: false),
+              '(2) => warningText (<name>)',
+            );
+            expect(
+              message.toString(time: false, type: false, text: false),
+              'warningName:(2)',
             );
           });
 
@@ -260,8 +464,28 @@ Future<void> main() async {
             );
 
             expect(
+              message.toString(),
+              'TestMode: 2 Warning: warningName:(2) => warningText (John, 30)',
+            );
+            expect(
               message.toString(time: false),
               'Warning: warningName:(2) => warningText (John, 30)',
+            );
+            expect(
+              message.toString(time: false, type: false),
+              'warningName:(2) => warningText (John, 30)',
+            );
+            expect(
+              message.toString(time: false, type: false, level: false),
+              'warningName => warningText (John, 30)',
+            );
+            expect(
+              message.toString(time: false, type: false, title: false),
+              '(2) => warningText (John, 30)',
+            );
+            expect(
+              message.toString(time: false, type: false, text: false),
+              'warningName:(2)',
             );
           });
 
@@ -274,8 +498,28 @@ Future<void> main() async {
             );
 
             expect(
+              message.toString(),
+              'TestMode: 2 Warning: warningName:(2) => warningText (John)',
+            );
+            expect(
               message.toString(time: false),
               'Warning: warningName:(2) => warningText (John)',
+            );
+            expect(
+              message.toString(time: false, type: false),
+              'warningName:(2) => warningText (John)',
+            );
+            expect(
+              message.toString(time: false, type: false, level: false),
+              'warningName => warningText (John)',
+            );
+            expect(
+              message.toString(time: false, type: false, title: false),
+              '(2) => warningText (John)',
+            );
+            expect(
+              message.toString(time: false, type: false, text: false),
+              'warningName:(2)',
             );
           });
         });
@@ -290,8 +534,28 @@ Future<void> main() async {
             );
 
             expect(
+              message.toString(),
+              'TestMode: 2 Error: errorName:(4) => errorText (John)',
+            );
+            expect(
               message.toString(time: false),
               'Error: errorName:(4) => errorText (John)',
+            );
+            expect(
+              message.toString(time: false, type: false),
+              'errorName:(4) => errorText (John)',
+            );
+            expect(
+              message.toString(time: false, type: false, level: false),
+              'errorName => errorText (John)',
+            );
+            expect(
+              message.toString(time: false, type: false, title: false),
+              '(4) => errorText (John)',
+            );
+            expect(
+              message.toString(type: false, title: false, level: false),
+              'TestMode: 2 => errorText (John)',
             );
           });
 
@@ -303,8 +567,28 @@ Future<void> main() async {
             );
 
             expect(
+              message.toString(),
+              'TestMode: 2 Error: errorName:(4) => errorText (<name>)',
+            );
+            expect(
               message.toString(time: false),
               'Error: errorName:(4) => errorText (<name>)',
+            );
+            expect(
+              message.toString(time: false, type: false),
+              'errorName:(4) => errorText (<name>)',
+            );
+            expect(
+              message.toString(time: false, type: false, level: false),
+              'errorName => errorText (<name>)',
+            );
+            expect(
+              message.toString(time: false, type: false, title: false),
+              '(4) => errorText (<name>)',
+            );
+            expect(
+              message.toString(time: false, type: false, text: false),
+              'errorName:(4)',
             );
           });
 
@@ -317,8 +601,28 @@ Future<void> main() async {
             );
 
             expect(
+              message.toString(),
+              'TestMode: 2 Error: errorName:(4) => errorText (John, 30)',
+            );
+            expect(
               message.toString(time: false),
               'Error: errorName:(4) => errorText (John, 30)',
+            );
+            expect(
+              message.toString(time: false, type: false),
+              'errorName:(4) => errorText (John, 30)',
+            );
+            expect(
+              message.toString(time: false, type: false, level: false),
+              'errorName => errorText (John, 30)',
+            );
+            expect(
+              message.toString(time: false, type: false, title: false),
+              '(4) => errorText (John, 30)',
+            );
+            expect(
+              message.toString(time: false, type: false, text: false),
+              'errorName:(4)',
             );
           });
 
@@ -331,8 +635,28 @@ Future<void> main() async {
             );
 
             expect(
+              message.toString(),
+              'TestMode: 2 Error: errorName:(4) => errorText (John)',
+            );
+            expect(
               message.toString(time: false),
               'Error: errorName:(4) => errorText (John)',
+            );
+            expect(
+              message.toString(time: false, type: false),
+              'errorName:(4) => errorText (John)',
+            );
+            expect(
+              message.toString(time: false, type: false, level: false),
+              'errorName => errorText (John)',
+            );
+            expect(
+              message.toString(time: false, type: false, title: false),
+              '(4) => errorText (John)',
+            );
+            expect(
+              message.toString(time: false, type: false, text: false),
+              'errorName:(4)',
             );
           });
         });
