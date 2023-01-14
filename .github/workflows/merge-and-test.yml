@@ -1,0 +1,72 @@
+# This workflow uses actions that are not certified by GitHub.
+# They are provided by a third-party and are governed by
+# separate terms of service, privacy policy, and support
+# documentation.
+
+name: Merge to Master
+
+on: [push, pull_request]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    if: github.event.ref != 'refs/heads/master'
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Extract branch name
+        shell: bash
+        run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
+        id: extract_branch
+
+      - name: Fetch master and current branch
+        run: |
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git config --global user.name "GitHub Actions"
+          git remote add upstream "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git"
+          git fetch upstream
+          git fetch origin
+          
+      - name: Check out current branch
+        run: git checkout ${{ steps.extract_branch.outputs.branch }}
+        
+      - name: Pull master
+        run: git merge origin/master --allow-unrelated-histories
+
+      # Note: This workflow uses the latest stable version of the Dart SDK.
+      # You can specify other versions if desired, see documentation here:
+      # https://github.com/dart-lang/setup-dart/blob/main/README.md
+      # - uses: dart-lang/setup-dart@v1
+      - uses: dart-lang/setup-dart@v1.3
+        with:
+          sdk: "2.19.0-146.2.beta"
+
+      - name: Install dependencies
+        run: dart pub get
+
+      # Consider passing '--fatal-infos' for slightly stricter analysis.
+      - name: Analyze project source
+        run: dart analyze --fatal-warnings
+
+      # Get a list of all test files
+      - name: Get test files
+        run: tests=$(find test -name "*_test.dart")
+        shell: bash
+        id: test_files
+
+      # Create a step for each test file
+      - name: Run tests
+        run: dart pub run test ${{ steps.test_files.outputs.tests }}
+        shell: bash
+
+      # Commit and push the changes to master if all the previous steps did not fail
+      - name: Commit and push
+        if: success()
+        run: |
+          # git add .
+          # Get the commit message of the original commit
+          commit_message=$(git log --format=%B -n 1 ${{ github.event.before }})
+          # Append a hint that the changes were tested in CI
+          commit_message="$commit_message (tested in CI)"
+          git commit -m "$commit_message"
+          git push upstream HEAD:master
