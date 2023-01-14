@@ -270,6 +270,10 @@ class Message {
         done = true;
       } else {
         final key = removeCurlyBrackets(match.last.group(1));
+        if (key.contains('{') || key.contains('}')) {
+          return 'Error: Invalid state for: $key';
+        }
+
         final value = templateValues[key];
 
         if (value != null) {
