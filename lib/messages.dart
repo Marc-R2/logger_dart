@@ -207,7 +207,7 @@ class Message {
     map['time'] = time.millisecondsSinceEpoch;
     map['templates'] = templateValues;
 
-    if (includeStackTrace || stackTrace != null) {
+    if (includeStackTrace && stackTrace != null) {
       map['stackTrace'] = stackTrace.toString();
     }
 
@@ -274,13 +274,8 @@ class Message {
           return 'Error: Invalid state for: $key';
         }
 
-        final value = templateValues[key];
-
-        if (value != null) {
-          resultText = resultText.replaceFirst('{$key}', value);
-        } else {
-          resultText = resultText.replaceFirst('{$key}', '<$key>');
-        }
+        final value = templateValues[key] ?? '<$key>';
+        resultText = resultText.replaceFirst('{$key}', value);
       }
     }
 
