@@ -146,6 +146,7 @@ class Message {
   /// Usually the DateTime from the creation of the message
   final DateTime time;
 
+  /// Time of the message in microseconds
   int get timeMC => time.microsecondsSinceEpoch;
 
   /// The higher the worse
@@ -160,6 +161,7 @@ class Message {
   /// Can provide stacktrace information when available
   StackTrace? stackTrace;
 
+  /// Conter for testmode
   late final int testModeCount = Logger.testModeCounter;
 
   /// A marker used to stop coloring

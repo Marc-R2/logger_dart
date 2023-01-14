@@ -34,10 +34,12 @@ class Logger {
 
   static bool _testMode = false;
 
+  /// Whether testMode is active
   static bool get testMode => _testMode;
 
   static int _testModeCounter = 0;
 
+  /// Counter for testMode
   static int get testModeCounter {
     if (!testMode) return 0;
     return _testModeCounter += 1;
