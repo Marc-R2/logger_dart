@@ -106,7 +106,10 @@ class Message {
             .map((key, value) => MapEntry(key.toString(), value.toString())),
         tags = ((map['tags'] ?? <String>[]) as List)
             .map<String>((dynamic e) => e.toString())
-            .toList();
+            .toList(),
+        stackTrace = map['stackTrace'] != null
+            ? StackTrace.fromString(map['stackTrace'] as String)
+            : null;
 
   /// Name or Title of the message
   ///

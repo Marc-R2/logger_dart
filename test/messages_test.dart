@@ -74,6 +74,7 @@ Future<void> main() async {
           title: 'traceName',
           text: 'traceText',
           level: 1,
+          log: true,
         );
       });
 
@@ -227,7 +228,7 @@ Future<void> main() async {
         expect(message.stackTrace, stackTrace);
       });
 
-      test('StackTrace is saved and loaded correctly in map', () {
+      test('StackTrace is not in map by default', () {
         final message = Message.error(
           title: 'Test Title',
           text: 'Test Text',
@@ -238,6 +239,21 @@ Future<void> main() async {
         expect(map['stackTrace'], isNull);
         final messageFromMap = Message.fromMap(map);
         expect(messageFromMap.stackTrace, isNull);
+      });
+
+      test('StackTrace is saved and loaded correctly in map', () {
+        final message = Message.error(
+          title: 'Test Title',
+          text: 'Test Text',
+          level: 2,
+          stackTrace: stackTrace,
+        );
+        final map = message.toMap(includeStackTrace: true);
+        expect(map['stackTrace'], isA<String>());
+        expect(map['stackTrace'], stackTrace.toString());
+        final messageFromMap = Message.fromMap(map);
+        expect(messageFromMap.stackTrace, isA<StackTrace>());
+        expect(messageFromMap.stackTrace.toString(), stackTrace.toString());
       });
 
       test('Message is created with stack trace without any issues', () {
