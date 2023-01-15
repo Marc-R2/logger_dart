@@ -321,11 +321,11 @@ td.barBg
 
      <tr>
      <td class="ItemLabel" width="10%">Date:</td>
-     <td class="ItemText" width="35%">2023-01-15 15:06:29.394631</td>
+     <td class="ItemText" width="35%">2023-01-15 17:38:14.798331</td>
      <td class="ItemLabel" width="10%">Mutations:</td>
-     <td class="ItemReport" width="15%">74</td>
-     <td class="ItemReport" width="15%">89</td>
-     <td class="ItemReportHigh" width="15%">83.1 %</td>
+     <td class="ItemReport" width="15%">72</td>
+     <td class="ItemReport" width="15%">72</td>
+     <td class="ItemReportHigh" width="15%">100.0 %</td>
      </tr>
      
      <tr>
@@ -333,7 +333,7 @@ td.barBg
      <td class="ItemText" width="35%">false</td>
      <td class="ItemLabel" width="10%">Timeouts:</td>
      <td class="ItemReport" width="15%">0</td>
-     <td class="ItemReport" width="15%">89</td>
+     <td class="ItemReport" width="15%">72</td>
      <td class="ItemReportHigh" width="15%">0.0 %</td>
      </tr>
      </tbody>
@@ -806,13 +806,13 @@ td.barBg
 <div class="content">
 <b>Detected mutations:</b>
 <table class="mutationTable">
-<tr><td class="mutationLabel" width="10%">1 :</td><td class="mutationText" width="90%"><span class="addedLine">+     if (function <span class="changedTokens">==</span> null) tags.add('func:$function');</span></td></tr><tr><td colspan="2"><hr class="ruler"/></td></tr><tr><td class="mutationLabel" width="10%">2 :</td><td class="mutationText" width="90%"><span class="addedLine">+    <span class="changedTokens"> if (!(function != null) tags.add('func:$function');
+<tr><td class="mutationLabel" width="10%">1 :</td><td class="mutationText" width="90%"><span class="addedLine">+    <span class="changedTokens"> if (!(function != null) tags.add('func:$function');
   }
 
   /// Turns the message into a map
   ///
   /// This can later be used to recreate the message via fromMap
-  Map&lt;String, dynamic&gt; toMap({bool includeStackTrace = false})) {</span></span></td></tr></table>
+  Map&lt;String, dynamic&gt; toMap({bool includeStackTrace = false})) {</span></span></td></tr><tr><td colspan="2"><hr class="ruler"/></td></tr><tr><td class="mutationLabel" width="10%">2 :</td><td class="mutationText" width="90%"><span class="addedLine">+     if (function <span class="changedTokens">==</span> null) tags.add('func:$function');</span></td></tr></table>
 
 </div></a><a name="201"><span class="lineNumber">     201 </span>  }</a>
 <a name="202"><span class="lineNumber">     202 </span></a>
@@ -849,7 +849,7 @@ td.barBg
 <div class="content">
 <b>Detected mutations:</b>
 <table class="mutationTable">
-<tr><td class="mutationLabel" width="10%">1 :</td><td class="mutationText" width="90%"><span class="addedLine">+     <span class="changedTokens">if (!(includeStackTrace )&amp;&amp;</span> stackTrace != null) {</span></td></tr><tr><td colspan="2"><hr class="ruler"/></td></tr><tr><td class="mutationLabel" width="10%">2 :</td><td class="mutationText" width="90%"><span class="addedLine">+     if (includeStackTrace &amp;&amp; stackTrace <span class="changedTokens">==</span> null) {</span></td></tr><tr><td colspan="2"><hr class="ruler"/></td></tr><tr><td class="mutationLabel" width="10%">3 :</td><td class="mutationText" width="90%"><span class="addedLine">+     if (includeStackTrace <span class="changedTokens">||</span> stackTrace != null) {</span></td></tr><tr><td colspan="2"><hr class="ruler"/></td></tr><tr><td class="mutationLabel" width="10%">4 :</td><td class="mutationText" width="90%"><span class="addedLine">+    <span class="changedTokens"> if (!(includeStackTrace &amp;&amp; stackTrace != null)) {</span></span></td></tr><tr><td colspan="2"><hr class="ruler"/></td></tr><tr><td class="mutationLabel" width="10%">5 :</td><td class="mutationText" width="90%"><span class="addedLine">+     if <span class="changedTokens">(!(includeStackTrace )&amp;&amp; stackTrace != null)</span> {</span></td></tr><tr><td colspan="2"><hr class="ruler"/></td></tr><tr><td class="mutationLabel" width="10%">6 :</td><td class="mutationText" width="90%"><span class="addedLine">+     if (includeStackTrace <span class="changedTokens">&amp;&amp;!( stackTrace != null))</span> {</span></td></tr><tr><td colspan="2"><hr class="ruler"/></td></tr><tr><td class="mutationLabel" width="10%">7 :</td><td class="mutationText" width="90%"><span class="addedLine">+     if <span class="changedTokens">(includeStackTrace &amp;&amp;!( stackTrace != null))</span> {</span></td></tr></table>
+<tr><td class="mutationLabel" width="10%">1 :</td><td class="mutationText" width="90%"><span class="addedLine">+     <span class="changedTokens">if (!(includeStackTrace )&amp;&amp;</span> stackTrace != null) {</span></td></tr><tr><td colspan="2"><hr class="ruler"/></td></tr><tr><td class="mutationLabel" width="10%">2 :</td><td class="mutationText" width="90%"><span class="addedLine">+     if (includeStackTrace <span class="changedTokens">||</span> stackTrace != null) {</span></td></tr><tr><td colspan="2"><hr class="ruler"/></td></tr><tr><td class="mutationLabel" width="10%">3 :</td><td class="mutationText" width="90%"><span class="addedLine">+    <span class="changedTokens"> if (!(includeStackTrace &amp;&amp; stackTrace != null)) {</span></span></td></tr><tr><td colspan="2"><hr class="ruler"/></td></tr><tr><td class="mutationLabel" width="10%">4 :</td><td class="mutationText" width="90%"><span class="addedLine">+     if <span class="changedTokens">(!(includeStackTrace )&amp;&amp; stackTrace != null)</span> {</span></td></tr><tr><td colspan="2"><hr class="ruler"/></td></tr><tr><td class="mutationLabel" width="10%">5 :</td><td class="mutationText" width="90%"><span class="addedLine">+     if <span class="changedTokens">(includeStackTrace &amp;&amp;!( stackTrace != null))</span> {</span></td></tr><tr><td colspan="2"><hr class="ruler"/></td></tr><tr><td class="mutationLabel" width="10%">6 :</td><td class="mutationText" width="90%"><span class="addedLine">+     if (includeStackTrace <span class="changedTokens">&amp;&amp;!( stackTrace != null))</span> {</span></td></tr><tr><td colspan="2"><hr class="ruler"/></td></tr><tr><td class="mutationLabel" width="10%">7 :</td><td class="mutationText" width="90%"><span class="addedLine">+     if (includeStackTrace &amp;&amp; stackTrace <span class="changedTokens">==</span> null) {</span></td></tr></table>
 
 </div></a><a name="217"><span class="lineNumber">     217 </span>      map['stackTrace'] = stackTrace.toString();</a>
 <a name="218"><span class="lineNumber">     218 </span>    }</a>
@@ -872,152 +872,49 @@ td.barBg
 <a name="235"><span class="lineNumber">     235 </span>    return '';</a>
 <a name="236"><span class="lineNumber">     236 </span>  }</a>
 <a name="237"><span class="lineNumber">     237 </span></a>
-<a name="238"><span class="lineNumber">     238 </span>  /// Removes all curly brackets from a given [text]</a>
-<a name="239"><span class="lineNumber">     239 </span>  static String removeCurlyBrackets(String? text) {</a>
-<a name="240"><button class="collapsible hit"><pre class="fileContents"><span class="lineNumber">     240 </span>    if (text == null) return '';</pre></button>
+<a name="238"><span class="lineNumber">     238 </span>  /// Replaces the templates in a given [text]</a>
+<a name="239"><span class="lineNumber">     239 </span>  /// with the values in [templateValues]</a>
+<a name="240"><span class="lineNumber">     240 </span>  ///</a>
+<a name="241"><span class="lineNumber">     241 </span>  /// [maxDepth] - By default a maximum of 32 replacements will be</a>
+<a name="242"><span class="lineNumber">     242 </span>  /// processed to prevent infinite loops.</a>
+<a name="243"><span class="lineNumber">     243 </span>  /// You can increase the [maxDepth] but not disable it.</a>
+<a name="244"><span class="lineNumber">     244 </span>  ///</a>
+<a name="245"><span class="lineNumber">     245 </span>  /// Using regex</a>
+<a name="246"><button class="collapsible hit"><pre class="fileContents"><span class="lineNumber">     246 </span>  String replaceTemplates(String inputValue, {int maxDepth = 32}) {</pre></button>
 <div class="content">
 <b>Detected mutations:</b>
 <table class="mutationTable">
-<tr><td class="mutationLabel" width="10%">1 :</td><td class="mutationText" width="90%"><span class="addedLine">+    <span class="changedTokens"> if (!(text == null) return '';
-    return text.replaceAll('{', '').replaceAll('}', '');
-  }
+<tr><td class="mutationLabel" width="10%">1 :</td><td class="mutationText" width="90%"><span class="addedLine">+   String replaceTemplates(String inputValue, {int maxDepth =<span class="changedTokens"> -32</span>}) {</span></td></tr></table>
 
-  /// Replaces the templates in a given [text]
-  /// with the values in [templateValues]
-  ///
-  /// Curly brackets are not allowed in values and will be deleted
-  ///
-  /// Using regex
-  String replaceTemplates(String text, {bool? recursion})) {</span></span></td></tr><tr><td colspan="2"><hr class="ruler"/></td></tr><tr><td class="mutationLabel" width="10%">2 :</td><td class="mutationText" width="90%"><span class="addedLine">+     if (text <span class="changedTokens">!=</span> null) return '';</span></td></tr></table>
-
-</div></a><a name="241"><button class="collapsible hit"><pre class="fileContents"><span class="lineNumber">     241 </span>    return text.replaceAll('{', '').replaceAll('}', '');</pre></button>
+</div></a><a name="247"><button class="collapsible hit"><pre class="fileContents"><span class="lineNumber">     247 </span>    final pattern = RegExp('{([^{}]+)}');</pre></button>
 <div class="content">
 <b>Detected mutations:</b>
 <table class="mutationTable">
-<tr><td class="mutationLabel" width="10%">1 :</td><td class="mutationText" width="90%"><span class="addedLine">+     return text.replaceAll('{',<span class="changedTokens"> '').replaceAll( '','}');</span></span></td></tr></table>
+<tr><td class="mutationLabel" width="10%">1 :</td><td class="mutationText" width="90%"><span class="addedLine">+     final pattern = RegExp('{([^{}]<span class="changedTokens">-</span>)}');</span></td></tr><tr><td colspan="2"><hr class="ruler"/></td></tr><tr><td class="mutationLabel" width="10%">2 :</td><td class="mutationText" width="90%"><span class="addedLine">+     final pattern = RegExp('{([^{}]<span class="changedTokens">*</span>)}');</span></td></tr></table>
 
-</div></a><a name="242"><span class="lineNumber">     242 </span>  }</a>
-<a name="243"><span class="lineNumber">     243 </span></a>
-<a name="244"><span class="lineNumber">     244 </span>  /// Replaces the templates in a given [text]</a>
-<a name="245"><span class="lineNumber">     245 </span>  /// with the values in [templateValues]</a>
-<a name="246"><span class="lineNumber">     246 </span>  ///</a>
-<a name="247"><span class="lineNumber">     247 </span>  /// Curly brackets are not allowed in values and will be deleted</a>
-<a name="248"><span class="lineNumber">     248 </span>  ///</a>
-<a name="249"><span class="lineNumber">     249 </span>  /// Using regex</a>
-<a name="250"><button class="collapsible hit"><pre class="fileContents"><span class="lineNumber">     250 </span>  String replaceTemplates(String text, {bool? recursion}) {</pre></button>
-<div class="content">
-<b>Detected mutations:</b>
-<table class="mutationTable">
-<tr><td class="mutationLabel" width="10%">1 :</td><td class="mutationText" width="90%"><span class="addedLine">+   String<span class="changedTokens"> replaceTemplates( {bool? recursion}) {
-    // RegEx to find "{key}"
-    final regExp = RegExp('{([a-zA-Z0-9]+)}');
-
-    // Check if there is a 2 opening curly brackets
-    // without a closing one in between
-    // TODO(Marc-R2): Improve recursion detection
-    // final regExp2 = RegExp('{{([a-zA-Z0-9]+)}}');
-
-    final disableRecursion =
-        !(recursion ?? (text.contains('{{') || text.contains('}}')),String text);</span></span></td></tr></table>
-
-</div></a><a name="251"><span class="lineNumber">     251 </span>    // RegEx to find "{key}"</a>
-<a name="252"><button class="collapsible problem"><pre class="fileContents"><span class="lineNumber">     252 </span>    final regExp = RegExp('{([a-zA-Z0-9]+)}');</pre></button>
-<div class="content">
-<b>Undetected mutations:</b>
-<table class="mutationTable">
-<tr><td class="mutationLabel" width="10%">1 :</td><td class="mutationText" width="90%"><span class="addedLine">+     final regExp = RegExp('{([a-zA-Z0-9]<span class="changedTokens">*</span>)}');</span></td></tr><tr><td colspan="2"><hr class="ruler"/></td></tr><tr><td class="mutationLabel" width="10%">2 :</td><td class="mutationText" width="90%"><span class="addedLine">+     final regExp = RegExp('{([a-zA<span class="changedTokens">+</span>Z0-9]+)}');</span></td></tr><tr><td colspan="2"><hr class="ruler"/></td></tr><tr><td class="mutationLabel" width="10%">3 :</td><td class="mutationText" width="90%"><span class="addedLine">+     final regExp = RegExp('{([a-zA<span class="changedTokens">*</span>Z0-9]+)}');</span></td></tr><tr><td colspan="2"><hr class="ruler"/></td></tr><tr><td class="mutationLabel" width="10%">4 :</td><td class="mutationText" width="90%"><span class="addedLine">+     final regExp = RegExp('{([a-zA-Z0<span class="changedTokens">+</span>9]+)}');</span></td></tr><tr><td colspan="2"><hr class="ruler"/></td></tr><tr><td class="mutationLabel" width="10%">5 :</td><td class="mutationText" width="90%"><span class="addedLine">+     final regExp = RegExp('{([a-zA-Z0<span class="changedTokens">*</span>9]+)}');</span></td></tr></table>
-<b>Detected mutations:</b>
-<table class="mutationTable">
-<tr><td class="mutationLabel" width="10%">1 :</td><td class="mutationText" width="90%"><span class="addedLine">+     final regExp = RegExp('{([a<span class="changedTokens">*</span>zA-Z0-9]+)}');</span></td></tr><tr><td colspan="2"><hr class="ruler"/></td></tr><tr><td class="mutationLabel" width="10%">2 :</td><td class="mutationText" width="90%"><span class="addedLine">+     final regExp = RegExp('{([a-zA-Z0-9]<span class="changedTokens">-</span>)}');</span></td></tr><tr><td colspan="2"><hr class="ruler"/></td></tr><tr><td class="mutationLabel" width="10%">3 :</td><td class="mutationText" width="90%"><span class="addedLine">+     final regExp = RegExp('{([a<span class="changedTokens">+</span>zA-Z0-9]+)}');</span></td></tr></table>
-
-</div></a><a name="253"><span class="lineNumber">     253 </span></a>
-<a name="254"><span class="lineNumber">     254 </span>    // Check if there is a 2 opening curly brackets</a>
-<a name="255"><span class="lineNumber">     255 </span>    // without a closing one in between</a>
-<a name="256"><span class="lineNumber">     256 </span>    // TODO(Marc-R2): Improve recursion detection</a>
-<a name="257"><span class="lineNumber">     257 </span>    // final regExp2 = RegExp('{{([a-zA-Z0-9]+)}}');</a>
-<a name="258"><span class="lineNumber">     258 </span></a>
-<a name="259"><span class="lineNumber">     259 </span>    final disableRecursion =</a>
-<a name="260"><button class="collapsible hit"><pre class="fileContents"><span class="lineNumber">     260 </span>        !(recursion ?? (text.contains('{{') || text.contains('}}')));</pre></button>
-<div class="content">
-<b>Detected mutations:</b>
-<table class="mutationTable">
-<tr><td class="mutationLabel" width="10%">1 :</td><td class="mutationText" width="90%"><span class="addedLine">+         !(recursion ?? (text.contains('{{') <span class="changedTokens">||!( text.contains('}}'))</span>));</span></td></tr><tr><td colspan="2"><hr class="ruler"/></td></tr><tr><td class="mutationLabel" width="10%">2 :</td><td class="mutationText" width="90%"><span class="addedLine">+         !(recursion ?? (text.contains('{{') <span class="changedTokens">&amp;&amp;</span> text.contains('}}')));</span></td></tr></table>
-
-</div></a><a name="261"><span class="lineNumber">     261 </span></a>
-<a name="262"><button class="collapsible hit"><pre class="fileContents"><span class="lineNumber">     262 </span>    if (disableRecursion) {</pre></button>
-<div class="content">
-<b>Detected mutations:</b>
-<table class="mutationTable">
-<tr><td class="mutationLabel" width="10%">1 :</td><td class="mutationText" width="90%"><span class="addedLine">+    <span class="changedTokens"> if (!(disableRecursion)) {</span></span></td></tr><tr><td colspan="2"><hr class="ruler"/></td></tr><tr><td class="mutationLabel" width="10%">2 :</td><td class="mutationText" width="90%"><span class="addedLine">+    <span class="changedTokens"> if( (match) {
-        final key = match.group(1);
-        return templateValues[key] ?? '&lt;$key&gt;';
-      });
-    }
-
-    var resultText = text;
-
-    var done = false;
-    while (!done) {
-      final match = regExp.allMatches(resultText);
-
-      if (match.isEmpty) {
-        done = true;
-      } else {
-        final key = removeCurlyBrackets(match.last.group(1),disableRecursion) {
-      return text.replaceAllMapped(regExp);</span></span></td></tr></table>
-
-</div></a><a name="263"><span class="lineNumber">     263 </span>      return text.replaceAllMapped(regExp, (match) {</a>
-<a name="264"><span class="lineNumber">     264 </span>        final key = match.group(1);</a>
-<a name="265"><span class="lineNumber">     265 </span>        return templateValues[key] ?? '&lt;$key&gt;';</a>
-<a name="266"><span class="lineNumber">     266 </span>      });</a>
-<a name="267"><span class="lineNumber">     267 </span>    }</a>
-<a name="268"><span class="lineNumber">     268 </span></a>
-<a name="269"><span class="lineNumber">     269 </span>    var resultText = text;</a>
-<a name="270"><span class="lineNumber">     270 </span></a>
-<a name="271"><span class="lineNumber">     271 </span>    var done = false;</a>
-<a name="272"><span class="lineNumber">     272 </span>    while (!done) {</a>
-<a name="273"><span class="lineNumber">     273 </span>      final match = regExp.allMatches(resultText);</a>
-<a name="274"><span class="lineNumber">     274 </span></a>
-<a name="275"><span class="lineNumber">     275 </span>      if (match.isEmpty) {</a>
-<a name="276"><span class="lineNumber">     276 </span>        done = true;</a>
-<a name="277"><span class="lineNumber">     277 </span>      } else {</a>
-<a name="278"><span class="lineNumber">     278 </span>        final key = removeCurlyBrackets(match.last.group(1));</a>
-<a name="279"><button class="collapsible problem"><pre class="fileContents"><span class="lineNumber">     279 </span>        if (key.contains('{') || key.contains('}')) {</pre></button>
-<div class="content">
-<b>Undetected mutations:</b>
-<table class="mutationTable">
-<tr><td class="mutationLabel" width="10%">1 :</td><td class="mutationText" width="90%"><span class="addedLine">+         if (key.contains('{') <span class="changedTokens">&amp;&amp;</span> key.contains('}')) {</span></td></tr></table>
-<b>Detected mutations:</b>
-<table class="mutationTable">
-<tr><td class="mutationLabel" width="10%">1 :</td><td class="mutationText" width="90%"><span class="addedLine">+        <span class="changedTokens"> if (!(key.contains('{') || key.contains('}'))) {</span></span></td></tr><tr><td colspan="2"><hr class="ruler"/></td></tr><tr><td class="mutationLabel" width="10%">2 :</td><td class="mutationText" width="90%"><span class="addedLine">+         if (key.contains('{') <span class="changedTokens">||!( key.contains('}'))</span>) {</span></td></tr><tr><td colspan="2"><hr class="ruler"/></td></tr><tr><td class="mutationLabel" width="10%">3 :</td><td class="mutationText" width="90%"><span class="addedLine">+        <span class="changedTokens"> if( value,key.contains('{') || key.contains('}')) {
-          return 'Error: Invalid state for: $key';
-        }
-
-        final value = templateValues[key] ?? '&lt;$key&gt;';
-        resultText = resultText.replaceFirst('{$key}');</span></span></td></tr></table>
-
-</div></a><a name="280"><span class="lineNumber">     280 </span>          return 'Error: Invalid state for: $key';</a>
-<a name="281"><span class="lineNumber">     281 </span>        }</a>
-<a name="282"><span class="lineNumber">     282 </span></a>
-<a name="283"><span class="lineNumber">     283 </span>        final value = templateValues[key] ?? '&lt;$key&gt;';</a>
-<a name="284"><span class="lineNumber">     284 </span>        resultText = resultText.replaceFirst('{$key}', value);</a>
-<a name="285"><span class="lineNumber">     285 </span>      }</a>
-<a name="286"><span class="lineNumber">     286 </span>    }</a>
-<a name="287"><span class="lineNumber">     287 </span></a>
-<a name="288"><span class="lineNumber">     288 </span>    return resultText;</a>
-<a name="289"><span class="lineNumber">     289 </span>  }</a>
-<a name="290"><span class="lineNumber">     290 </span></a>
-<a name="291"><span class="lineNumber">     291 </span>  @override</a>
-<a name="292"><span class="lineNumber">     292 </span>  String toString({</a>
-<a name="293"><span class="lineNumber">     293 </span>    bool time = true,</a>
-<a name="294"><span class="lineNumber">     294 </span>    bool type = true,</a>
-<a name="295"><span class="lineNumber">     295 </span>    bool title = true,</a>
-<a name="296"><span class="lineNumber">     296 </span>    bool level = true,</a>
-<a name="297"><span class="lineNumber">     297 </span>    bool tags = true,</a>
-<a name="298"><span class="lineNumber">     298 </span>    bool text = true,</a>
-<a name="299"><span class="lineNumber">     299 </span>    bool stackTrace = false,</a>
-<a name="300"><span class="lineNumber">     300 </span>  }) {</a>
-<a name="301"><button class="collapsible hit"><pre class="fileContents"><span class="lineNumber">     301 </span>    final str = StringBuffer();</pre></button>
+</div></a><a name="248"><span class="lineNumber">     248 </span>    var input = inputValue.trim();</a>
+<a name="249"><span class="lineNumber">     249 </span>    var iteration = 0;</a>
+<a name="250"><span class="lineNumber">     250 </span>    while ((iteration += 1) &lt; maxDepth &amp;&amp; iteration &gt;= 0) {</a>
+<a name="251"><span class="lineNumber">     251 </span>      final match = pattern.firstMatch(input);</a>
+<a name="252"><span class="lineNumber">     252 </span>      if (match == null) break;</a>
+<a name="253"><span class="lineNumber">     253 </span>      final key = match.group(1);</a>
+<a name="254"><span class="lineNumber">     254 </span>      final value = templateValues[key] ?? '&lt;$key&gt;';</a>
+<a name="255"><span class="lineNumber">     255 </span>      input = input.replaceFirst(match.group(0) ?? '', value);</a>
+<a name="256"><span class="lineNumber">     256 </span>    }</a>
+<a name="257"><span class="lineNumber">     257 </span>    return input;</a>
+<a name="258"><span class="lineNumber">     258 </span>  }</a>
+<a name="259"><span class="lineNumber">     259 </span></a>
+<a name="260"><span class="lineNumber">     260 </span>  @override</a>
+<a name="261"><span class="lineNumber">     261 </span>  String toString({</a>
+<a name="262"><span class="lineNumber">     262 </span>    bool time = true,</a>
+<a name="263"><span class="lineNumber">     263 </span>    bool type = true,</a>
+<a name="264"><span class="lineNumber">     264 </span>    bool title = true,</a>
+<a name="265"><span class="lineNumber">     265 </span>    bool level = true,</a>
+<a name="266"><span class="lineNumber">     266 </span>    bool tags = true,</a>
+<a name="267"><span class="lineNumber">     267 </span>    bool text = true,</a>
+<a name="268"><span class="lineNumber">     268 </span>    bool stackTrace = false,</a>
+<a name="269"><span class="lineNumber">     269 </span>  }) {</a>
+<a name="270"><button class="collapsible hit"><pre class="fileContents"><span class="lineNumber">     270 </span>    final str = StringBuffer();</pre></button>
 <div class="content">
 <b>Detected mutations:</b>
 <table class="mutationTable">
@@ -1064,32 +961,32 @@ td.barBg
       if (str.isNotEmpty) str.write(' ');
       str.write('[${this.tags.join(');</span></span></td></tr></table>
 
-</div></a><a name="302"><span class="lineNumber">     302 </span></a>
-<a name="303"><button class="collapsible hit"><pre class="fileContents"><span class="lineNumber">     303 </span>    if (time) {</pre></button>
+</div></a><a name="271"><span class="lineNumber">     271 </span></a>
+<a name="272"><button class="collapsible hit"><pre class="fileContents"><span class="lineNumber">     272 </span>    if (time) {</pre></button>
 <div class="content">
 <b>Detected mutations:</b>
 <table class="mutationTable">
 <tr><td class="mutationLabel" width="10%">1 :</td><td class="mutationText" width="90%"><span class="addedLine">+    <span class="changedTokens"> if (!(time)) {</span></span></td></tr></table>
 
-</div></a><a name="304"><button class="collapsible hit"><pre class="fileContents"><span class="lineNumber">     304 </span>      if (!Logger.testMode) {</pre></button>
+</div></a><a name="273"><button class="collapsible hit"><pre class="fileContents"><span class="lineNumber">     273 </span>      if (!Logger.testMode) {</pre></button>
 <div class="content">
 <b>Detected mutations:</b>
 <table class="mutationTable">
 <tr><td class="mutationLabel" width="10%">1 :</td><td class="mutationText" width="90%"><span class="addedLine">+      <span class="changedTokens"> if (!(!Logger.testMode)) {</span></span></td></tr></table>
 
-</div></a><a name="305"><span class="lineNumber">     305 </span>        str.write('${this.time}');</a>
-<a name="306"><span class="lineNumber">     306 </span>      } else {</a>
-<a name="307"><span class="lineNumber">     307 </span>        str.write('TestMode: $testModeCount');</a>
-<a name="308"><span class="lineNumber">     308 </span>      }</a>
-<a name="309"><span class="lineNumber">     309 </span>    }</a>
-<a name="310"><span class="lineNumber">     310 </span></a>
-<a name="311"><button class="collapsible hit"><pre class="fileContents"><span class="lineNumber">     311 </span>    if (type) {</pre></button>
+</div></a><a name="274"><span class="lineNumber">     274 </span>        str.write('${this.time}');</a>
+<a name="275"><span class="lineNumber">     275 </span>      } else {</a>
+<a name="276"><span class="lineNumber">     276 </span>        str.write('TestMode: $testModeCount');</a>
+<a name="277"><span class="lineNumber">     277 </span>      }</a>
+<a name="278"><span class="lineNumber">     278 </span>    }</a>
+<a name="279"><span class="lineNumber">     279 </span></a>
+<a name="280"><button class="collapsible hit"><pre class="fileContents"><span class="lineNumber">     280 </span>    if (type) {</pre></button>
 <div class="content">
 <b>Detected mutations:</b>
 <table class="mutationTable">
 <tr><td class="mutationLabel" width="10%">1 :</td><td class="mutationText" width="90%"><span class="addedLine">+    <span class="changedTokens"> if (!(type)) {</span></span></td></tr></table>
 
-</div></a><a name="312"><button class="collapsible hit"><pre class="fileContents"><span class="lineNumber">     312 </span>      if (str.isNotEmpty) str.write(' ');</pre></button>
+</div></a><a name="281"><button class="collapsible hit"><pre class="fileContents"><span class="lineNumber">     281 </span>      if (str.isNotEmpty) str.write(' ');</pre></button>
 <div class="content">
 <b>Detected mutations:</b>
 <table class="mutationTable">
@@ -1099,16 +996,16 @@ td.barBg
 
     if (title &amp;&amp; this.title.isNotEmpty)) {</span></span></td></tr></table>
 
-</div></a><a name="313"><span class="lineNumber">     313 </span>      str.write(typeToString());</a>
-<a name="314"><span class="lineNumber">     314 </span>    }</a>
-<a name="315"><span class="lineNumber">     315 </span></a>
-<a name="316"><button class="collapsible hit"><pre class="fileContents"><span class="lineNumber">     316 </span>    if (title &amp;&amp; this.title.isNotEmpty) {</pre></button>
+</div></a><a name="282"><span class="lineNumber">     282 </span>      str.write(typeToString());</a>
+<a name="283"><span class="lineNumber">     283 </span>    }</a>
+<a name="284"><span class="lineNumber">     284 </span></a>
+<a name="285"><button class="collapsible hit"><pre class="fileContents"><span class="lineNumber">     285 </span>    if (title &amp;&amp; this.title.isNotEmpty) {</pre></button>
 <div class="content">
 <b>Detected mutations:</b>
 <table class="mutationTable">
-<tr><td class="mutationLabel" width="10%">1 :</td><td class="mutationText" width="90%"><span class="addedLine">+     if <span class="changedTokens">(title &amp;&amp;!( this.title.isNotEmpty))</span> {</span></td></tr><tr><td colspan="2"><hr class="ruler"/></td></tr><tr><td class="mutationLabel" width="10%">2 :</td><td class="mutationText" width="90%"><span class="addedLine">+     if <span class="changedTokens">(!(title )&amp;&amp; this.title.isNotEmpty)</span> {</span></td></tr><tr><td colspan="2"><hr class="ruler"/></td></tr><tr><td class="mutationLabel" width="10%">3 :</td><td class="mutationText" width="90%"><span class="addedLine">+     <span class="changedTokens">if (!(title )&amp;&amp;</span> this.title.isNotEmpty) {</span></td></tr><tr><td colspan="2"><hr class="ruler"/></td></tr><tr><td class="mutationLabel" width="10%">4 :</td><td class="mutationText" width="90%"><span class="addedLine">+     if (title <span class="changedTokens">||</span> this.title.isNotEmpty) {</span></td></tr><tr><td colspan="2"><hr class="ruler"/></td></tr><tr><td class="mutationLabel" width="10%">5 :</td><td class="mutationText" width="90%"><span class="addedLine">+     if (title <span class="changedTokens">&amp;&amp;!( this.title.isNotEmpty))</span> {</span></td></tr></table>
+<tr><td class="mutationLabel" width="10%">1 :</td><td class="mutationText" width="90%"><span class="addedLine">+     if <span class="changedTokens">(title &amp;&amp;!( this.title.isNotEmpty))</span> {</span></td></tr><tr><td colspan="2"><hr class="ruler"/></td></tr><tr><td class="mutationLabel" width="10%">2 :</td><td class="mutationText" width="90%"><span class="addedLine">+     if <span class="changedTokens">(!(title )&amp;&amp; this.title.isNotEmpty)</span> {</span></td></tr><tr><td colspan="2"><hr class="ruler"/></td></tr><tr><td class="mutationLabel" width="10%">3 :</td><td class="mutationText" width="90%"><span class="addedLine">+     if (title <span class="changedTokens">||</span> this.title.isNotEmpty) {</span></td></tr><tr><td colspan="2"><hr class="ruler"/></td></tr><tr><td class="mutationLabel" width="10%">4 :</td><td class="mutationText" width="90%"><span class="addedLine">+     if (title <span class="changedTokens">&amp;&amp;!( this.title.isNotEmpty))</span> {</span></td></tr><tr><td colspan="2"><hr class="ruler"/></td></tr><tr><td class="mutationLabel" width="10%">5 :</td><td class="mutationText" width="90%"><span class="addedLine">+     <span class="changedTokens">if (!(title )&amp;&amp;</span> this.title.isNotEmpty) {</span></td></tr></table>
 
-</div></a><a name="317"><button class="collapsible hit"><pre class="fileContents"><span class="lineNumber">     317 </span>      if (str.isNotEmpty) str.write(' ');</pre></button>
+</div></a><a name="286"><button class="collapsible hit"><pre class="fileContents"><span class="lineNumber">     286 </span>      if (str.isNotEmpty) str.write(' ');</pre></button>
 <div class="content">
 <b>Detected mutations:</b>
 <table class="mutationTable">
@@ -1119,42 +1016,36 @@ td.barBg
 
     if (level)) {</span></span></td></tr></table>
 
-</div></a><a name="318"><span class="lineNumber">     318 </span>      str.write(titleString);</a>
-<a name="319"><button class="collapsible problem"><pre class="fileContents"><span class="lineNumber">     319 </span>      if (level || (tags &amp;&amp; this.tags.isNotEmpty)) str.write(':');</pre></button>
+</div></a><a name="287"><span class="lineNumber">     287 </span>      str.write(titleString);</a>
+<a name="288"><button class="collapsible hit"><pre class="fileContents"><span class="lineNumber">     288 </span>      if (level || (tags &amp;&amp; this.tags.isNotEmpty)) str.write(':');</pre></button>
 <div class="content">
-<b>Undetected mutations:</b>
-<table class="mutationTable">
-<tr><td class="mutationLabel" width="10%">1 :</td><td class="mutationText" width="90%"><span class="addedLine">+       if (level || <span class="changedTokens">(!(tags )&amp;&amp; this.tags.isNotEmpty)</span>) str.write(':');</span></td></tr></table>
 <b>Detected mutations:</b>
 <table class="mutationTable">
-<tr><td class="mutationLabel" width="10%">1 :</td><td class="mutationText" width="90%"><span class="addedLine">+       if (level || <span class="changedTokens">(tags &amp;&amp;!( this.tags.isNotEmpty))</span>) str.write(':');</span></td></tr><tr><td colspan="2"><hr class="ruler"/></td></tr><tr><td class="mutationLabel" width="10%">2 :</td><td class="mutationText" width="90%"><span class="addedLine">+       if (level <span class="changedTokens">&amp;&amp;</span> (tags &amp;&amp; this.tags.isNotEmpty)) str.write(':');</span></td></tr><tr><td colspan="2"><hr class="ruler"/></td></tr><tr><td class="mutationLabel" width="10%">3 :</td><td class="mutationText" width="90%"><span class="addedLine">+       <span class="changedTokens">if (!(level )||</span> (tags &amp;&amp; this.tags.isNotEmpty)) str.write(':');</span></td></tr><tr><td colspan="2"><hr class="ruler"/></td></tr><tr><td class="mutationLabel" width="10%">4 :</td><td class="mutationText" width="90%"><span class="addedLine">+       if (level || (tags <span class="changedTokens">&amp;&amp;!( this.tags.isNotEmpty))</span>) str.write(':');</span></td></tr><tr><td colspan="2"><hr class="ruler"/></td></tr><tr><td class="mutationLabel" width="10%">5 :</td><td class="mutationText" width="90%"><span class="addedLine">+       if (level || (tags <span class="changedTokens">||</span> this.tags.isNotEmpty)) str.write(':');</span></td></tr><tr><td colspan="2"><hr class="ruler"/></td></tr><tr><td class="mutationLabel" width="10%">6 :</td><td class="mutationText" width="90%"><span class="addedLine">+       if (level <span class="changedTokens">||!(</span>tags &amp;&amp; this.tags.isNotEmpty)) str.write(':');</span></td></tr></table>
+<tr><td class="mutationLabel" width="10%">1 :</td><td class="mutationText" width="90%"><span class="addedLine">+       if (level || <span class="changedTokens">(!(tags )&amp;&amp; this.tags.isNotEmpty)</span>) str.write(':');</span></td></tr><tr><td colspan="2"><hr class="ruler"/></td></tr><tr><td class="mutationLabel" width="10%">2 :</td><td class="mutationText" width="90%"><span class="addedLine">+       if (level || <span class="changedTokens">(tags &amp;&amp;!( this.tags.isNotEmpty))</span>) str.write(':');</span></td></tr><tr><td colspan="2"><hr class="ruler"/></td></tr><tr><td class="mutationLabel" width="10%">3 :</td><td class="mutationText" width="90%"><span class="addedLine">+       if (level <span class="changedTokens">&amp;&amp;</span> (tags &amp;&amp; this.tags.isNotEmpty)) str.write(':');</span></td></tr><tr><td colspan="2"><hr class="ruler"/></td></tr><tr><td class="mutationLabel" width="10%">4 :</td><td class="mutationText" width="90%"><span class="addedLine">+       if (level || (tags <span class="changedTokens">&amp;&amp;!( this.tags.isNotEmpty))</span>) str.write(':');</span></td></tr><tr><td colspan="2"><hr class="ruler"/></td></tr><tr><td class="mutationLabel" width="10%">5 :</td><td class="mutationText" width="90%"><span class="addedLine">+       if (level || (tags <span class="changedTokens">||</span> this.tags.isNotEmpty)) str.write(':');</span></td></tr><tr><td colspan="2"><hr class="ruler"/></td></tr><tr><td class="mutationLabel" width="10%">6 :</td><td class="mutationText" width="90%"><span class="addedLine">+       <span class="changedTokens">if (!(level )||</span> (tags &amp;&amp; this.tags.isNotEmpty)) str.write(':');</span></td></tr><tr><td colspan="2"><hr class="ruler"/></td></tr><tr><td class="mutationLabel" width="10%">7 :</td><td class="mutationText" width="90%"><span class="addedLine">+       if (level <span class="changedTokens">||!(</span>tags &amp;&amp; this.tags.isNotEmpty)) str.write(':');</span></td></tr></table>
 
-</div></a><a name="320"><span class="lineNumber">     320 </span>    }</a>
-<a name="321"><span class="lineNumber">     321 </span></a>
-<a name="322"><span class="lineNumber">     322 </span>    if (level) {</a>
-<a name="323"><button class="collapsible hit"><pre class="fileContents"><span class="lineNumber">     323 </span>      if (!title &amp;&amp; str.isNotEmpty) str.write(' ');</pre></button>
+</div></a><a name="289"><span class="lineNumber">     289 </span>    }</a>
+<a name="290"><span class="lineNumber">     290 </span></a>
+<a name="291"><span class="lineNumber">     291 </span>    if (level) {</a>
+<a name="292"><button class="collapsible hit"><pre class="fileContents"><span class="lineNumber">     292 </span>      if (!title &amp;&amp; str.isNotEmpty) str.write(' ');</pre></button>
 <div class="content">
 <b>Detected mutations:</b>
 <table class="mutationTable">
-<tr><td class="mutationLabel" width="10%">1 :</td><td class="mutationText" width="90%"><span class="addedLine">+       if (!title <span class="changedTokens">&amp;&amp;!( str.isNotEmpty))</span> str.write(' ');</span></td></tr><tr><td colspan="2"><hr class="ruler"/></td></tr><tr><td class="mutationLabel" width="10%">2 :</td><td class="mutationText" width="90%"><span class="addedLine">+       <span class="changedTokens">if (!(!title )&amp;&amp;</span> str.isNotEmpty) str.write(' ');</span></td></tr><tr><td colspan="2"><hr class="ruler"/></td></tr><tr><td class="mutationLabel" width="10%">3 :</td><td class="mutationText" width="90%"><span class="addedLine">+       if <span class="changedTokens">(!title &amp;&amp;!( str.isNotEmpty))</span> str.write(' ');</span></td></tr><tr><td colspan="2"><hr class="ruler"/></td></tr><tr><td class="mutationLabel" width="10%">4 :</td><td class="mutationText" width="90%"><span class="addedLine">+       if <span class="changedTokens">(!(!title )&amp;&amp; str.isNotEmpty)</span> str.write(' ');</span></td></tr><tr><td colspan="2"><hr class="ruler"/></td></tr><tr><td class="mutationLabel" width="10%">5 :</td><td class="mutationText" width="90%"><span class="addedLine">+      <span class="changedTokens"> if (!(!title &amp;&amp; str.isNotEmpty) str.write(' ');
+<tr><td class="mutationLabel" width="10%">1 :</td><td class="mutationText" width="90%"><span class="addedLine">+      <span class="changedTokens"> if (!(!title &amp;&amp; str.isNotEmpty) str.write(' ');
       str.write('(${this.level})');
     }
 
-    if (tags &amp;&amp; this.tags.isNotEmpty)) {</span></span></td></tr><tr><td colspan="2"><hr class="ruler"/></td></tr><tr><td class="mutationLabel" width="10%">6 :</td><td class="mutationText" width="90%"><span class="addedLine">+       if (!title <span class="changedTokens">||</span> str.isNotEmpty) str.write(' ');</span></td></tr></table>
+    if (tags &amp;&amp; this.tags.isNotEmpty)) {</span></span></td></tr><tr><td colspan="2"><hr class="ruler"/></td></tr><tr><td class="mutationLabel" width="10%">2 :</td><td class="mutationText" width="90%"><span class="addedLine">+       if <span class="changedTokens">(!(!title )&amp;&amp; str.isNotEmpty)</span> str.write(' ');</span></td></tr><tr><td colspan="2"><hr class="ruler"/></td></tr><tr><td class="mutationLabel" width="10%">3 :</td><td class="mutationText" width="90%"><span class="addedLine">+       if <span class="changedTokens">(!title &amp;&amp;!( str.isNotEmpty))</span> str.write(' ');</span></td></tr><tr><td colspan="2"><hr class="ruler"/></td></tr><tr><td class="mutationLabel" width="10%">4 :</td><td class="mutationText" width="90%"><span class="addedLine">+       if (!title <span class="changedTokens">||</span> str.isNotEmpty) str.write(' ');</span></td></tr><tr><td colspan="2"><hr class="ruler"/></td></tr><tr><td class="mutationLabel" width="10%">5 :</td><td class="mutationText" width="90%"><span class="addedLine">+       if (!title <span class="changedTokens">&amp;&amp;!( str.isNotEmpty))</span> str.write(' ');</span></td></tr><tr><td colspan="2"><hr class="ruler"/></td></tr><tr><td class="mutationLabel" width="10%">6 :</td><td class="mutationText" width="90%"><span class="addedLine">+       <span class="changedTokens">if (!(!title )&amp;&amp;</span> str.isNotEmpty) str.write(' ');</span></td></tr></table>
 
-</div></a><a name="324"><span class="lineNumber">     324 </span>      str.write('(${this.level})');</a>
-<a name="325"><span class="lineNumber">     325 </span>    }</a>
-<a name="326"><span class="lineNumber">     326 </span></a>
-<a name="327"><button class="collapsible problem"><pre class="fileContents"><span class="lineNumber">     327 </span>    if (tags &amp;&amp; this.tags.isNotEmpty) {</pre></button>
+</div></a><a name="293"><span class="lineNumber">     293 </span>      str.write('(${this.level})');</a>
+<a name="294"><span class="lineNumber">     294 </span>    }</a>
+<a name="295"><span class="lineNumber">     295 </span></a>
+<a name="296"><button class="collapsible hit"><pre class="fileContents"><span class="lineNumber">     296 </span>    if (tags &amp;&amp; this.tags.isNotEmpty) {</pre></button>
 <div class="content">
-<b>Undetected mutations:</b>
-<table class="mutationTable">
-<tr><td class="mutationLabel" width="10%">1 :</td><td class="mutationText" width="90%"><span class="addedLine">+     if <span class="changedTokens">(!(tags )&amp;&amp; this.tags.isNotEmpty)</span> {</span></td></tr><tr><td colspan="2"><hr class="ruler"/></td></tr><tr><td class="mutationLabel" width="10%">2 :</td><td class="mutationText" width="90%"><span class="addedLine">+     <span class="changedTokens">if (!(tags )&amp;&amp;</span> this.tags.isNotEmpty) {</span></td></tr></table>
 <b>Detected mutations:</b>
 <table class="mutationTable">
-<tr><td class="mutationLabel" width="10%">1 :</td><td class="mutationText" width="90%"><span class="addedLine">+     if (tags <span class="changedTokens">&amp;&amp;!( this.tags.isNotEmpty))</span> {</span></td></tr><tr><td colspan="2"><hr class="ruler"/></td></tr><tr><td class="mutationLabel" width="10%">2 :</td><td class="mutationText" width="90%"><span class="addedLine">+     if <span class="changedTokens">(tags &amp;&amp;!( this.tags.isNotEmpty))</span> {</span></td></tr><tr><td colspan="2"><hr class="ruler"/></td></tr><tr><td class="mutationLabel" width="10%">3 :</td><td class="mutationText" width="90%"><span class="addedLine">+     if (tags <span class="changedTokens">||</span> this.tags.isNotEmpty) {</span></td></tr></table>
+<tr><td class="mutationLabel" width="10%">1 :</td><td class="mutationText" width="90%"><span class="addedLine">+     if <span class="changedTokens">(tags &amp;&amp;!( this.tags.isNotEmpty))</span> {</span></td></tr><tr><td colspan="2"><hr class="ruler"/></td></tr><tr><td class="mutationLabel" width="10%">2 :</td><td class="mutationText" width="90%"><span class="addedLine">+     if <span class="changedTokens">(!(tags )&amp;&amp; this.tags.isNotEmpty)</span> {</span></td></tr><tr><td colspan="2"><hr class="ruler"/></td></tr><tr><td class="mutationLabel" width="10%">3 :</td><td class="mutationText" width="90%"><span class="addedLine">+     if (tags <span class="changedTokens">||</span> this.tags.isNotEmpty) {</span></td></tr><tr><td colspan="2"><hr class="ruler"/></td></tr><tr><td class="mutationLabel" width="10%">4 :</td><td class="mutationText" width="90%"><span class="addedLine">+     <span class="changedTokens">if (!(tags )&amp;&amp;</span> this.tags.isNotEmpty) {</span></td></tr><tr><td colspan="2"><hr class="ruler"/></td></tr><tr><td class="mutationLabel" width="10%">5 :</td><td class="mutationText" width="90%"><span class="addedLine">+     if (tags <span class="changedTokens">&amp;&amp;!( this.tags.isNotEmpty))</span> {</span></td></tr></table>
 
-</div></a><a name="328"><button class="collapsible hit"><pre class="fileContents"><span class="lineNumber">     328 </span>      if (str.isNotEmpty) str.write(' ');</pre></button>
+</div></a><a name="297"><button class="collapsible hit"><pre class="fileContents"><span class="lineNumber">     297 </span>      if (str.isNotEmpty) str.write(' ');</pre></button>
 <div class="content">
 <b>Detected mutations:</b>
 <table class="mutationTable">
@@ -1164,16 +1055,16 @@ td.barBg
 
     if (text &amp;&amp; this.text.isNotEmpty)) {</span></span></td></tr></table>
 
-</div></a><a name="329"><span class="lineNumber">     329 </span>      str.write('[${this.tags.join(', ')}]');</a>
-<a name="330"><span class="lineNumber">     330 </span>    }</a>
-<a name="331"><span class="lineNumber">     331 </span></a>
-<a name="332"><button class="collapsible hit"><pre class="fileContents"><span class="lineNumber">     332 </span>    if (text &amp;&amp; this.text.isNotEmpty) {</pre></button>
+</div></a><a name="298"><span class="lineNumber">     298 </span>      str.write('[${this.tags.join(', ')}]');</a>
+<a name="299"><span class="lineNumber">     299 </span>    }</a>
+<a name="300"><span class="lineNumber">     300 </span></a>
+<a name="301"><button class="collapsible hit"><pre class="fileContents"><span class="lineNumber">     301 </span>    if (text &amp;&amp; this.text.isNotEmpty) {</pre></button>
 <div class="content">
 <b>Detected mutations:</b>
 <table class="mutationTable">
-<tr><td class="mutationLabel" width="10%">1 :</td><td class="mutationText" width="90%"><span class="addedLine">+     if (text <span class="changedTokens">&amp;&amp;!( this.text.isNotEmpty))</span> {</span></td></tr><tr><td colspan="2"><hr class="ruler"/></td></tr><tr><td class="mutationLabel" width="10%">2 :</td><td class="mutationText" width="90%"><span class="addedLine">+     if <span class="changedTokens">(text &amp;&amp;!( this.text.isNotEmpty))</span> {</span></td></tr><tr><td colspan="2"><hr class="ruler"/></td></tr><tr><td class="mutationLabel" width="10%">3 :</td><td class="mutationText" width="90%"><span class="addedLine">+     if <span class="changedTokens">(!(text )&amp;&amp; this.text.isNotEmpty)</span> {</span></td></tr><tr><td colspan="2"><hr class="ruler"/></td></tr><tr><td class="mutationLabel" width="10%">4 :</td><td class="mutationText" width="90%"><span class="addedLine">+     if (text <span class="changedTokens">||</span> this.text.isNotEmpty) {</span></td></tr><tr><td colspan="2"><hr class="ruler"/></td></tr><tr><td class="mutationLabel" width="10%">5 :</td><td class="mutationText" width="90%"><span class="addedLine">+     <span class="changedTokens">if (!(text )&amp;&amp;</span> this.text.isNotEmpty) {</span></td></tr></table>
+<tr><td class="mutationLabel" width="10%">1 :</td><td class="mutationText" width="90%"><span class="addedLine">+     if (text <span class="changedTokens">&amp;&amp;!( this.text.isNotEmpty))</span> {</span></td></tr><tr><td colspan="2"><hr class="ruler"/></td></tr><tr><td class="mutationLabel" width="10%">2 :</td><td class="mutationText" width="90%"><span class="addedLine">+     <span class="changedTokens">if (!(text )&amp;&amp;</span> this.text.isNotEmpty) {</span></td></tr><tr><td colspan="2"><hr class="ruler"/></td></tr><tr><td class="mutationLabel" width="10%">3 :</td><td class="mutationText" width="90%"><span class="addedLine">+     if <span class="changedTokens">(text &amp;&amp;!( this.text.isNotEmpty))</span> {</span></td></tr><tr><td colspan="2"><hr class="ruler"/></td></tr><tr><td class="mutationLabel" width="10%">4 :</td><td class="mutationText" width="90%"><span class="addedLine">+     if <span class="changedTokens">(!(text )&amp;&amp; this.text.isNotEmpty)</span> {</span></td></tr><tr><td colspan="2"><hr class="ruler"/></td></tr><tr><td class="mutationLabel" width="10%">5 :</td><td class="mutationText" width="90%"><span class="addedLine">+     if (text <span class="changedTokens">||</span> this.text.isNotEmpty) {</span></td></tr></table>
 
-</div></a><a name="333"><button class="collapsible hit"><pre class="fileContents"><span class="lineNumber">     333 </span>      if (str.isNotEmpty) str.write(' =&gt; ');</pre></button>
+</div></a><a name="302"><button class="collapsible hit"><pre class="fileContents"><span class="lineNumber">     302 </span>      if (str.isNotEmpty) str.write(' =&gt; ');</pre></button>
 <div class="content">
 <b>Detected mutations:</b>
 <table class="mutationTable">
@@ -1183,23 +1074,23 @@ td.barBg
 
     if (stackTrace &amp;&amp; this.stackTrace != null)) {</span></span></td></tr></table>
 
-</div></a><a name="334"><span class="lineNumber">     334 </span>      str.write(textString);</a>
-<a name="335"><span class="lineNumber">     335 </span>    }</a>
-<a name="336"><span class="lineNumber">     336 </span></a>
-<a name="337"><button class="collapsible problem"><pre class="fileContents"><span class="lineNumber">     337 </span>    if (stackTrace &amp;&amp; this.stackTrace != null) {</pre></button>
+</div></a><a name="303"><span class="lineNumber">     303 </span>      str.write(textString);</a>
+<a name="304"><span class="lineNumber">     304 </span>    }</a>
+<a name="305"><span class="lineNumber">     305 </span></a>
+<a name="306"><button class="collapsible hit"><pre class="fileContents"><span class="lineNumber">     306 </span>    if (stackTrace &amp;&amp; this.stackTrace != null) {</pre></button>
 <div class="content">
-<b>Undetected mutations:</b>
+<b>Detected mutations:</b>
 <table class="mutationTable">
-<tr><td class="mutationLabel" width="10%">1 :</td><td class="mutationText" width="90%"><span class="addedLine">+     if (stackTrace <span class="changedTokens">||</span> this.stackTrace != null) {</span></td></tr><tr><td colspan="2"><hr class="ruler"/></td></tr><tr><td class="mutationLabel" width="10%">2 :</td><td class="mutationText" width="90%"><span class="addedLine">+     if (stackTrace &amp;&amp; this.stackTrace <span class="changedTokens">==</span> null) {</span></td></tr><tr><td colspan="2"><hr class="ruler"/></td></tr><tr><td class="mutationLabel" width="10%">3 :</td><td class="mutationText" width="90%"><span class="addedLine">+     if <span class="changedTokens">(!(stackTrace )&amp;&amp; this.stackTrace != null)</span> {</span></td></tr><tr><td colspan="2"><hr class="ruler"/></td></tr><tr><td class="mutationLabel" width="10%">4 :</td><td class="mutationText" width="90%"><span class="addedLine">+     if <span class="changedTokens">(stackTrace &amp;&amp;!( this.stackTrace != null))</span> {</span></td></tr><tr><td colspan="2"><hr class="ruler"/></td></tr><tr><td class="mutationLabel" width="10%">5 :</td><td class="mutationText" width="90%"><span class="addedLine">+     <span class="changedTokens">if (!(stackTrace )&amp;&amp;</span> this.stackTrace != null) {</span></td></tr><tr><td colspan="2"><hr class="ruler"/></td></tr><tr><td class="mutationLabel" width="10%">6 :</td><td class="mutationText" width="90%"><span class="addedLine">+     if (stackTrace <span class="changedTokens">&amp;&amp;!( this.stackTrace != null))</span> {</span></td></tr></table>
+<tr><td class="mutationLabel" width="10%">1 :</td><td class="mutationText" width="90%"><span class="addedLine">+     if <span class="changedTokens">(stackTrace &amp;&amp;!( this.stackTrace != null))</span> {</span></td></tr><tr><td colspan="2"><hr class="ruler"/></td></tr><tr><td class="mutationLabel" width="10%">2 :</td><td class="mutationText" width="90%"><span class="addedLine">+     if (stackTrace <span class="changedTokens">&amp;&amp;!( this.stackTrace != null))</span> {</span></td></tr><tr><td colspan="2"><hr class="ruler"/></td></tr><tr><td class="mutationLabel" width="10%">3 :</td><td class="mutationText" width="90%"><span class="addedLine">+     if <span class="changedTokens">(!(stackTrace )&amp;&amp; this.stackTrace != null)</span> {</span></td></tr><tr><td colspan="2"><hr class="ruler"/></td></tr><tr><td class="mutationLabel" width="10%">4 :</td><td class="mutationText" width="90%"><span class="addedLine">+     if (stackTrace &amp;&amp; this.stackTrace <span class="changedTokens">==</span> null) {</span></td></tr><tr><td colspan="2"><hr class="ruler"/></td></tr><tr><td class="mutationLabel" width="10%">5 :</td><td class="mutationText" width="90%"><span class="addedLine">+     if (stackTrace <span class="changedTokens">||</span> this.stackTrace != null) {</span></td></tr><tr><td colspan="2"><hr class="ruler"/></td></tr><tr><td class="mutationLabel" width="10%">6 :</td><td class="mutationText" width="90%"><span class="addedLine">+     <span class="changedTokens">if (!(stackTrace )&amp;&amp;</span> this.stackTrace != null) {</span></td></tr></table>
 
-</div></a><a name="338"><span class="lineNumber">     338 </span>      if (str.isNotEmpty) str.write('\n');</a>
-<a name="339"><span class="lineNumber">     339 </span>      str.write(this.stackTrace.toString());</a>
-<a name="340"><span class="lineNumber">     340 </span>    }</a>
-<a name="341"><span class="lineNumber">     341 </span></a>
-<a name="342"><span class="lineNumber">     342 </span>    return str.toString();</a>
-<a name="343"><span class="lineNumber">     343 </span>  }</a>
-<a name="344"><span class="lineNumber">     344 </span>}</a>
-<a name="345"><span class="lineNumber">     345 </span></a>
+</div></a><a name="307"><span class="lineNumber">     307 </span>      if (str.isNotEmpty) str.write('\n');</a>
+<a name="308"><span class="lineNumber">     308 </span>      str.write(this.stackTrace.toString());</a>
+<a name="309"><span class="lineNumber">     309 </span>    }</a>
+<a name="310"><span class="lineNumber">     310 </span></a>
+<a name="311"><span class="lineNumber">     311 </span>    return str.toString();</a>
+<a name="312"><span class="lineNumber">     312 </span>  }</a>
+<a name="313"><span class="lineNumber">     313 </span>}</a>
+<a name="314"><span class="lineNumber">     314 </span></a>
 </pre>
 <script>
 var coll = document.getElementsByClassName("collapsible");
