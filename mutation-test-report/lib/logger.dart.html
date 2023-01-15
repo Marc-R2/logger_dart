@@ -312,7 +312,7 @@ td.barBg
      <table width="100%" cellpadding="1" border="0">
      <tbody><tr>
      <td class="ItemLabel" width="10%">Current display:</td>
-     <td class="ItemText" width="35%">lib/logger.dart - <a href="../mutation-test-report.html">back to top</a></td>
+     <td class="ItemText" width="35%">lib\logger.dart - <a href="../mutation-test-report.html">back to top</a></td>
      <td width="10%"></td>
      <td class="MiddleHeader" width="15%">Detected</td>
      <td class="MiddleHeader" width="15%">Total</td>
@@ -321,11 +321,11 @@ td.barBg
 
      <tr>
      <td class="ItemLabel" width="10%">Date:</td>
-     <td class="ItemText" width="35%">2023-01-14 14:01:42.529196</td>
+     <td class="ItemText" width="35%">2023-01-15 15:06:29.391954</td>
      <td class="ItemLabel" width="10%">Mutations:</td>
-     <td class="ItemReport" width="15%">5</td>
-     <td class="ItemReport" width="15%">8</td>
-     <td class="ItemReportMedium" width="15%">62.5 %</td>
+     <td class="ItemReport" width="15%">9</td>
+     <td class="ItemReport" width="15%">9</td>
+     <td class="ItemReportHigh" width="15%">100.0 %</td>
      </tr>
      
      <tr>
@@ -333,7 +333,7 @@ td.barBg
      <td class="ItemText" width="35%">false</td>
      <td class="ItemLabel" width="10%">Timeouts:</td>
      <td class="ItemReport" width="15%">0</td>
-     <td class="ItemReport" width="15%">8</td>
+     <td class="ItemReport" width="15%">9</td>
      <td class="ItemReportHigh" width="15%">0.0 %</td>
      </tr>
      </tbody>
@@ -379,7 +379,7 @@ td.barBg
   static final Logger _logger = Logger._internal(,) =&gt; _logger;
 
   Logger._internal() {
-    logMessage(Message.warning(title: 'Init Logger');</span></span></td></tr></table>
+    logMessage(Message.warning(title: 'Init Logger');</span></span></td></tr></table>
 
 </div></a><a name="15"><span class="lineNumber">      15 </span></a>
 <a name="16"><span class="lineNumber">      16 </span>  Logger._internal() {</a>
@@ -418,97 +418,120 @@ td.barBg
     return _testModeCounter += 1;
   }
 
-  final _controller = StreamController&lt;Message&gt;.broadcast();
+  static final _controller = StreamController&lt;Message&gt;.broadcast();
 
   late final _logIt = MessageTemplate(klasse: this);
 
   /// Stream of incoming Messages
-  Stream&lt;Message&gt; get stream =&gt; _controller.stream;
+  static Stream&lt;Message&gt; get stream =&gt; _controller.stream;
 
   /// Returns a stream of messages filtered by the given [test].
-  Stream&lt;Message&gt; where(bool Function(Message event) test) =&gt;
+  static Stream&lt;Message&gt; where(bool Function(Message event) test) =&gt;
       stream.where(test);
 
   /// Disable the Logger
-  static void disable() =&gt; _logger._active = false;
+  static void disable({bool logIt = true}) =&gt;
+      _logger.setActive(active: false, logIt: logIt);
 
   /// Enable the Logger
-  static void enable() =&gt; _logger._active = true;
+  static void enable({bool logIt = true}) =&gt;
+      _logger.setActive(active: true, logIt: logIt);
 
-  set _active(bool active)) {</span></span></td></tr></table>
+  void setActive({required bool active, bool logIt = true})) {</span></span></td></tr><tr><td colspan="2"><hr class="ruler"/></td></tr><tr><td class="mutationLabel" width="10%">2 :</td><td class="mutationText" width="90%"><span class="addedLine">+    <span class="changedTokens"> if( logIt: logIt,!testMode) return 0;
+    return _testModeCounter += 1;
+  }
+
+  static final _controller = StreamController&lt;Message&gt;.broadcast();
+
+  late final _logIt = MessageTemplate(klasse: this);
+
+  /// Stream of incoming Messages
+  static Stream&lt;Message&gt; get stream =&gt; _controller.stream;
+
+  /// Returns a stream of messages filtered by the given [test].
+  static Stream&lt;Message&gt; where(bool Function(Message event) test) =&gt;
+      stream.where(test);
+
+  /// Disable the Logger
+  static void disable({bool logIt = true}) =&gt;
+      _logger.setActive(active: false);</span></span></td></tr></table>
 
 </div></a><a name="45"><button class="collapsible hit"><pre class="fileContents"><span class="lineNumber">      45 </span>    return _testModeCounter += 1;</pre></button>
 <div class="content">
 <b>Detected mutations:</b>
 <table class="mutationTable">
-<tr><td class="mutationLabel" width="10%">1 :</td><td class="mutationText" width="90%"><span class="addedLine">+     return _testModeCounter <span class="changedTokens">-</span>= 1;</span></td></tr><tr><td colspan="2"><hr class="ruler"/></td></tr><tr><td class="mutationLabel" width="10%">2 :</td><td class="mutationText" width="90%"><span class="addedLine">+     return _testModeCounter <span class="changedTokens">*</span>= 1;</span></td></tr></table>
+<tr><td class="mutationLabel" width="10%">1 :</td><td class="mutationText" width="90%"><span class="addedLine">+     return _testModeCounter <span class="changedTokens">-</span>= 1;</span></td></tr><tr><td colspan="2"><hr class="ruler"/></td></tr><tr><td class="mutationLabel" width="10%">2 :</td><td class="mutationText" width="90%"><span class="addedLine">+     return _testModeCounter <span class="changedTokens">*</span>= 1;</span></td></tr></table>
 
 </div></a><a name="46"><span class="lineNumber">      46 </span>  }</a>
 <a name="47"><span class="lineNumber">      47 </span></a>
-<a name="48"><span class="lineNumber">      48 </span>  final _controller = StreamController&lt;Message&gt;.broadcast();</a>
+<a name="48"><span class="lineNumber">      48 </span>  static final _controller = StreamController&lt;Message&gt;.broadcast();</a>
 <a name="49"><span class="lineNumber">      49 </span></a>
 <a name="50"><span class="lineNumber">      50 </span>  late final _logIt = MessageTemplate(klasse: this);</a>
 <a name="51"><span class="lineNumber">      51 </span></a>
 <a name="52"><span class="lineNumber">      52 </span>  /// Stream of incoming Messages</a>
-<a name="53"><span class="lineNumber">      53 </span>  Stream&lt;Message&gt; get stream =&gt; _controller.stream;</a>
+<a name="53"><span class="lineNumber">      53 </span>  static Stream&lt;Message&gt; get stream =&gt; _controller.stream;</a>
 <a name="54"><span class="lineNumber">      54 </span></a>
 <a name="55"><span class="lineNumber">      55 </span>  /// Returns a stream of messages filtered by the given [test].</a>
-<a name="56"><span class="lineNumber">      56 </span>  Stream&lt;Message&gt; where(bool Function(Message event) test) =&gt;</a>
+<a name="56"><span class="lineNumber">      56 </span>  static Stream&lt;Message&gt; where(bool Function(Message event) test) =&gt;</a>
 <a name="57"><span class="lineNumber">      57 </span>      stream.where(test);</a>
 <a name="58"><span class="lineNumber">      58 </span></a>
 <a name="59"><span class="lineNumber">      59 </span>  /// Disable the Logger</a>
-<a name="60"><span class="lineNumber">      60 </span>  static void disable() =&gt; _logger._active = false;</a>
-<a name="61"><span class="lineNumber">      61 </span></a>
-<a name="62"><span class="lineNumber">      62 </span>  /// Enable the Logger</a>
-<a name="63"><span class="lineNumber">      63 </span>  static void enable() =&gt; _logger._active = true;</a>
-<a name="64"><span class="lineNumber">      64 </span></a>
-<a name="65"><span class="lineNumber">      65 </span>  set _active(bool active) {</a>
-<a name="66"><span class="lineNumber">      66 </span>    final log = _logIt.child(function: 'set._active');</a>
-<a name="67"><span class="lineNumber">      67 </span></a>
-<a name="68"><button class="collapsible problem"><pre class="fileContents"><span class="lineNumber">      68 </span>    if (active == _activeLogging) {</pre></button>
+<a name="60"><span class="lineNumber">      60 </span>  static void disable({bool logIt = true}) =&gt;</a>
+<a name="61"><span class="lineNumber">      61 </span>      _logger.setActive(active: false, logIt: logIt);</a>
+<a name="62"><span class="lineNumber">      62 </span></a>
+<a name="63"><span class="lineNumber">      63 </span>  /// Enable the Logger</a>
+<a name="64"><button class="collapsible hit"><pre class="fileContents"><span class="lineNumber">      64 </span>  static void enable({bool logIt = true}) =&gt;</pre></button>
 <div class="content">
-<b>Undetected mutations:</b>
+<b>Detected mutations:</b>
 <table class="mutationTable">
-<tr><td class="mutationLabel" width="10%">1 :</td><td class="mutationText" width="90%"><span class="addedLine">+     if (active <span class="changedTokens">!=</span> _activeLogging) {</span></td></tr><tr><td colspan="2"><hr class="ruler"/></td></tr><tr><td class="mutationLabel" width="10%">2 :</td><td class="mutationText" width="90%"><span class="addedLine">+    <span class="changedTokens"> if (!(active == _activeLogging)) {</span></span></td></tr></table>
+<tr><td class="mutationLabel" width="10%">1 :</td><td class="mutationText" width="90%"><span class="addedLine">+   static void<span class="changedTokens"> enable( logIt: logIt,{bool logIt = true}) =&gt;
+      _logger.setActive(active: true);</span></span></td></tr></table>
 
-</div></a><a name="69"><span class="lineNumber">      69 </span>      log.info(</a>
-<a name="70"><span class="lineNumber">      70 </span>        title: 'Logging state not changed',</a>
-<a name="71"><span class="lineNumber">      71 </span>        message: 'The logging state is already {active}',</a>
-<a name="72"><span class="lineNumber">      72 </span>        values: {'active': active ? 'enabled' : 'disabled'},</a>
-<a name="73"><span class="lineNumber">      73 </span>      );</a>
-<a name="74"><span class="lineNumber">      74 </span>      return;</a>
-<a name="75"><span class="lineNumber">      75 </span>    }</a>
-<a name="76"><button class="collapsible problem"><pre class="fileContents"><span class="lineNumber">      76 </span>    if (active) {</pre></button>
+</div></a><a name="65"><span class="lineNumber">      65 </span>      _logger.setActive(active: true, logIt: logIt);</a>
+<a name="66"><span class="lineNumber">      66 </span></a>
+<a name="67"><button class="collapsible hit"><pre class="fileContents"><span class="lineNumber">      67 </span>  void setActive({required bool active, bool logIt = true}) {</pre></button>
 <div class="content">
-<b>Undetected mutations:</b>
+<b>Detected mutations:</b>
 <table class="mutationTable">
-<tr><td class="mutationLabel" width="10%">1 :</td><td class="mutationText" width="90%"><span class="addedLine">+    <span class="changedTokens"> if (!(active)) {</span></span></td></tr></table>
+<tr><td class="mutationLabel" width="10%">1 :</td><td class="mutationText" width="90%"><span class="addedLine">+   void<span class="changedTokens"> setActive( bool logIt = true}) {
+    final log = _logIt.child(function: 'setActive',{required bool active);</span></span></td></tr></table>
 
-</div></a><a name="77"><span class="lineNumber">      77 </span>      log.info(</a>
-<a name="78"><span class="lineNumber">      78 </span>        title: 'Enabled Logging',</a>
-<a name="79"><span class="lineNumber">      79 </span>        message: 'Set the logging state to enabled',</a>
-<a name="80"><span class="lineNumber">      80 </span>      );</a>
-<a name="81"><span class="lineNumber">      81 </span>    } else {</a>
-<a name="82"><span class="lineNumber">      82 </span>      log.info(</a>
-<a name="83"><span class="lineNumber">      83 </span>        title: 'Disabled Logging',</a>
-<a name="84"><span class="lineNumber">      84 </span>        message: 'Set the logging state to disabled',</a>
-<a name="85"><span class="lineNumber">      85 </span>      );</a>
-<a name="86"><span class="lineNumber">      86 </span>    }</a>
-<a name="87"><span class="lineNumber">      87 </span>    _activeLogging = active;</a>
-<a name="88"><span class="lineNumber">      88 </span>  }</a>
+</div></a><a name="68"><span class="lineNumber">      68 </span>    final log = _logIt.child(function: 'setActive');</a>
+<a name="69"><span class="lineNumber">      69 </span></a>
+<a name="70"><button class="collapsible hit"><pre class="fileContents"><span class="lineNumber">      70 </span>    if (logIt) {</pre></button>
+<div class="content">
+<b>Detected mutations:</b>
+<table class="mutationTable">
+<tr><td class="mutationLabel" width="10%">1 :</td><td class="mutationText" width="90%"><span class="addedLine">+    <span class="changedTokens"> if (!(logIt)) {</span></span></td></tr></table>
+
+</div></a><a name="71"><span class="lineNumber">      71 </span>      log.info(</a>
+<a name="72"><span class="lineNumber">      72 </span>        title: '{mode} Logging',</a>
+<a name="73"><span class="lineNumber">      73 </span>        message: 'Set the logging state to {state}',</a>
+<a name="74"><span class="lineNumber">      74 </span>        values: {</a>
+<a name="75"><span class="lineNumber">      75 </span>          'mode': active ? 'Enable' : 'Disable',</a>
+<a name="76"><span class="lineNumber">      76 </span>          'state': active ? 'active' : 'inactive',</a>
+<a name="77"><span class="lineNumber">      77 </span>        },</a>
+<a name="78"><span class="lineNumber">      78 </span>      );</a>
+<a name="79"><span class="lineNumber">      79 </span>    }</a>
+<a name="80"><span class="lineNumber">      80 </span></a>
+<a name="81"><span class="lineNumber">      81 </span>    _activeLogging = active;</a>
+<a name="82"><span class="lineNumber">      82 </span>  }</a>
+<a name="83"><span class="lineNumber">      83 </span></a>
+<a name="84"><span class="lineNumber">      84 </span>  /// Whether the Logger is active</a>
+<a name="85"><span class="lineNumber">      85 </span>  static bool get isLoggingEnabled =&gt; _activeLogging;</a>
+<a name="86"><span class="lineNumber">      86 </span></a>
+<a name="87"><span class="lineNumber">      87 </span>  /// Logs a Message</a>
+<a name="88"><span class="lineNumber">      88 </span>  static void log(Message message) =&gt; _logger.logMessage(message);</a>
 <a name="89"><span class="lineNumber">      89 </span></a>
 <a name="90"><span class="lineNumber">      90 </span>  /// Logs a Message</a>
-<a name="91"><span class="lineNumber">      91 </span>  static void log(Message message) =&gt; _logger.logMessage(message);</a>
-<a name="92"><span class="lineNumber">      92 </span></a>
-<a name="93"><span class="lineNumber">      93 </span>  /// Logs a Message</a>
-<a name="94"><span class="lineNumber">      94 </span>  void logMessage(</a>
-<a name="95"><span class="lineNumber">      95 </span>    Message message, {</a>
-<a name="96"><span class="lineNumber">      96 </span>    bool queue = true,</a>
-<a name="97"><span class="lineNumber">      97 </span>    bool notifyListeners = true,</a>
-<a name="98"><span class="lineNumber">      98 </span>    bool devLog = false,</a>
-<a name="99"><span class="lineNumber">      99 </span>    bool println = true,</a>
-<a name="100"><span class="lineNumber">     100 </span>  }) {</a>
-<a name="101"><button class="collapsible hit"><pre class="fileContents"><span class="lineNumber">     101 </span>    if (!_activeLogging) return;</pre></button>
+<a name="91"><span class="lineNumber">      91 </span>  void logMessage(</a>
+<a name="92"><span class="lineNumber">      92 </span>    Message message, {</a>
+<a name="93"><span class="lineNumber">      93 </span>    bool queue = true,</a>
+<a name="94"><span class="lineNumber">      94 </span>    bool notifyListeners = true,</a>
+<a name="95"><span class="lineNumber">      95 </span>    bool devLog = false,</a>
+<a name="96"><span class="lineNumber">      96 </span>    bool println = true,</a>
+<a name="97"><span class="lineNumber">      97 </span>  }) {</a>
+<a name="98"><button class="collapsible hit"><pre class="fileContents"><span class="lineNumber">      98 </span>    if (!_activeLogging) return;</pre></button>
 <div class="content">
 <b>Detected mutations:</b>
 <table class="mutationTable">
@@ -516,21 +539,21 @@ td.barBg
     if (queue) messages[message.time.millisecondsSinceEpoch] = message;
     if (notifyListeners) _controller.sink.add(message);
     if (println) print(message.prettyString(stackTrace: true));
-    if (devLog)) {</span></span></td></tr></table>
+    if (devLog)) {</span></span></td></tr></table>
 
-</div></a><a name="102"><span class="lineNumber">     102 </span>    if (queue) messages[message.time.millisecondsSinceEpoch] = message;</a>
-<a name="103"><span class="lineNumber">     103 </span>    if (notifyListeners) _controller.sink.add(message);</a>
-<a name="104"><span class="lineNumber">     104 </span>    if (println) print(message.prettyString(stackTrace: true));</a>
-<a name="105"><span class="lineNumber">     105 </span>    if (devLog) {</a>
-<a name="106"><span class="lineNumber">     106 </span>      developer.log(</a>
-<a name="107"><span class="lineNumber">     107 </span>        message.prettyString(stackTrace: true),</a>
-<a name="108"><span class="lineNumber">     108 </span>        time: message.time,</a>
-<a name="109"><span class="lineNumber">     109 </span>        level: message.level,</a>
-<a name="110"><span class="lineNumber">     110 </span>      );</a>
-<a name="111"><span class="lineNumber">     111 </span>    }</a>
-<a name="112"><span class="lineNumber">     112 </span>  }</a>
-<a name="113"><span class="lineNumber">     113 </span>}</a>
-<a name="114"><span class="lineNumber">     114 </span></a>
+</div></a><a name="99"><span class="lineNumber">      99 </span>    if (queue) messages[message.time.millisecondsSinceEpoch] = message;</a>
+<a name="100"><span class="lineNumber">     100 </span>    if (notifyListeners) _controller.sink.add(message);</a>
+<a name="101"><span class="lineNumber">     101 </span>    if (println) print(message.prettyString(stackTrace: true));</a>
+<a name="102"><span class="lineNumber">     102 </span>    if (devLog) {</a>
+<a name="103"><span class="lineNumber">     103 </span>      developer.log(</a>
+<a name="104"><span class="lineNumber">     104 </span>        message.prettyString(stackTrace: true),</a>
+<a name="105"><span class="lineNumber">     105 </span>        time: message.time,</a>
+<a name="106"><span class="lineNumber">     106 </span>        level: message.level,</a>
+<a name="107"><span class="lineNumber">     107 </span>      );</a>
+<a name="108"><span class="lineNumber">     108 </span>    }</a>
+<a name="109"><span class="lineNumber">     109 </span>  }</a>
+<a name="110"><span class="lineNumber">     110 </span>}</a>
+<a name="111"><span class="lineNumber">     111 </span></a>
 </pre>
 <script>
 var coll = document.getElementsByClassName("collapsible");
