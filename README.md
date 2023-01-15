@@ -1,2 +1,3 @@
-A sample command-line application with an entrypoint in `bin/`, library code
-in `lib/`, and example unit test in `test/`.
+[![codecov](https://codecov.io/github/Marc-R2/logger_dart/branch/master/graph/badge.svg?token=XM5NIT73JV)](https://codecov.io/github/Marc-R2/logger_dart)
+
+# Logger for Dart

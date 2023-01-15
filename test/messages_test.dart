@@ -7,42 +7,12 @@ Future<void> main() async {
     final startTime = DateTime.now();
     final stMC = startTime.microsecondsSinceEpoch;
 
-    group('removeCurlyBrackets', () {
-      test('char', () {
-        expect(Message.removeCurlyBrackets(''), '');
-        expect(Message.removeCurlyBrackets('a'), 'a');
-        expect(Message.removeCurlyBrackets('b'), 'b');
-        expect(Message.removeCurlyBrackets('{'), '');
-        expect(Message.removeCurlyBrackets('}'), '');
-      });
-
-      test('word', () {
-        expect(Message.removeCurlyBrackets('word'), 'word');
-        expect(Message.removeCurlyBrackets('{word'), 'word');
-        expect(Message.removeCurlyBrackets('word}'), 'word');
-        expect(Message.removeCurlyBrackets('{word}'), 'word');
-        expect(Message.removeCurlyBrackets('wo{rd'), 'word');
-        expect(Message.removeCurlyBrackets('wo}rd'), 'word');
-        expect(Message.removeCurlyBrackets('wo{rd}'), 'word');
-        expect(Message.removeCurlyBrackets('{wo}rd'), 'word');
-        expect(Message.removeCurlyBrackets('{wo}rd{'), 'word');
-        expect(Message.removeCurlyBrackets('{wo}rd}'), 'word');
-        expect(Message.removeCurlyBrackets('{wo}{rd}'), 'word');
-      });
-
-      test('sentence', () {
-        expect(
-          Message.removeCurlyBrackets('This is a {test} with {curly} brackets'),
-          'This is a test with curly brackets',
-        );
-      });
-    });
-
     group('<fields>', () {
       late Message log;
       late Message info;
       late Message warning;
       late Message error;
+      late Message trace;
 
       setUp(() {
         log = Message.log(
@@ -67,6 +37,13 @@ Future<void> main() async {
           title: 'errorName',
           text: 'errorText',
           level: 4,
+        );
+
+        trace = Message.trace(
+          title: 'traceName',
+          text: 'traceText',
+          level: 1,
+          log: true,
         );
       });
 
@@ -101,6 +78,308 @@ Future<void> main() async {
         test('error type', () => expect(error.type, 3));
         test('error time', () => expect(error.timeMC, greaterThan(stMC)));
         test('error test', () => expect(error.testModeCount, 5));
+      });
+      group('trace', () {
+        test('trace name', () => expect(trace.title, 'traceName'));
+        test('trace text', () => expect(trace.text, 'traceText'));
+        test('trace level', () => expect(trace.level, 1));
+        test('trace type', () => expect(trace.type, 9));
+        test('trace time', () => expect(trace.timeMC, greaterThan(stMC)));
+        test('trace test', () => expect(trace.testModeCount, 6));
+      });
+    });
+
+    group('fromMap', () {
+      test('fromMap creates a valid message from a valid map', () {
+        final testMap = <String, dynamic>{
+          'title': 'Test Title',
+          'text': 'Test Text',
+          'time': 563536000000,
+          'level': 2,
+          'type': 3,
+          'templates': {'key': 'value'},
+          'tags': ['tag1', 'tag2']
+        };
+        final message = Message.fromMap(testMap);
+        expect(message.title, 'Test Title');
+        expect(message.text, 'Test Text');
+        expect(message.time, DateTime.fromMillisecondsSinceEpoch(563536000000));
+        expect(message.level, 2);
+        expect(message.type, 3);
+        expect(message.templateValues, {'key': 'value'});
+        expect(message.tags, ['tag1', 'tag2']);
+      });
+
+      test('fromMap when an invalid(empty) map is passed', () {
+        final testMap = <dynamic, dynamic>{};
+        final message = Message.fromMap(testMap);
+        expect(message.title, 'Error');
+        expect(message.text, '');
+        expect(message.time, isNot(null));
+        expect(message.level, 0);
+        expect(message.type, 0);
+        expect(message.templateValues, isEmpty);
+        expect(message.tags, isEmpty);
+      });
+
+      test('fromMap error message when invalid data types are passed', () {
+        final testMap = <dynamic, dynamic>{
+          'title': 'Test Title',
+          'text': 'Test Text',
+          'time': 'invalid time',
+          'level': 'invalid level',
+          'type': 'invalid type',
+          'templates': 'invalid templates',
+          'tags': 'invalid tags'
+        };
+        try {
+          Message.fromMap(testMap);
+          fail('Expected exception to be thrown');
+        } catch (e) {
+          expect(e, isA<TypeError>());
+        }
+      });
+    });
+
+    group('toMap', () {
+      final message = Message.log(
+        title: 'Test Title',
+        text: 'Test Text',
+        level: 2,
+        tags: ['tag1', 'tag2'],
+      );
+
+      test('toMap and fromMap with no data loss', () {
+        final map = message.toMap();
+        final messageFromMap = Message.fromMap(map);
+        expect(messageFromMap.title, message.title);
+        expect(messageFromMap.text, message.text);
+        expect(messageFromMap.timeMS, message.timeMS);
+        expect(messageFromMap.level, message.level);
+        expect(messageFromMap.type, message.type);
+        expect(messageFromMap.templateValues, message.templateValues);
+        expect(messageFromMap.tags, message.tags);
+      });
+
+      test('toMap returns a map with all required fields', () {
+        final map = message.toMap();
+        expect(map.containsKey('title'), true);
+        expect(map.containsKey('text'), true);
+        expect(map.containsKey('time'), true);
+        expect(map.containsKey('level'), true);
+        expect(map.containsKey('type'), true);
+        expect(map.containsKey('templates'), true);
+        expect(map.containsKey('tags'), true);
+      });
+
+      test('toMap returns a map with all fields in the correct data type', () {
+        final map = message.toMap();
+        expect(map['title'], isA<String>());
+        expect(map['text'], isA<String>());
+        expect(map['time'], isA<int>());
+        expect(map['level'], isA<int>());
+        expect(map['type'], isA<int>());
+        expect(map['templates'], isA<Map>());
+        expect(map['tags'], isA<List>());
+      });
+    });
+
+    group('stackTrace', () {
+      final stackTrace = StackTrace.fromString('Stack Trace');
+
+      test('StackTrace is added to message correctly', () {
+        final message = Message.error(
+          title: 'Test Title',
+          text: 'Test Text',
+          level: 2,
+          stackTrace: stackTrace,
+        );
+        expect(message.stackTrace, stackTrace);
+      });
+
+      test('StackTrace is not in map by default', () {
+        final message = Message.error(
+          title: 'Test Title',
+          text: 'Test Text',
+          level: 2,
+          stackTrace: stackTrace,
+        );
+        final map = message.toMap();
+        expect(map['stackTrace'], isNull);
+        final messageFromMap = Message.fromMap(map);
+        expect(messageFromMap.stackTrace, isNull);
+      });
+
+      test('StackTrace is saved and loaded correctly in map', () {
+        final message = Message.error(
+          title: 'Test Title',
+          text: 'Test Text',
+          level: 2,
+          stackTrace: stackTrace,
+        );
+        final map = message.toMap(includeStackTrace: true);
+        expect(map['stackTrace'], isA<String>());
+        expect(map['stackTrace'], stackTrace.toString());
+        final messageFromMap = Message.fromMap(map);
+        expect(messageFromMap.stackTrace, isA<StackTrace>());
+        expect(messageFromMap.stackTrace.toString(), stackTrace.toString());
+      });
+
+      test('Message is created with stack trace without any issues', () {
+        final message = Message.error(
+          title: 'Test Title',
+          text: 'Test Text',
+          level: 2,
+          stackTrace: stackTrace,
+        );
+        expect(message.title, 'Test Title');
+        expect(message.text, 'Test Text');
+        expect(message.level, 2);
+        expect(message.stackTrace, stackTrace);
+      });
+
+      test('StackTrace is not present in map if not passed', () {
+        final message = Message.error(
+          title: 'Test Title',
+          text: 'Test Text',
+          level: 2,
+        );
+        final map = message.toMap();
+        expect(map.containsKey('stackTrace'), false);
+      });
+    });
+
+    group('klasse', () {
+      test('Class is added to tags correctly', () {
+        final message = Message.error(
+          title: 'Test Title',
+          text: 'Test Text',
+          level: 2,
+          klasse: 'Message',
+        );
+        expect(message.tags, contains('class:Message'));
+      });
+
+      test('Class is saved and loaded correctly in map', () {
+        final message = Message.error(
+          title: 'Test Title',
+          text: 'Test Text',
+          level: 2,
+          klasse: Logger(),
+        );
+        final map = message.toMap();
+        expect(map['tags'], contains('class:Logger'));
+        final messageFromMap = Message.fromMap(map);
+        expect(messageFromMap.tags, contains('class:Logger'));
+      });
+
+      test('Class is not added to tags if not passed', () {
+        final message = Message.error(
+          title: 'Test Title',
+          text: 'Test Text',
+          level: 2,
+        );
+        expect(message.tags, isNot(contains('class:Any')));
+      });
+
+      test('Class is not present in map if not passed', () {
+        final message = Message.error(
+          title: 'Test Title',
+          text: 'Test Text',
+          level: 2,
+        );
+        final map = message.toMap();
+        expect(map.containsKey('tags'), true);
+        expect(map['tags'], isNot(contains('class:MyClass')));
+      });
+    });
+
+    group('function', () {
+      test('Class is added to tags correctly', () {
+        final message = Message.error(
+          title: 'Test Title',
+          text: 'Test Text',
+          level: 2,
+          function: 'my_function',
+        );
+        expect(message.tags, contains('func:my_function'));
+      });
+
+      test('Class is saved and loaded correctly in map', () {
+        final message = Message.error(
+          title: 'Test Title',
+          text: 'Test Text',
+          level: 2,
+          function: 'my_function',
+        );
+        final map = message.toMap();
+        expect(map['tags'], contains('func:my_function'));
+        final messageFromMap = Message.fromMap(map);
+        expect(messageFromMap.tags, contains('func:my_function'));
+      });
+
+      test('Class is not added to tags if not passed', () {
+        final message = Message.error(
+          title: 'Test Title',
+          text: 'Test Text',
+          level: 2,
+        );
+        expect(message.tags, isNot(contains('func:my_function')));
+      });
+
+      test('Class is not present in map if not passed', () {
+        final message = Message.error(
+          title: 'Test Title',
+          text: 'Test Text',
+          level: 2,
+        );
+        final map = message.toMap();
+        expect(map.containsKey('tags'), true);
+        expect(map['tags'], isNot(contains('func:my_function')));
+      });
+    });
+
+    group('toString', () {
+      test('toString() with tags=true', () {
+        final message = Message.log(title: 'Test message', tags: ['tag1']);
+        const expectedString = 'TestMode: 2 Log: Test message:(0) [tag1]';
+        expect(message.toString(), equals(expectedString));
+      });
+
+      test('toString() with tags=false', () {
+        final message = Message.log(title: 'Test message', tags: ['tag1']);
+        const expectedString = 'TestMode: 2 Log: Test message:(0)';
+        expect(message.toString(tags: false), equals(expectedString));
+      });
+
+      test('toString() with tags=false, level=false', () {
+        final message = Message.log(title: 'Test message', tags: ['tag1']);
+        const expectedString = 'TestMode: 2 Log: Test message';
+        expect(
+          message.toString(tags: false, level: false),
+          equals(expectedString),
+        );
+      });
+
+      test('toString() with templateValues', () {
+        final message = Message.log(
+          title: 'Test message with {key}',
+          templateValues: {'key': 'value'},
+        );
+        const expectedString = 'TestMode: 2 Log: Test message with value:(0)';
+        expect(message.toString(tags: false), equals(expectedString));
+      });
+
+      test('toString() with stackTrace = false', () {
+        final stack = StackTrace.current;
+        final message = Message.log(title: 'Test message', stackTrace: stack);
+        expect(message.toString(), isNot(contains(stack.toString())));
+      });
+
+      test('toString() with stackTrace = true', () {
+        final stack = StackTrace.current;
+        final message = Message.log(title: 'Test message', stackTrace: stack);
+        expect(message.toString(stackTrace: true), contains(stack.toString()));
       });
     });
   });
