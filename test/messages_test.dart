@@ -369,5 +369,40 @@ Future<void> main() async {
         expect(map['tags'], isNot(contains('func:my_function')));
       });
     });
+
+    group('toString', () {
+      test('toString() with tags=true', () {
+        final message = Message.log(title: 'Test message', tags: ['tag1']);
+        const expectedString = 'TestMode: 2 Log: Test message:(0) [tag1]';
+        expect(message.toString(), equals(expectedString));
+      });
+
+      test('toString() with tags=false', () {
+        final message = Message.log(title: 'Test message', tags: ['tag1']);
+        const expectedString = 'TestMode: 2 Log: Test message:(0)';
+        expect(message.toString(tags: false), equals(expectedString));
+      });
+
+      test('toString() with templateValues', () {
+        final message = Message.log(
+          title: 'Test message with {key}',
+          templateValues: {'key': 'value'},
+        );
+        const expectedString = 'TestMode: 2 Log: Test message with value:(0)';
+        expect(message.toString(tags: false), equals(expectedString));
+      });
+
+      test('toString() with stackTrace = false', () {
+        final stack = StackTrace.current;
+        final message = Message.log(title: 'Test message', stackTrace: stack);
+        expect(message.toString(), isNot(contains(stack.toString())));
+      });
+
+      test('toString() with stackTrace = true', () {
+        final stack = StackTrace.current;
+        final message = Message.log(title: 'Test message', stackTrace: stack);
+        expect(message.toString(stackTrace: true), contains(stack.toString()));
+      });
+    });
   });
 }
