@@ -106,7 +106,10 @@ class Message {
             .map((key, value) => MapEntry(key.toString(), value.toString())),
         tags = ((map['tags'] ?? <String>[]) as List)
             .map<String>((dynamic e) => e.toString())
-            .toList();
+            .toList(),
+        stackTrace = map['stackTrace'] != null
+            ? StackTrace.fromString(map['stackTrace'] as String)
+            : null;
 
   /// Name or Title of the message
   ///
@@ -146,6 +149,12 @@ class Message {
   /// Usually the DateTime from the creation of the message
   final DateTime time;
 
+  /// Time of the message in microseconds
+  int get timeMC => time.microsecondsSinceEpoch;
+
+  /// Time of the message in milliseconds
+  int get timeMS => time.millisecondsSinceEpoch;
+
   /// The higher the worse
   final int level;
 
@@ -157,6 +166,9 @@ class Message {
 
   /// Can provide stacktrace information when available
   StackTrace? stackTrace;
+
+  /// Conter for testmode
+  late final int testModeCount = Logger.testModeCounter;
 
   /// A marker used to stop coloring
   static const _endColorMarker = '\x1B[0m';
@@ -201,7 +213,7 @@ class Message {
     map['time'] = time.millisecondsSinceEpoch;
     map['templates'] = templateValues;
 
-    if (includeStackTrace || stackTrace != null) {
+    if (includeStackTrace && stackTrace != null) {
       map['stackTrace'] = stackTrace.toString();
     }
 
@@ -223,58 +235,26 @@ class Message {
     return '';
   }
 
-  /// Removes all curly brackets from a given [text]
-  static String removeCurlyBrackets(String? text) {
-    if (text == null) return '';
-    return text.replaceAll('{', '').replaceAll('}', '');
-  }
-
   /// Replaces the templates in a given [text]
   /// with the values in [templateValues]
   ///
-  /// Curly brackets are not allowed in values and will be deleted
+  /// [maxDepth] - By default a maximum of 32 replacements will be
+  /// processed to prevent infinite loops.
+  /// You can increase the [maxDepth] but not disable it.
   ///
   /// Using regex
-  String replaceTemplates(String text, {bool? recursion}) {
-    // RegEx to find "{key}"
-    final regExp = RegExp('{([a-zA-Z0-9]+)}');
-
-    // Check if there is a 2 opening curly brackets
-    // without a closing one in between
-    // TODO(Marc-R2): Improve recursion detection
-    // final regExp2 = RegExp('{{([a-zA-Z0-9]+)}}');
-
-    final disableRecursion =
-        !(recursion ?? (text.contains('{{') || text.contains('}}')));
-
-    if (disableRecursion) {
-      return text.replaceAllMapped(regExp, (match) {
-        final key = match.group(1);
-        return templateValues[key] ?? '<$key>';
-      });
+  String replaceTemplates(String inputValue, {int maxDepth = 32}) {
+    final pattern = RegExp('{([^{}]+)}');
+    var input = inputValue.trim();
+    var iteration = 0;
+    while ((iteration += 1) < maxDepth && iteration >= 0) {
+      final match = pattern.firstMatch(input);
+      if (match == null) break;
+      final key = match.group(1);
+      final value = templateValues[key] ?? '<$key>';
+      input = input.replaceFirst(match.group(0) ?? '', value);
     }
-
-    var resultText = text;
-
-    var done = false;
-    while (!done) {
-      final match = regExp.allMatches(resultText);
-
-      if (match.isEmpty) {
-        done = true;
-      } else {
-        final key = removeCurlyBrackets(match.last.group(1));
-        final value = templateValues[key];
-
-        if (value != null) {
-          resultText = resultText.replaceFirst('{$key}', value);
-        } else {
-          resultText = resultText.replaceFirst('{$key}', '<$key>');
-        }
-      }
-    }
-
-    return resultText;
+    return input;
   }
 
   @override
@@ -289,7 +269,13 @@ class Message {
   }) {
     final str = StringBuffer();
 
-    if (time) str.write('${this.time}');
+    if (time) {
+      if (!Logger.testMode) {
+        str.write('${this.time}');
+      } else {
+        str.write('TestMode: $testModeCount');
+      }
+    }
 
     if (type) {
       if (str.isNotEmpty) str.write(' ');
@@ -303,7 +289,7 @@ class Message {
     }
 
     if (level) {
-      if (!title) str.write(' ');
+      if (!title && str.isNotEmpty) str.write(' ');
       str.write('(${this.level})');
     }
 
