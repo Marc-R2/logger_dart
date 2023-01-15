@@ -45,15 +45,15 @@ class Logger {
     return _testModeCounter += 1;
   }
 
-  final _controller = StreamController<Message>.broadcast();
+  static final _controller = StreamController<Message>.broadcast();
 
   late final _logIt = MessageTemplate(klasse: this);
 
   /// Stream of incoming Messages
-  Stream<Message> get stream => _controller.stream;
+  static Stream<Message> get stream => _controller.stream;
 
   /// Returns a stream of messages filtered by the given [test].
-  Stream<Message> where(bool Function(Message event) test) =>
+  static Stream<Message> where(bool Function(Message event) test) =>
       stream.where(test);
 
   /// Disable the Logger
@@ -86,6 +86,9 @@ class Logger {
     }
     _activeLogging = active;
   }
+
+  /// Whether the Logger is active
+  static bool get isLoggingEnabled => _activeLogging;
 
   /// Logs a Message
   static void log(Message message) => _logger.logMessage(message);
