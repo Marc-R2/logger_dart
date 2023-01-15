@@ -8,6 +8,6 @@ mixin Logging {
   /// Create a child template with the given [function]
   MessageTemplate functionLog(String function) => log.function(function);
 
-  /// Create a child template with the given [klasse]
-  MessageTemplate classLog(Object klasse) => log.klasse(klasse);
+  /// Create a child template with the given [className]
+  MessageTemplate classLog(Object className) => log.klasse(className);
 }
