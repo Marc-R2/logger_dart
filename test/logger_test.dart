@@ -64,5 +64,63 @@ void main() {
       expect(Logger.messages.values, isNot(contains('Not logged msg.')));
       Logger.enable();
     });
+
+    test('Test setting setActive variable with active = false', () {
+      Logger.enable();
+      Logger.disable();
+      expect(Logger.isLoggingEnabled, equals(false));
+
+      // Get newest message (by time) from messages map key
+      final message = Logger.messages.values
+          .reduce((curr, next) => curr.time.isAfter(next.time) ? curr : next);
+
+      expect(message.title, equals('{mode} Logging'));
+      expect(message.text, equals('Set the logging state to {state}'));
+
+      expect(message.titleString, equals('Disable Logging'));
+      expect(message.textString, equals('Set the logging state to inactive'));
+    });
+
+    test('Test setting setActive variable with active = true', () {
+      Logger.enable();
+      Logger.enable();
+      expect(Logger.isLoggingEnabled, equals(true));
+
+      final message = Logger.messages.values
+          .reduce((curr, next) => curr.time.isAfter(next.time) ? curr : next);
+
+      expect(message.title, equals('{mode} Logging'));
+      expect(message.text, equals('Set the logging state to {state}'));
+
+      expect(message.titleString, equals('Enable Logging'));
+      expect(message.textString, equals('Set the logging state to active'));
+    });
+
+    test('Test Logger.enable() with logIt = false', () {
+      Logger.enable();
+      Message.info(title: 'Test message');
+      Logger.disable(logIt: false);
+      expect(Logger.isLoggingEnabled, equals(false));
+
+      // Get newest message (by time) from messages map key
+      final message = Logger.messages.values
+          .reduce((curr, next) => curr.time.isAfter(next.time) ? curr : next);
+
+      expect(message.titleString, isNot(equals('Disable Logging')));
+      expect(message.titleString, equals('Test message'));
+    });
+
+    test('Test setting setActive variable with active = true', () {
+      Logger.enable();
+      Message.info(title: 'Test message');
+      Logger.enable(logIt: false);
+      expect(Logger.isLoggingEnabled, equals(true));
+
+      final message = Logger.messages.values
+          .reduce((curr, next) => curr.time.isAfter(next.time) ? curr : next);
+
+      expect(message.titleString, isNot(equals('Enable Logging')));
+      expect(message.titleString, equals('Test message'));
+    });
   });
 }

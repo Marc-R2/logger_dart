@@ -57,33 +57,27 @@ class Logger {
       stream.where(test);
 
   /// Disable the Logger
-  static void disable() => _logger._active = false;
+  static void disable({bool logIt = true}) =>
+      _logger.setActive(active: false, logIt: logIt);
 
   /// Enable the Logger
-  static void enable() => _logger._active = true;
+  static void enable({bool logIt = true}) =>
+      _logger.setActive(active: true, logIt: logIt);
 
-  set _active(bool active) {
-    final log = _logIt.child(function: 'set._active');
+  void setActive({required bool active, bool logIt = true}) {
+    final log = _logIt.child(function: 'setActive');
 
-    if (active == _activeLogging) {
+    if (logIt) {
       log.info(
-        title: 'Logging state not changed',
-        message: 'The logging state is already {active}',
-        values: {'active': active ? 'enabled' : 'disabled'},
-      );
-      return;
-    }
-    if (active) {
-      log.info(
-        title: 'Enabled Logging',
-        message: 'Set the logging state to enabled',
-      );
-    } else {
-      log.info(
-        title: 'Disabled Logging',
-        message: 'Set the logging state to disabled',
+        title: '{mode} Logging',
+        message: 'Set the logging state to {state}',
+        values: {
+          'mode': active ? 'Enable' : 'Disable',
+          'state': active ? 'active' : 'inactive',
+        },
       );
     }
+
     _activeLogging = active;
   }
 

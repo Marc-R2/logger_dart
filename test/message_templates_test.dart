@@ -1,6 +1,8 @@
 import 'package:log_message/logger.dart';
 import 'package:test/test.dart';
 
+import 'dart:developer' as developer;
+
 void main() {
   group('MessageTemplate', () {
     test('Test log method', () {
@@ -59,7 +61,7 @@ void main() {
 
     group('klasse(Object klasse)', () {
       test('Test creating a message with klasse() method', () {
-        final template = MessageTemplate();
+        const template = MessageTemplate();
         final message = template
             .klasse('Logger')
             .log(title: 'Test message', message: 'Test');
@@ -67,7 +69,7 @@ void main() {
       });
 
       test('Test creating a message with klasse() method and class', () {
-        final template = MessageTemplate();
+        const template = MessageTemplate();
         final message = template
             .klasse(Logger())
             .log(title: 'Test message', message: 'Test');
@@ -112,6 +114,19 @@ void main() {
         final child = parent.function('childFunction');
         final message = child.log(title: 'Test message', message: 'Test');
         expect(message.tags, contains('func:childFunction'));
+      });
+    });
+
+    group('logMessage - devLog', () {
+      group('Logger.logMessage()', () {
+        test('logMessage() sends message to developer if devLog is true', () {
+          final message = Message.log(
+            title: 'Test message',
+            text: 'Test text',
+            log: false,
+          );
+          Logger().logMessage(message, devLog: true);
+        });
       });
     });
   });
