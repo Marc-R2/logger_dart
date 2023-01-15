@@ -248,6 +248,40 @@ Future<void> main() async {
               '(5) => logText (John)',
             );
           });
+
+          test('templates.text.Log empty key', () {
+            final message = Message.log(
+              title: 'logName',
+              text: 'logText ({})',
+              level: 5,
+              templateValues: {'': 'John'},
+            );
+
+            expect(
+              message.toString(),
+              'TestMode: 2 Log: logName:(5) => logText ({})',
+            );
+            expect(
+              message.toString(time: false),
+              'Log: logName:(5) => logText ({})',
+            );
+            expect(
+              message.toString(time: false, type: false),
+              'logName:(5) => logText ({})',
+            );
+            expect(
+              message.toString(time: false, type: false, level: false),
+              'logName => logText ({})',
+            );
+            expect(
+              message.toString(time: false, type: false, title: false),
+              '(5) => logText ({})',
+            );
+            expect(
+              message.toString(type: false, title: false, level: false),
+              'TestMode: 2 => logText ({})',
+            );
+          });
         });
 
         group('templates.text.Info', () {

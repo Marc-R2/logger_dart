@@ -235,57 +235,26 @@ class Message {
     return '';
   }
 
-  /// Removes all curly brackets from a given [text]
-  static String removeCurlyBrackets(String? text) {
-    if (text == null) return '';
-    return text.replaceAll('{', '').replaceAll('}', '');
-  }
-
   /// Replaces the templates in a given [text]
   /// with the values in [templateValues]
   ///
-  /// Curly brackets are not allowed in values and will be deleted
+  /// [maxDepth] - By default a maximum of 32 replacements will be
+  /// processed to prevent infinite loops.
+  /// You can increase the [maxDepth] but not disable it.
   ///
   /// Using regex
-  String replaceTemplates(String text, {bool? recursion}) {
-    // RegEx to find "{key}"
-    final regExp = RegExp('{([a-zA-Z0-9]+)}');
-
-    // Check if there is a 2 opening curly brackets
-    // without a closing one in between
-    // TODO(Marc-R2): Improve recursion detection
-    // final regExp2 = RegExp('{{([a-zA-Z0-9]+)}}');
-
-    final disableRecursion =
-        !(recursion ?? (text.contains('{{') || text.contains('}}')));
-
-    if (disableRecursion) {
-      return text.replaceAllMapped(regExp, (match) {
-        final key = match.group(1);
-        return templateValues[key] ?? '<$key>';
-      });
+  String replaceTemplates(String inputValue, {int maxDepth = 32}) {
+    final pattern = RegExp('{([^{}]+)}');
+    var input = inputValue.trim();
+    var iteration = 0;
+    while ((iteration += 1) < maxDepth && iteration >= 0) {
+      final match = pattern.firstMatch(input);
+      if (match == null) break;
+      final key = match.group(1);
+      final value = templateValues[key] ?? '<$key>';
+      input = input.replaceFirst(match.group(0) ?? '', value);
     }
-
-    var resultText = text;
-
-    var done = false;
-    while (!done) {
-      final match = regExp.allMatches(resultText);
-
-      if (match.isEmpty) {
-        done = true;
-      } else {
-        final key = removeCurlyBrackets(match.last.group(1));
-        if (key.contains('{') || key.contains('}')) {
-          return 'Error: Invalid state for: $key';
-        }
-
-        final value = templateValues[key] ?? '<$key>';
-        resultText = resultText.replaceFirst('{$key}', value);
-      }
-    }
-
-    return resultText;
+    return input;
   }
 
   @override

@@ -7,37 +7,6 @@ Future<void> main() async {
     final startTime = DateTime.now();
     final stMC = startTime.microsecondsSinceEpoch;
 
-    group('removeCurlyBrackets', () {
-      test('char', () {
-        expect(Message.removeCurlyBrackets(''), '');
-        expect(Message.removeCurlyBrackets('a'), 'a');
-        expect(Message.removeCurlyBrackets('b'), 'b');
-        expect(Message.removeCurlyBrackets('{'), '');
-        expect(Message.removeCurlyBrackets('}'), '');
-      });
-
-      test('word', () {
-        expect(Message.removeCurlyBrackets('word'), 'word');
-        expect(Message.removeCurlyBrackets('{word'), 'word');
-        expect(Message.removeCurlyBrackets('word}'), 'word');
-        expect(Message.removeCurlyBrackets('{word}'), 'word');
-        expect(Message.removeCurlyBrackets('wo{rd'), 'word');
-        expect(Message.removeCurlyBrackets('wo}rd'), 'word');
-        expect(Message.removeCurlyBrackets('wo{rd}'), 'word');
-        expect(Message.removeCurlyBrackets('{wo}rd'), 'word');
-        expect(Message.removeCurlyBrackets('{wo}rd{'), 'word');
-        expect(Message.removeCurlyBrackets('{wo}rd}'), 'word');
-        expect(Message.removeCurlyBrackets('{wo}{rd}'), 'word');
-      });
-
-      test('sentence', () {
-        expect(
-          Message.removeCurlyBrackets('This is a {test} with {curly} brackets'),
-          'This is a test with curly brackets',
-        );
-      });
-    });
-
     group('<fields>', () {
       late Message log;
       late Message info;
@@ -381,6 +350,15 @@ Future<void> main() async {
         final message = Message.log(title: 'Test message', tags: ['tag1']);
         const expectedString = 'TestMode: 2 Log: Test message:(0)';
         expect(message.toString(tags: false), equals(expectedString));
+      });
+
+      test('toString() with tags=false, level=false', () {
+        final message = Message.log(title: 'Test message', tags: ['tag1']);
+        const expectedString = 'TestMode: 2 Log: Test message';
+        expect(
+          message.toString(tags: false, level: false),
+          equals(expectedString),
+        );
       });
 
       test('toString() with templateValues', () {

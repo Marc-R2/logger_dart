@@ -1,8 +1,6 @@
 import 'package:log_message/logger.dart';
 import 'package:test/test.dart';
 
-import 'dart:developer' as developer;
-
 void main() {
   group('MessageTemplate', () {
     test('Test log method', () {

@@ -64,6 +64,7 @@ class Logger {
   static void enable({bool logIt = true}) =>
       _logger.setActive(active: true, logIt: logIt);
 
+  /// Set the active state of the Logger
   void setActive({required bool active, bool logIt = true}) {
     final log = _logIt.child(function: 'setActive');
 
