@@ -312,7 +312,7 @@ td.barBg
      <table width="100%" cellpadding="1" border="0">
      <tbody><tr>
      <td class="ItemLabel" width="10%">Current display:</td>
-     <td class="ItemText" width="35%">lib\message_templates.dart - <a href="../mutation-test-report.html">back to top</a></td>
+     <td class="ItemText" width="35%">lib/message_templates.dart - <a href="../mutation-test-report.html">back to top</a></td>
      <td width="10%"></td>
      <td class="MiddleHeader" width="15%">Detected</td>
      <td class="MiddleHeader" width="15%">Total</td>
@@ -321,11 +321,11 @@ td.barBg
 
      <tr>
      <td class="ItemLabel" width="10%">Date:</td>
-     <td class="ItemText" width="35%">2023-01-15 17:38:14.802714</td>
+     <td class="ItemText" width="35%">2023-01-16 12:02:42.549444</td>
      <td class="ItemLabel" width="10%">Mutations:</td>
-     <td class="ItemReport" width="15%">5</td>
-     <td class="ItemReport" width="15%">5</td>
-     <td class="ItemReportHigh" width="15%">100.0 %</td>
+     <td class="ItemReport" width="15%">42</td>
+     <td class="ItemReport" width="15%">48</td>
+     <td class="ItemReportHigh" width="15%">87.5 %</td>
      </tr>
      
      <tr>
@@ -333,7 +333,7 @@ td.barBg
      <td class="ItemText" width="35%">false</td>
      <td class="ItemLabel" width="10%">Timeouts:</td>
      <td class="ItemReport" width="15%">0</td>
-     <td class="ItemReport" width="15%">5</td>
+     <td class="ItemReport" width="15%">48</td>
      <td class="ItemReportHigh" width="15%">0.0 %</td>
      </tr>
      </tbody>
@@ -361,16 +361,112 @@ td.barBg
 <a name="11"><span class="lineNumber">      11 </span>  /// created with this template.</a>
 <a name="12"><span class="lineNumber">      12 </span>  const MessageTemplate({</a>
 <a name="13"><span class="lineNumber">      13 </span>    this.tags = const [],</a>
-<a name="14"><span class="lineNumber">      14 </span>    Object? klasse,</a>
-<a name="15"><span class="lineNumber">      15 </span>    String? function,</a>
+<a name="14"><button class="collapsible hit"><pre class="fileContents"><span class="lineNumber">      14 </span>    Object? klasse,</pre></button>
+<div class="content">
+<b>Detected mutations:</b>
+<table class="mutationTable">
+<tr><td class="mutationLabel" width="10%">1 :</td><td class="mutationText" width="90%"><span class="addedLine">+     <span class="changedTokens">!Object ? klasse,
+    String? function,
+  })  : _classValue = klasse,</span> _functionValue = function;</span></td></tr><tr><td colspan="2"><hr class="ruler"/></td></tr><tr><td class="mutationLabel" width="10%">2 :</td><td class="mutationText" width="90%"><span class="addedLine">+     <span class="changedTokens">Object ? _classValue = klasse, _functionValue = function : klasse,
+    String? function,
+  }) ;</span></span></td></tr><tr><td colspan="2"><hr class="ruler"/></td></tr><tr><td class="mutationLabel" width="10%">3 :</td><td class="mutationText" width="90%"><span class="addedLine">+     <span class="changedTokens">!Object ? klasse,
+    String? function,
+  })  : _classValue = klasse, _functionValue = function;</span></span></td></tr><tr><td colspan="2"><hr class="ruler"/></td></tr><tr><td class="mutationLabel" width="10%">4 :</td><td class="mutationText" width="90%"><span class="addedLine">+     <span class="changedTokens">Object ? _classValue = klasse : klasse,
+    String? function,
+  }) ,</span> _functionValue = function;</span></td></tr></table>
+
+</div></a><a name="15"><span class="lineNumber">      15 </span>    String? function,</a>
 <a name="16"><span class="lineNumber">      16 </span>  }) : _classValue = klasse, _functionValue = function;</a>
 <a name="17"><span class="lineNumber">      17 </span></a>
 <a name="18"><span class="lineNumber">      18 </span>  /// Groups</a>
 <a name="19"><span class="lineNumber">      19 </span>  final List&lt;String&gt; tags;</a>
 <a name="20"><span class="lineNumber">      20 </span></a>
 <a name="21"><span class="lineNumber">      21 </span>  /// Class</a>
-<a name="22"><span class="lineNumber">      22 </span>  final Object? _classValue;</a>
-<a name="23"><span class="lineNumber">      23 </span></a>
+<a name="22"><button class="collapsible hit"><pre class="fileContents"><span class="lineNumber">      22 </span>  final Object? _classValue;</pre></button>
+<div class="content">
+<b>Detected mutations:</b>
+<table class="mutationTable">
+<tr><td class="mutationLabel" width="10%">1 :</td><td class="mutationText" width="90%"><span class="addedLine">+   final <span class="changedTokens">Object ? [...this.tags, ...tags],
+      klasse: klasse ?? _classValue,
+      function: function ?? _functionValue,
+    ) : _classValue;
+
+  /// Function
+  final String? _functionValue;
+
+  /// Create a MessageTemplate with the given values
+  /// and inherit the template values of the parent template.
+  ///
+  /// [klasse] and [function] will override the values of the parent template.
+  ///
+  /// [tags] will be added to the tags of the parent template.
+  MessageTemplate child({
+    List&lt;String&gt; tags = const [],
+    Object? klasse,
+    String? function,
+  }) {
+    return MessageTemplate(
+      tags;</span></span></td></tr><tr><td colspan="2"><hr class="ruler"/></td></tr><tr><td class="mutationLabel" width="10%">2 :</td><td class="mutationText" width="90%"><span class="addedLine">+   final <span class="changedTokens">!Object ? _classValue;
+
+  /// Function
+  final String? _functionValue;
+
+  /// Create a MessageTemplate with the given values
+  /// and inherit the template values of the parent template.
+  ///
+  /// [klasse] and [function] will override the values of the parent template.
+  ///
+  /// [tags] will be added to the tags of the parent template.
+  MessageTemplate child({
+    List&lt;String&gt; tags = const [],
+    Object? klasse,
+    String? function,
+  }) {
+    return MessageTemplate(
+      tags : [...this.tags, ...tags],
+      klasse: klasse ?? _classValue,
+      function: function ?? _functionValue,
+    );</span></span></td></tr><tr><td colspan="2"><hr class="ruler"/></td></tr><tr><td class="mutationLabel" width="10%">3 :</td><td class="mutationText" width="90%"><span class="addedLine">+   final <span class="changedTokens">Object ? [...this.tags, ...tags],
+      klasse: klasse ?? _classValue,
+      function: function ?? _functionValue : _classValue;
+
+  /// Function
+  final String? _functionValue;
+
+  /// Create a MessageTemplate with the given values
+  /// and inherit the template values of the parent template.
+  ///
+  /// [klasse] and [function] will override the values of the parent template.
+  ///
+  /// [tags] will be added to the tags of the parent template.
+  MessageTemplate child({
+    List&lt;String&gt; tags = const [],
+    Object? klasse,
+    String? function,
+  }) {
+    return MessageTemplate(
+      tags,</span></span></td></tr><tr><td colspan="2"><hr class="ruler"/></td></tr><tr><td class="mutationLabel" width="10%">4 :</td><td class="mutationText" width="90%"><span class="addedLine">+   final <span class="changedTokens">!Object ? _classValue;
+
+  /// Function
+  final String? _functionValue;
+
+  /// Create a MessageTemplate with the given values
+  /// and inherit the template values of the parent template.
+  ///
+  /// [klasse] and [function] will override the values of the parent template.
+  ///
+  /// [tags] will be added to the tags of the parent template.
+  MessageTemplate child({
+    List&lt;String&gt; tags = const [],
+    Object? klasse,
+    String? function,
+  }) {
+    return MessageTemplate(
+      tags : [...this.tags, ...tags],
+      klasse: klasse ?? _classValue,
+      function: function ?? _functionValue,</span></span></td></tr></table>
+
+</div></a><a name="23"><span class="lineNumber">      23 </span></a>
 <a name="24"><span class="lineNumber">      24 </span>  /// Function</a>
 <a name="25"><span class="lineNumber">      25 </span>  final String? _functionValue;</a>
 <a name="26"><span class="lineNumber">      26 </span></a>
@@ -387,9 +483,21 @@ td.barBg
 <a name="37"><span class="lineNumber">      37 </span>  }) {</a>
 <a name="38"><span class="lineNumber">      38 </span>    return MessageTemplate(</a>
 <a name="39"><span class="lineNumber">      39 </span>      tags: [...this.tags, ...tags],</a>
-<a name="40"><span class="lineNumber">      40 </span>      klasse: klasse ?? _classValue,</a>
-<a name="41"><span class="lineNumber">      41 </span>      function: function ?? _functionValue,</a>
-<a name="42"><span class="lineNumber">      42 </span>    );</a>
+<a name="40"><button class="collapsible hit"><pre class="fileContents"><span class="lineNumber">      40 </span>      klasse: klasse ?? _classValue,</pre></button>
+<div class="content">
+<b>Detected mutations:</b>
+<table class="mutationTable">
+<tr><td class="mutationLabel" width="10%">1 :</td><td class="mutationText" width="90%"><span class="addedLine">+       klasse: <span class="changedTokens">klasse ?? klasse
+      function: function ?? _functionValue,</span></span></td></tr><tr><td colspan="2"><hr class="ruler"/></td></tr><tr><td class="mutationLabel" width="10%">2 :</td><td class="mutationText" width="90%"><span class="addedLine">+       klasse: <span class="changedTokens">_classValue, ?? _classValue,</span></span></td></tr><tr><td colspan="2"><hr class="ruler"/></td></tr><tr><td class="mutationLabel" width="10%">3 :</td><td class="mutationText" width="90%"><span class="addedLine">+       klasse: <span class="changedTokens">_classValue, ?? klasse</span></span></td></tr></table>
+
+</div></a><a name="41"><button class="collapsible hit"><pre class="fileContents"><span class="lineNumber">      41 </span>      function: function ?? _functionValue,</pre></button>
+<div class="content">
+<b>Detected mutations:</b>
+<table class="mutationTable">
+<tr><td class="mutationLabel" width="10%">1 :</td><td class="mutationText" width="90%"><span class="addedLine">+       function: <span class="changedTokens">function ?? function
+    );</span></span></td></tr><tr><td colspan="2"><hr class="ruler"/></td></tr><tr><td class="mutationLabel" width="10%">2 :</td><td class="mutationText" width="90%"><span class="addedLine">+       function: <span class="changedTokens">_functionValue, ?? _functionValue,</span></span></td></tr><tr><td colspan="2"><hr class="ruler"/></td></tr><tr><td class="mutationLabel" width="10%">3 :</td><td class="mutationText" width="90%"><span class="addedLine">+       function: <span class="changedTokens">_functionValue, ?? function</span></span></td></tr></table>
+
+</div></a><a name="42"><span class="lineNumber">      42 </span>    );</a>
 <a name="43"><span class="lineNumber">      43 </span>  }</a>
 <a name="44"><span class="lineNumber">      44 </span></a>
 <a name="45"><span class="lineNumber">      45 </span>  /// Create a child template with the given [klasse]</a>
@@ -398,18 +506,171 @@ td.barBg
 <a name="48"><span class="lineNumber">      48 </span>  /// Create a child template with the given [function]</a>
 <a name="49"><span class="lineNumber">      49 </span>  MessageTemplate function(String function) =&gt; child(function: function);</a>
 <a name="50"><span class="lineNumber">      50 </span></a>
-<a name="51"><span class="lineNumber">      51 </span>  Object? _class(Object? klasse) =&gt; klasse ?? _classValue;</a>
-<a name="52"><span class="lineNumber">      52 </span></a>
-<a name="53"><span class="lineNumber">      53 </span>  List&lt;String&gt; _tags(List&lt;String&gt;? tags) =&gt; [...this.tags, ...tags ?? []];</a>
-<a name="54"><span class="lineNumber">      54 </span></a>
-<a name="55"><span class="lineNumber">      55 </span>  String? _function(String? function) =&gt; function ?? _functionValue;</a>
-<a name="56"><span class="lineNumber">      56 </span></a>
+<a name="51"><button class="collapsible problem"><pre class="fileContents"><span class="lineNumber">      51 </span>  Object? _class(Object? klasse) =&gt; klasse ?? _classValue;</pre></button>
+<div class="content">
+<b>Undetected mutations:</b>
+<table class="mutationTable">
+<tr><td class="mutationLabel" width="10%">1 :</td><td class="mutationText" width="90%"><span class="addedLine">+   Object? _class(Object? klasse) =&gt; <span class="changedTokens">_classValue ?? klasse</span>;</span></td></tr><tr><td colspan="2"><hr class="ruler"/></td></tr><tr><td class="mutationLabel" width="10%">2 :</td><td class="mutationText" width="90%"><span class="addedLine">+   Object? _class(Object? klasse) =&gt; <span class="changedTokens">_classValue ?? _classValue</span>;</span></td></tr></table>
+<b>Detected mutations:</b>
+<table class="mutationTable">
+<tr><td class="mutationLabel" width="10%">1 :</td><td class="mutationText" width="90%"><span class="addedLine">+   Object? _class(Object? klasse) =&gt; <span class="changedTokens">klasse ?? klasse;
+
+  List&lt;String&gt; _tags(List&lt;String&gt;? tags) =&gt; [...this.tags, ...tags ?? []]</span>;</span></td></tr><tr><td colspan="2"><hr class="ruler"/></td></tr><tr><td class="mutationLabel" width="10%">2 :</td><td class="mutationText" width="90%"><span class="addedLine">+   <span class="changedTokens">Object ? title,
+      text: message,
+      level: level,
+      stackTrace: trace,
+      log: log,
+      tags: _tags(tags),
+      klasse: _class(klasse),
+      function: _function(function),
+      templateValues: _templateValues(values),
+    ) : _class(Object? klasse) =&gt; klasse ?? _classValue;
+
+  List&lt;String&gt; _tags(List&lt;String&gt;? tags) =&gt; [...this.tags, ...tags ?? []];
+
+  String? _function(String? function) =&gt; function ?? _functionValue;
+
+  Map&lt;String, String&gt; _templateValues(Map&lt;String, dynamic&gt; templateValues) {
+    return templateValues.map((key, value) =&gt; MapEntry(key, value.toString()));
+  }
+
+  /// Create a log message
+  Message log({
+    required String title,
+    String message = '',
+    int level = 0,
+    StackTrace? trace,
+    bool log = true,
+    List&lt;String&gt;? tags,
+    Object? klasse,
+    String? function,
+    Map&lt;String, dynamic&gt; values = const {},
+  }) {
+    return Message.log(
+      title;</span></span></td></tr><tr><td colspan="2"><hr class="ruler"/></td></tr><tr><td class="mutationLabel" width="10%">3 :</td><td class="mutationText" width="90%"><span class="addedLine">+   <span class="changedTokens">!Object ? _class(Object? klasse) =&gt; klasse ?? _classValue;
+
+  List&lt;String&gt; _tags(List&lt;String&gt;? tags) =&gt; [...this.tags, ...tags ?? []];
+
+  String? _function(String? function) =&gt; function ?? _functionValue;
+
+  Map&lt;String, String&gt; _templateValues(Map&lt;String, dynamic&gt; templateValues) {
+    return templateValues.map((key, value) =&gt; MapEntry(key, value.toString()));
+  }
+
+  /// Create a log message
+  Message log({
+    required String title,
+    String message = '',
+    int level = 0,
+    StackTrace? trace,
+    bool log = true,
+    List&lt;String&gt;? tags,
+    Object? klasse,
+    String? function,
+    Map&lt;String, dynamic&gt; values = const {},
+  }) {
+    return Message.log(
+      title : title,
+      text: message,
+      level: level,
+      stackTrace: trace,
+      log: log,
+      tags: _tags(tags),
+      klasse: _class(klasse),
+      function: _function(function),
+      templateValues: _templateValues(values),
+    );</span></span></td></tr><tr><td colspan="2"><hr class="ruler"/></td></tr><tr><td class="mutationLabel" width="10%">4 :</td><td class="mutationText" width="90%"><span class="addedLine">+   <span class="changedTokens">Object ? title,
+      text: message,
+      level: level,
+      stackTrace: trace,
+      log: log,
+      tags: _tags(tags),
+      klasse: _class(klasse),
+      function: _function(function),
+      templateValues: _templateValues(values) : _class(Object? klasse) =&gt; klasse ?? _classValue;
+
+  List&lt;String&gt; _tags(List&lt;String&gt;? tags) =&gt; [...this.tags, ...tags ?? []];
+
+  String? _function(String? function) =&gt; function ?? _functionValue;
+
+  Map&lt;String, String&gt; _templateValues(Map&lt;String, dynamic&gt; templateValues) {
+    return templateValues.map((key, value) =&gt; MapEntry(key, value.toString()));
+  }
+
+  /// Create a log message
+  Message log({
+    required String title,
+    String message = '',
+    int level = 0,
+    StackTrace? trace,
+    bool log = true,
+    List&lt;String&gt;? tags,
+    Object? klasse,
+    String? function,
+    Map&lt;String, dynamic&gt; values = const {},
+  }) {
+    return Message.log(
+      title,</span></span></td></tr><tr><td colspan="2"><hr class="ruler"/></td></tr><tr><td class="mutationLabel" width="10%">5 :</td><td class="mutationText" width="90%"><span class="addedLine">+   <span class="changedTokens">!Object ? _class(Object? klasse) =&gt; klasse ?? _classValue;
+
+  List&lt;String&gt; _tags(List&lt;String&gt;? tags) =&gt; [...this.tags, ...tags ?? []];
+
+  String? _function(String? function) =&gt; function ?? _functionValue;
+
+  Map&lt;String, String&gt; _templateValues(Map&lt;String, dynamic&gt; templateValues) {
+    return templateValues.map((key, value) =&gt; MapEntry(key, value.toString()));
+  }
+
+  /// Create a log message
+  Message log({
+    required String title,
+    String message = '',
+    int level = 0,
+    StackTrace? trace,
+    bool log = true,
+    List&lt;String&gt;? tags,
+    Object? klasse,
+    String? function,
+    Map&lt;String, dynamic&gt; values = const {},
+  }) {
+    return Message.log(
+      title : title,
+      text: message,
+      level: level,
+      stackTrace: trace,
+      log: log,
+      tags: _tags(tags),
+      klasse: _class(klasse),
+      function: _function(function),
+      templateValues: _templateValues(values),</span></span></td></tr></table>
+
+</div></a><a name="52"><span class="lineNumber">      52 </span></a>
+<a name="53"><button class="collapsible hit"><pre class="fileContents"><span class="lineNumber">      53 </span>  List&lt;String&gt; _tags(List&lt;String&gt;? tags) =&gt; [...this.tags, ...tags ?? []];</pre></button>
+<div class="content">
+<b>Detected mutations:</b>
+<table class="mutationTable">
+<tr><td class="mutationLabel" width="10%">1 :</td><td class="mutationText" width="90%"><span class="addedLine">+   List&lt;String&gt; _tags(List&lt;String&gt;? tags) =&gt; [...this.tags, <span class="changedTokens">...tags ?? ...tags</span>;</span></td></tr><tr><td colspan="2"><hr class="ruler"/></td></tr><tr><td class="mutationLabel" width="10%">2 :</td><td class="mutationText" width="90%"><span class="addedLine">+   List&lt;String&gt; _tags(List&lt;String&gt;? tags) =&gt; [...this.tags, <span class="changedTokens">[]] ?? []];
+
+  String? _function(String? function) =&gt; function ?? _functionValue</span>;</span></td></tr><tr><td colspan="2"><hr class="ruler"/></td></tr><tr><td class="mutationLabel" width="10%">3 :</td><td class="mutationText" width="90%"><span class="addedLine">+   List&lt;String&gt; _tags(List&lt;String&gt;? tags) =&gt; [...this.tags, <span class="changedTokens">[]] ?? ...tags</span>;</span></td></tr></table>
+
+</div></a><a name="54"><span class="lineNumber">      54 </span></a>
+<a name="55"><button class="collapsible problem"><pre class="fileContents"><span class="lineNumber">      55 </span>  String? _function(String? function) =&gt; function ?? _functionValue;</pre></button>
+<div class="content">
+<b>Undetected mutations:</b>
+<table class="mutationTable">
+<tr><td class="mutationLabel" width="10%">1 :</td><td class="mutationText" width="90%"><span class="addedLine">+   String? _function(String? function) =&gt; <span class="changedTokens">_functionValue ?? function</span>;</span></td></tr><tr><td colspan="2"><hr class="ruler"/></td></tr><tr><td class="mutationLabel" width="10%">2 :</td><td class="mutationText" width="90%"><span class="addedLine">+   String? _function(String? function) =&gt; <span class="changedTokens">_functionValue ?? _functionValue</span>;</span></td></tr></table>
+<b>Detected mutations:</b>
+<table class="mutationTable">
+<tr><td class="mutationLabel" width="10%">1 :</td><td class="mutationText" width="90%"><span class="addedLine">+   String? _function(String? function) =&gt; <span class="changedTokens">function ?? function;
+
+  Map&lt;String, String&gt; _templateValues(Map&lt;String, dynamic&gt; templateValues) </span>{</span></td></tr></table>
+
+</div></a><a name="56"><span class="lineNumber">      56 </span></a>
 <a name="57"><span class="lineNumber">      57 </span>  Map&lt;String, String&gt; _templateValues(Map&lt;String, dynamic&gt; templateValues) {</a>
 <a name="58"><button class="collapsible hit"><pre class="fileContents"><span class="lineNumber">      58 </span>    return templateValues.map((key, value) =&gt; MapEntry(key, value.toString()));</pre></button>
 <div class="content">
 <b>Detected mutations:</b>
 <table class="mutationTable">
-<tr><td class="mutationLabel" width="10%">1 :</td><td class="mutationText" width="90%"><span class="addedLine">+     return templateValues.map((key, value) =&gt;<span class="changedTokens"> MapEntry( value.toString()),key);</span></span></td></tr></table>
+<tr><td class="mutationLabel" width="10%">1 :</td><td class="mutationText" width="90%"><span class="addedLine">+     return templateValues.map((key, value) =&gt;<span class="changedTokens"> MapEntry( value.toString()),key);</span></span></td></tr></table>
 
 </div></a><a name="59"><span class="lineNumber">      59 </span>  }</a>
 <a name="60"><span class="lineNumber">      60 </span></a>
@@ -419,8 +680,13 @@ td.barBg
 <a name="64"><span class="lineNumber">      64 </span>    String message = '',</a>
 <a name="65"><span class="lineNumber">      65 </span>    int level = 0,</a>
 <a name="66"><span class="lineNumber">      66 </span>    StackTrace? trace,</a>
-<a name="67"><span class="lineNumber">      67 </span>    bool log = true,</a>
-<a name="68"><span class="lineNumber">      68 </span>    List&lt;String&gt;? tags,</a>
+<a name="67"><button class="collapsible hit"><pre class="fileContents"><span class="lineNumber">      67 </span>    bool log = true,</pre></button>
+<div class="content">
+<b>Detected mutations:</b>
+<table class="mutationTable">
+<tr><td class="mutationLabel" width="10%">1 :</td><td class="mutationText" width="90%"><span class="addedLine">+     bool log = <span class="changedTokens">false</span>,</span></td></tr></table>
+
+</div></a><a name="68"><span class="lineNumber">      68 </span>    List&lt;String&gt;? tags,</a>
 <a name="69"><span class="lineNumber">      69 </span>    Object? klasse,</a>
 <a name="70"><span class="lineNumber">      70 </span>    String? function,</a>
 <a name="71"><span class="lineNumber">      71 </span>    Map&lt;String, dynamic&gt; values = const {},</a>
@@ -439,7 +705,7 @@ td.barBg
 <b>Detected mutations:</b>
 <table class="mutationTable">
 <tr><td class="mutationLabel" width="10%">1 :</td><td class="mutationText" width="90%"><span class="addedLine">+       templateValues:<span class="changedTokens"> _templateValues(
-    ,values));</span></span></td></tr></table>
+    ,values));</span></span></td></tr></table>
 
 </div></a><a name="83"><span class="lineNumber">      83 </span>    );</a>
 <a name="84"><span class="lineNumber">      84 </span>  }</a>
@@ -449,9 +715,85 @@ td.barBg
 <a name="88"><span class="lineNumber">      88 </span>    required String title,</a>
 <a name="89"><span class="lineNumber">      89 </span>    String message = '',</a>
 <a name="90"><span class="lineNumber">      90 </span>    int level = 0,</a>
-<a name="91"><span class="lineNumber">      91 </span>    StackTrace? trace,</a>
-<a name="92"><span class="lineNumber">      92 </span>    bool log = true,</a>
-<a name="93"><span class="lineNumber">      93 </span>    List&lt;String&gt;? tags,</a>
+<a name="91"><button class="collapsible hit"><pre class="fileContents"><span class="lineNumber">      91 </span>    StackTrace? trace,</pre></button>
+<div class="content">
+<b>Detected mutations:</b>
+<table class="mutationTable">
+<tr><td class="mutationLabel" width="10%">1 :</td><td class="mutationText" width="90%"><span class="addedLine">+     <span class="changedTokens">!StackTrace ? trace,
+    bool log = true,
+    List&lt;String&gt;? tags,
+    Object? klasse,
+    String? function,
+    Map&lt;String, dynamic&gt; values = const {},
+  }) {
+    return Message.info(
+      title : title,
+      text: message,
+      level: level,
+      stackTrace: trace,
+      log: log,
+      tags: _tags(tags),
+      klasse: _class(klasse),
+      function: _function(function),
+      templateValues: _templateValues(values),
+    );</span></span></td></tr><tr><td colspan="2"><hr class="ruler"/></td></tr><tr><td class="mutationLabel" width="10%">2 :</td><td class="mutationText" width="90%"><span class="addedLine">+     <span class="changedTokens">StackTrace ? title,
+      text: message,
+      level: level,
+      stackTrace: trace,
+      log: log,
+      tags: _tags(tags),
+      klasse: _class(klasse),
+      function: _function(function),
+      templateValues: _templateValues(values) : trace,
+    bool log = true,
+    List&lt;String&gt;? tags,
+    Object? klasse,
+    String? function,
+    Map&lt;String, dynamic&gt; values = const {},
+  }) {
+    return Message.info(
+      title,</span></span></td></tr><tr><td colspan="2"><hr class="ruler"/></td></tr><tr><td class="mutationLabel" width="10%">3 :</td><td class="mutationText" width="90%"><span class="addedLine">+     <span class="changedTokens">!StackTrace ? trace,
+    bool log = true,
+    List&lt;String&gt;? tags,
+    Object? klasse,
+    String? function,
+    Map&lt;String, dynamic&gt; values = const {},
+  }) {
+    return Message.info(
+      title : title,
+      text: message,
+      level: level,
+      stackTrace: trace,
+      log: log,
+      tags: _tags(tags),
+      klasse: _class(klasse),
+      function: _function(function),
+      templateValues: _templateValues(values),</span></span></td></tr><tr><td colspan="2"><hr class="ruler"/></td></tr><tr><td class="mutationLabel" width="10%">4 :</td><td class="mutationText" width="90%"><span class="addedLine">+     <span class="changedTokens">StackTrace ? title,
+      text: message,
+      level: level,
+      stackTrace: trace,
+      log: log,
+      tags: _tags(tags),
+      klasse: _class(klasse),
+      function: _function(function),
+      templateValues: _templateValues(values),
+    ) : trace,
+    bool log = true,
+    List&lt;String&gt;? tags,
+    Object? klasse,
+    String? function,
+    Map&lt;String, dynamic&gt; values = const {},
+  }) {
+    return Message.info(
+      title;</span></span></td></tr></table>
+
+</div></a><a name="92"><button class="collapsible hit"><pre class="fileContents"><span class="lineNumber">      92 </span>    bool log = true,</pre></button>
+<div class="content">
+<b>Detected mutations:</b>
+<table class="mutationTable">
+<tr><td class="mutationLabel" width="10%">1 :</td><td class="mutationText" width="90%"><span class="addedLine">+     bool log = <span class="changedTokens">false</span>,</span></td></tr></table>
+
+</div></a><a name="93"><span class="lineNumber">      93 </span>    List&lt;String&gt;? tags,</a>
 <a name="94"><span class="lineNumber">      94 </span>    Object? klasse,</a>
 <a name="95"><span class="lineNumber">      95 </span>    String? function,</a>
 <a name="96"><span class="lineNumber">      96 </span>    Map&lt;String, dynamic&gt; values = const {},</a>
@@ -470,7 +812,7 @@ td.barBg
 <b>Detected mutations:</b>
 <table class="mutationTable">
 <tr><td class="mutationLabel" width="10%">1 :</td><td class="mutationText" width="90%"><span class="addedLine">+       templateValues:<span class="changedTokens"> _templateValues(
-    ,values));</span></span></td></tr></table>
+    ,values));</span></span></td></tr></table>
 
 </div></a><a name="108"><span class="lineNumber">     108 </span>    );</a>
 <a name="109"><span class="lineNumber">     109 </span>  }</a>
@@ -480,9 +822,85 @@ td.barBg
 <a name="113"><span class="lineNumber">     113 </span>    required String title,</a>
 <a name="114"><span class="lineNumber">     114 </span>    String message = '',</a>
 <a name="115"><span class="lineNumber">     115 </span>    int level = 0,</a>
-<a name="116"><span class="lineNumber">     116 </span>    StackTrace? trace,</a>
-<a name="117"><span class="lineNumber">     117 </span>    bool log = true,</a>
-<a name="118"><span class="lineNumber">     118 </span>    List&lt;String&gt;? tags,</a>
+<a name="116"><button class="collapsible hit"><pre class="fileContents"><span class="lineNumber">     116 </span>    StackTrace? trace,</pre></button>
+<div class="content">
+<b>Detected mutations:</b>
+<table class="mutationTable">
+<tr><td class="mutationLabel" width="10%">1 :</td><td class="mutationText" width="90%"><span class="addedLine">+     <span class="changedTokens">!StackTrace ? trace,
+    bool log = true,
+    List&lt;String&gt;? tags,
+    Object? klasse,
+    String? function,
+    Map&lt;String, dynamic&gt; values = const {},
+  }) {
+    return Message.warning(
+      title : title,
+      text: message,
+      level: level,
+      stackTrace: trace,
+      log: log,
+      tags: _tags(tags),
+      klasse: _class(klasse),
+      function: _function(function),
+      templateValues: _templateValues(values),</span></span></td></tr><tr><td colspan="2"><hr class="ruler"/></td></tr><tr><td class="mutationLabel" width="10%">2 :</td><td class="mutationText" width="90%"><span class="addedLine">+     <span class="changedTokens">StackTrace ? title,
+      text: message,
+      level: level,
+      stackTrace: trace,
+      log: log,
+      tags: _tags(tags),
+      klasse: _class(klasse),
+      function: _function(function),
+      templateValues: _templateValues(values) : trace,
+    bool log = true,
+    List&lt;String&gt;? tags,
+    Object? klasse,
+    String? function,
+    Map&lt;String, dynamic&gt; values = const {},
+  }) {
+    return Message.warning(
+      title,</span></span></td></tr><tr><td colspan="2"><hr class="ruler"/></td></tr><tr><td class="mutationLabel" width="10%">3 :</td><td class="mutationText" width="90%"><span class="addedLine">+     <span class="changedTokens">!StackTrace ? trace,
+    bool log = true,
+    List&lt;String&gt;? tags,
+    Object? klasse,
+    String? function,
+    Map&lt;String, dynamic&gt; values = const {},
+  }) {
+    return Message.warning(
+      title : title,
+      text: message,
+      level: level,
+      stackTrace: trace,
+      log: log,
+      tags: _tags(tags),
+      klasse: _class(klasse),
+      function: _function(function),
+      templateValues: _templateValues(values),
+    );</span></span></td></tr><tr><td colspan="2"><hr class="ruler"/></td></tr><tr><td class="mutationLabel" width="10%">4 :</td><td class="mutationText" width="90%"><span class="addedLine">+     <span class="changedTokens">StackTrace ? title,
+      text: message,
+      level: level,
+      stackTrace: trace,
+      log: log,
+      tags: _tags(tags),
+      klasse: _class(klasse),
+      function: _function(function),
+      templateValues: _templateValues(values),
+    ) : trace,
+    bool log = true,
+    List&lt;String&gt;? tags,
+    Object? klasse,
+    String? function,
+    Map&lt;String, dynamic&gt; values = const {},
+  }) {
+    return Message.warning(
+      title;</span></span></td></tr></table>
+
+</div></a><a name="117"><button class="collapsible problem"><pre class="fileContents"><span class="lineNumber">     117 </span>    bool log = true,</pre></button>
+<div class="content">
+<b>Undetected mutations:</b>
+<table class="mutationTable">
+<tr><td class="mutationLabel" width="10%">1 :</td><td class="mutationText" width="90%"><span class="addedLine">+     bool log = <span class="changedTokens">false</span>,</span></td></tr></table>
+
+</div></a><a name="118"><span class="lineNumber">     118 </span>    List&lt;String&gt;? tags,</a>
 <a name="119"><span class="lineNumber">     119 </span>    Object? klasse,</a>
 <a name="120"><span class="lineNumber">     120 </span>    String? function,</a>
 <a name="121"><span class="lineNumber">     121 </span>    Map&lt;String, dynamic&gt; values = const {},</a>
@@ -501,7 +919,7 @@ td.barBg
 <b>Detected mutations:</b>
 <table class="mutationTable">
 <tr><td class="mutationLabel" width="10%">1 :</td><td class="mutationText" width="90%"><span class="addedLine">+       templateValues:<span class="changedTokens"> _templateValues(
-    ,values));</span></span></td></tr></table>
+    ,values));</span></span></td></tr></table>
 
 </div></a><a name="133"><span class="lineNumber">     133 </span>    );</a>
 <a name="134"><span class="lineNumber">     134 </span>  }</a>
@@ -511,9 +929,85 @@ td.barBg
 <a name="138"><span class="lineNumber">     138 </span>    required String title,</a>
 <a name="139"><span class="lineNumber">     139 </span>    String message = '',</a>
 <a name="140"><span class="lineNumber">     140 </span>    int level = 0,</a>
-<a name="141"><span class="lineNumber">     141 </span>    StackTrace? trace,</a>
-<a name="142"><span class="lineNumber">     142 </span>    bool log = true,</a>
-<a name="143"><span class="lineNumber">     143 </span>    List&lt;String&gt;? tags,</a>
+<a name="141"><button class="collapsible hit"><pre class="fileContents"><span class="lineNumber">     141 </span>    StackTrace? trace,</pre></button>
+<div class="content">
+<b>Detected mutations:</b>
+<table class="mutationTable">
+<tr><td class="mutationLabel" width="10%">1 :</td><td class="mutationText" width="90%"><span class="addedLine">+     <span class="changedTokens">!StackTrace ? trace,
+    bool log = true,
+    List&lt;String&gt;? tags,
+    Object? klasse,
+    String? function,
+    Map&lt;String, dynamic&gt; values = const {},
+  }) {
+    return Message.error(
+      title : title,
+      text: message,
+      level: level,
+      stackTrace: trace,
+      log: log,
+      tags: _tags(tags),
+      klasse: _class(klasse),
+      function: _function(function),
+      templateValues: _templateValues(values),</span></span></td></tr><tr><td colspan="2"><hr class="ruler"/></td></tr><tr><td class="mutationLabel" width="10%">2 :</td><td class="mutationText" width="90%"><span class="addedLine">+     <span class="changedTokens">!StackTrace ? trace,
+    bool log = true,
+    List&lt;String&gt;? tags,
+    Object? klasse,
+    String? function,
+    Map&lt;String, dynamic&gt; values = const {},
+  }) {
+    return Message.error(
+      title : title,
+      text: message,
+      level: level,
+      stackTrace: trace,
+      log: log,
+      tags: _tags(tags),
+      klasse: _class(klasse),
+      function: _function(function),
+      templateValues: _templateValues(values),
+    );</span></span></td></tr><tr><td colspan="2"><hr class="ruler"/></td></tr><tr><td class="mutationLabel" width="10%">3 :</td><td class="mutationText" width="90%"><span class="addedLine">+     <span class="changedTokens">StackTrace ? title,
+      text: message,
+      level: level,
+      stackTrace: trace,
+      log: log,
+      tags: _tags(tags),
+      klasse: _class(klasse),
+      function: _function(function),
+      templateValues: _templateValues(values),
+    ) : trace,
+    bool log = true,
+    List&lt;String&gt;? tags,
+    Object? klasse,
+    String? function,
+    Map&lt;String, dynamic&gt; values = const {},
+  }) {
+    return Message.error(
+      title;</span></span></td></tr><tr><td colspan="2"><hr class="ruler"/></td></tr><tr><td class="mutationLabel" width="10%">4 :</td><td class="mutationText" width="90%"><span class="addedLine">+     <span class="changedTokens">StackTrace ? title,
+      text: message,
+      level: level,
+      stackTrace: trace,
+      log: log,
+      tags: _tags(tags),
+      klasse: _class(klasse),
+      function: _function(function),
+      templateValues: _templateValues(values) : trace,
+    bool log = true,
+    List&lt;String&gt;? tags,
+    Object? klasse,
+    String? function,
+    Map&lt;String, dynamic&gt; values = const {},
+  }) {
+    return Message.error(
+      title,</span></span></td></tr></table>
+
+</div></a><a name="142"><button class="collapsible problem"><pre class="fileContents"><span class="lineNumber">     142 </span>    bool log = true,</pre></button>
+<div class="content">
+<b>Undetected mutations:</b>
+<table class="mutationTable">
+<tr><td class="mutationLabel" width="10%">1 :</td><td class="mutationText" width="90%"><span class="addedLine">+     bool log = <span class="changedTokens">false</span>,</span></td></tr></table>
+
+</div></a><a name="143"><span class="lineNumber">     143 </span>    List&lt;String&gt;? tags,</a>
 <a name="144"><span class="lineNumber">     144 </span>    Object? klasse,</a>
 <a name="145"><span class="lineNumber">     145 </span>    String? function,</a>
 <a name="146"><span class="lineNumber">     146 </span>    Map&lt;String, dynamic&gt; values = const {},</a>
@@ -532,7 +1026,7 @@ td.barBg
 <b>Detected mutations:</b>
 <table class="mutationTable">
 <tr><td class="mutationLabel" width="10%">1 :</td><td class="mutationText" width="90%"><span class="addedLine">+       templateValues:<span class="changedTokens"> _templateValues(
-    ,values));</span></span></td></tr></table>
+    ,values));</span></span></td></tr></table>
 
 </div></a><a name="158"><span class="lineNumber">     158 </span>    );</a>
 <a name="159"><span class="lineNumber">     159 </span>  }</a>
