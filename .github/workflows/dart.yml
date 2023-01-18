@@ -61,6 +61,12 @@ jobs:
           dart pub global activate coverage
           dart pub global run coverage:test_with_coverage
 
+      - name: Print coverage
+        run: cat ./coverage/lcov.info
+
+      - name: Print coverage %
+        run: cat ./coverage/lcov.info | grep -oP '(\d+)%'
+
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v3
         with:
@@ -69,7 +75,7 @@ jobs:
 
       - name: Check if code coverage is above 95% and branch is not a protected one
         run: |
-          coverage=$(grep -oP 'lines......\K\d+(\.\d+)?' coverage/lcov.info)
+          coverage=$(grep -oP 'lines......\K\d+(\.\d+)?' ./coverage/lcov.info)
           branch_name=${{ github.ref }}
           author_name=$(git log -1 --pretty=format:'%an')
           author_email=$(git log -1 --pretty=format:'%ae')
