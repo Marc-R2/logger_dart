@@ -65,7 +65,21 @@ jobs:
         run: cat ./coverage/lcov.info
 
       - name: Print coverage %
-        run: cat ./coverage/lcov.info | grep -oP '(\d+)%'
+        run: |
+          #!/bin/bash
+
+          # Get the sum of numbers in lines with 'LF:'
+          lines_executed=$(grep -o 'LF:[^,]*' ./coverage/lcov.info | awk '{s+=$2} END {print s}')
+          
+          # Get the sum of numbers in lines with 'LH:'
+          lines_total=$(grep -o 'LH:[^,]*' ./coverage/lcov.info | awk '{s+=$2} END {print s}')
+          
+          # Calculate the coverage percentage
+          coverage=$(echo "scale=2; $lines_executed / $lines_total * 100" | bc)
+        
+          echo "Coverage percentage: $coverage%"
+  
+  
 
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v3
@@ -75,7 +89,7 @@ jobs:
 
       - name: Check if code coverage is above 95% and branch is not a protected one
         run: |
-          coverage=$(grep -oP 'lines......\K\d+(\.\d+)?' ./coverage/lcov.info)
+          coverage = env.coverage
           branch_name=${{ github.ref }}
           author_name=$(git log -1 --pretty=format:'%an')
           author_email=$(git log -1 --pretty=format:'%ae')
