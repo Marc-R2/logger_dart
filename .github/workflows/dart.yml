@@ -127,6 +127,5 @@ jobs:
           assignee: ${{ github.actor }}
           label: great-coverage, auto-merge
           template: .tmp/PULL_REQUEST_TEMPLATE.md
-          get_diff: true
 
 
