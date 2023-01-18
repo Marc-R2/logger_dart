@@ -69,11 +69,11 @@ jobs:
           #!/bin/bash
 
           # Get the sum of numbers in lines with 'LF:'
-          lines_executed=$(grep -o 'LF:[^,]*' ./coverage/lcov.info | awk -F: '{s+=$2} END {print s}')
+          lines_executed=$(grep -o 'LH:[^,]*' ./coverage/lcov.info | awk -F: '{s+=$2} END {print s}')
           echo "Lines executed: $lines_executed"          
           
           # Get the sum of numbers in lines with 'LH:'
-          lines_total=$(grep -o 'LH:[^,]*' ./coverage/lcov.info | awk -F: '{s+=$2} END {print s}')
+          lines_total=$(grep -o 'LF:[^,]*' ./coverage/lcov.info | awk -F: '{s+=$2} END {print s}')
           echo "Lines total: $lines_total"
             
           if [[ $lines_total -eq 0 ]]
@@ -93,7 +93,7 @@ jobs:
 
       - name: Check if code coverage is above 95% and branch is not a protected one
         run: |
-          coverage = env.coverage
+          coverage = $env.coverage
           branch_name=${{ github.ref }}
           author_name=$(git log -1 --pretty=format:'%an')
           author_email=$(git log -1 --pretty=format:'%ae')
