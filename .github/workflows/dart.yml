@@ -93,7 +93,7 @@ jobs:
 
       - name: Check if code coverage is above 95% and branch is not a protected one
         run: |
-          coverage = $env.coverage
+          coverage=$env.coverage
           branch_name=${{ github.ref }}
           author_name=$(git log -1 --pretty=format:'%an')
           author_email=$(git log -1 --pretty=format:'%ae')
