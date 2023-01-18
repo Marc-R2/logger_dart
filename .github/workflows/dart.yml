@@ -69,19 +69,26 @@ jobs:
           #!/bin/bash
 
           # Get the sum of numbers in lines with 'LF:'
-          lines_executed=$(grep -o 'LF:[^,]*' ./coverage/lcov.info | awk '{s+=$2} END {print s}')
+          lines_executed=$(grep -o 'LF:[^,]*' ./coverage/lcov.info | awk -F: '{s+=$2} END {print s}')
+          echo "Lines executed: $lines_executed"          
           
           # Get the sum of numbers in lines with 'LH:'
-          lines_total=$(grep -o 'LH:[^,]*' ./coverage/lcov.info | awk '{s+=$2} END {print s}')
-          
-          # Calculate the coverage percentage
-          coverage=$(echo "scale=2; $lines_executed / $lines_total * 100" | bc)
-        
-          echo "Coverage percentage: $coverage%"
-  
-  
+          lines_total=$(grep -o 'LH:[^,]*' ./coverage/lcov.info | awk -F: '{s+=$2} END {print s}')
+          echo "Lines total: $lines_total"
+            
+          if [[ $lines_total -eq 0 ]]
+          then
+            echo "Coverage percentage: 0%"
+          else
+            # Calculate the coverage percentage
+            coverage=$(echo "scale=2; $lines_executed / $lines_total * 100" | bc)
+            echo "Coverage percentage: $coverage%"
+          fi
 
-      - name: Upload coverage to Codecov
+
+
+
+- name: Upload coverage to Codecov
         uses: codecov/codecov-action@v3
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
