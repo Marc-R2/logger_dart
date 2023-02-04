@@ -4,6 +4,8 @@ import 'dart:developer' as developer;
 
 part 'mixin/logging.dart';
 
+part 'error_message.dart';
+
 part 'messages.dart';
 
 part 'message_templates.dart';
@@ -13,7 +15,8 @@ class Logger {
   /// Gets reference to the Logger Object
   factory Logger() => _logger;
 
-  Logger._internal() {
+  /// Create a logger instance
+  Logger.internal() {
     logMessage(Message.warning(title: 'Init Logger', log: false));
   }
 
@@ -25,7 +28,7 @@ class Logger {
     Message.warning(title: 'Enter Testmode');
   }
 
-  static final Logger _logger = Logger._internal();
+  static final Logger _logger = Logger.internal();
 
   /// Message queue
   static final Map<int, Message> messages = {};
