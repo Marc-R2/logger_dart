@@ -21,14 +21,14 @@ void main() {
       expect(childLog.tags, equals(contains('session:abc')));
       expect(childLog.tags, equals(contains('id:0')));
       expect(childLog.tags, equals(contains('tag3')));
-      expect(childLog.tags, equals(hasLength(4)));
+      expect(childLog.tags, equals(hasLength(3)));
     });
 
     test('child() should inherit template values from parent', () {
       const log = Log(session: 'xyz');
       final childLog = log.child(tags: ['child']);
 
-      expect(childLog.tags, hasLength(4));
+      expect(childLog.tags, hasLength(3));
       expect(childLog.tags, contains('session:xyz'));
       expect(childLog.tags, contains('id:0'));
       expect(childLog.tags, contains('child'));
