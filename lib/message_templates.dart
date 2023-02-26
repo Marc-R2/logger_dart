@@ -59,6 +59,31 @@ class MessageTemplate {
     return templateValues.map((key, value) => MapEntry(key, value.toString()));
   }
 
+  /// Create a trace message
+  Message trace({
+    required String title,
+    String message = '',
+    int level = 0,
+    StackTrace? trace,
+    bool log = true,
+    List<String>? tags,
+    Object? klasse,
+    String? function,
+    Map<String, dynamic> values = const {},
+  }) {
+    return Message.trace(
+      title: title,
+      text: message,
+      level: level,
+      stackTrace: trace,
+      log: log,
+      tags: _tags(tags),
+      klasse: _class(klasse),
+      function: _function(function),
+      templateValues: _templateValues(values),
+    );
+  }
+
   /// Create a log message
   Message log({
     required String title,

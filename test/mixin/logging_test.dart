@@ -34,6 +34,24 @@ void main() {
       expect(message.title, equals('Test message'));
       expect(message.type, equals(3));
     });
+
+    // Trace
+    test('trace method creates a trace message', () {
+      final log = LoggingMock();
+      final message = log.log.trace(title: 'Test message');
+
+      expect(message.title, equals('Test message'));
+      expect(message.type, equals(9));
+    });
+
+    // Exception
+    test('exception method creates an exception message', () {
+      final log = LoggingMock();
+      final message = log.log.exception(title: 'Test message');
+
+      expect(message.title, equals('Test message'));
+      expect(message.type, equals(3));
+    });
   });
 
   group('Logging Mixin', () {
@@ -44,7 +62,8 @@ void main() {
       expect(message.title, equals('Test title'));
       expect(message.text, equals('Test message'));
       expect(message.level, equals(0));
-      expect(message.tags, equals(['class:LoggingMock']));
+      expect(message.tags, equals(hasLength(2)));
+      expect(message.tags, equals(contains('class:LoggingMock')));
       expect(message.templateValues, equals({}));
     });
 
@@ -58,7 +77,9 @@ void main() {
       expect(message.title, equals('Test title'));
       expect(message.text, equals('Test message'));
       expect(message.level, equals(0));
-      expect(message.tags, equals(['class:LoggingMock', 'func:testFunction']));
+      expect(message.tags, equals(hasLength(3)));
+      expect(message.tags, equals(contains('class:LoggingMock')));
+      expect(message.tags, equals(contains('func:testFunction')));
       expect(message.templateValues, equals({}));
     });
 
@@ -72,7 +93,8 @@ void main() {
       expect(message.title, equals('Test title'));
       expect(message.text, equals('Test message'));
       expect(message.level, equals(0));
-      expect(message.tags, equals(['class:Logger']));
+      expect(message.tags, equals(hasLength(2)));
+      expect(message.tags, equals(contains('class:Logger')));
       expect(message.templateValues, equals({}));
     });
   });

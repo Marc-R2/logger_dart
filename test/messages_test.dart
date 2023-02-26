@@ -342,7 +342,8 @@ Future<void> main() async {
     group('toString', () {
       test('toString() with tags=true', () {
         final message = Message.log(title: 'Test message', tags: ['tag1']);
-        const expectedString = 'TestMode: 2 Log: Test message:(0) [tag1]';
+        final expectedString = 'TestMode: 2 Log: Test message:(0) '
+            '[tag1, runtime:${Logging.runtimeSession}]';
         expect(message.toString(), equals(expectedString));
       });
 

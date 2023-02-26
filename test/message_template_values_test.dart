@@ -3,6 +3,7 @@ import 'package:test/test.dart';
 
 Future<void> main() async {
   setUp(Logger.test);
+  final tags = '[runtime:${Logging.runtimeSession}]';
 
   group('Testing Message class util/message.dart - Templates', () {
     group('templates', () {
@@ -17,23 +18,23 @@ Future<void> main() async {
 
             expect(
               message.toString(),
-              'TestMode: 2 Log: logName - John:(2)',
+              'TestMode: 2 Log: logName - John:(2) $tags',
             );
             expect(
               message.toString(time: false),
-              'Log: logName - John:(2)',
+              'Log: logName - John:(2) $tags',
             );
             expect(
               message.toString(time: false, type: false),
-              'logName - John:(2)',
+              'logName - John:(2) $tags',
             );
             expect(
               message.toString(time: false, type: false, level: false),
-              'logName - John',
+              'logName - John: $tags',
             );
             expect(
               message.toString(type: false, level: false, title: false),
-              'TestMode: 2',
+              'TestMode: 2 $tags',
             );
           });
 
@@ -45,23 +46,23 @@ Future<void> main() async {
 
             expect(
               message.toString(),
-              'TestMode: 2 Log: logName:(3)',
+              'TestMode: 2 Log: logName:(3) $tags',
             );
             expect(
               message.toString(time: false),
-              'Log: logName:(3)',
+              'Log: logName:(3) $tags',
             );
             expect(
               message.toString(time: false, type: false),
-              'logName:(3)',
+              'logName:(3) $tags',
             );
             expect(
               message.toString(time: false, type: false, level: false),
-              'logName',
+              'logName: $tags',
             );
             expect(
               message.toString(time: false, level: false, title: false),
-              'Log:',
+              'Log: $tags',
             );
           });
 
@@ -73,23 +74,23 @@ Future<void> main() async {
 
             expect(
               message.toString(),
-              'TestMode: 2 Log: logName - <name>:(4)',
+              'TestMode: 2 Log: logName - <name>:(4) $tags',
             );
             expect(
               message.toString(time: false),
-              'Log: logName - <name>:(4)',
+              'Log: logName - <name>:(4) $tags',
             );
             expect(
               message.toString(time: false, type: false),
-              'logName - <name>:(4)',
+              'logName - <name>:(4) $tags',
             );
             expect(
               message.toString(time: false, type: false, level: false),
-              'logName - <name>',
+              'logName - <name>: $tags',
             );
             expect(
               message.toString(time: false, type: false, title: false),
-              '(4)',
+              '(4) $tags',
             );
           });
 
@@ -102,23 +103,23 @@ Future<void> main() async {
 
             expect(
               message.toString(),
-              'TestMode: 2 Log: logName - John:(5)',
+              'TestMode: 2 Log: logName - John:(5) $tags',
             );
             expect(
               message.toString(time: false),
-              'Log: logName - John:(5)',
+              'Log: logName - John:(5) $tags',
             );
             expect(
               message.toString(time: false, type: false),
-              'logName - John:(5)',
+              'logName - John:(5) $tags',
             );
             expect(
               message.toString(time: false, type: false, level: false),
-              'logName - John',
+              'logName - John: $tags',
             );
             expect(
               message.toString(time: false, type: false, title: false),
-              '(5)',
+              '(5) $tags',
             );
           });
         });
@@ -136,27 +137,27 @@ Future<void> main() async {
 
             expect(
               message.toString(),
-              'TestMode: 2 Log: logName:(5) => logText (John)',
+              'TestMode: 2 Log: logName:(5) $tags => logText (John)',
             );
             expect(
               message.toString(time: false),
-              'Log: logName:(5) => logText (John)',
+              'Log: logName:(5) $tags => logText (John)',
             );
             expect(
               message.toString(time: false, type: false),
-              'logName:(5) => logText (John)',
+              'logName:(5) $tags => logText (John)',
             );
             expect(
               message.toString(time: false, type: false, level: false),
-              'logName => logText (John)',
+              'logName: $tags => logText (John)',
             );
             expect(
               message.toString(time: false, type: false, title: false),
-              '(5) => logText (John)',
+              '(5) $tags => logText (John)',
             );
             expect(
               message.toString(type: false, title: false, level: false),
-              'TestMode: 2 => logText (John)',
+              'TestMode: 2 $tags => logText (John)',
             );
           });
 
@@ -169,23 +170,23 @@ Future<void> main() async {
 
             expect(
               message.toString(),
-              'TestMode: 2 Log: logName:(5) => logText (<name>)',
+              'TestMode: 2 Log: logName:(5) $tags => logText (<name>)',
             );
             expect(
               message.toString(time: false),
-              'Log: logName:(5) => logText (<name>)',
+              'Log: logName:(5) $tags => logText (<name>)',
             );
             expect(
               message.toString(time: false, type: false),
-              'logName:(5) => logText (<name>)',
+              'logName:(5) $tags => logText (<name>)',
             );
             expect(
               message.toString(time: false, type: false, level: false),
-              'logName => logText (<name>)',
+              'logName: $tags => logText (<name>)',
             );
             expect(
               message.toString(time: false, type: false, title: false),
-              '(5) => logText (<name>)',
+              '(5) $tags => logText (<name>)',
             );
           });
 
@@ -199,23 +200,23 @@ Future<void> main() async {
 
             expect(
               message.toString(),
-              'TestMode: 2 Log: logName:(5) => logText (John, 30)',
+              'TestMode: 2 Log: logName:(5) $tags => logText (John, 30)',
             );
             expect(
               message.toString(time: false),
-              'Log: logName:(5) => logText (John, 30)',
+              'Log: logName:(5) $tags => logText (John, 30)',
             );
             expect(
               message.toString(time: false, type: false),
-              'logName:(5) => logText (John, 30)',
+              'logName:(5) $tags => logText (John, 30)',
             );
             expect(
               message.toString(time: false, type: false, level: false),
-              'logName => logText (John, 30)',
+              'logName: $tags => logText (John, 30)',
             );
             expect(
               message.toString(time: false, type: false, title: false),
-              '(5) => logText (John, 30)',
+              '(5) $tags => logText (John, 30)',
             );
           });
 
@@ -229,23 +230,23 @@ Future<void> main() async {
 
             expect(
               message.toString(),
-              'TestMode: 2 Log: logName:(5) => logText (John)',
+              'TestMode: 2 Log: logName:(5) $tags => logText (John)',
             );
             expect(
               message.toString(time: false),
-              'Log: logName:(5) => logText (John)',
+              'Log: logName:(5) $tags => logText (John)',
             );
             expect(
               message.toString(time: false, type: false),
-              'logName:(5) => logText (John)',
+              'logName:(5) $tags => logText (John)',
             );
             expect(
               message.toString(time: false, type: false, level: false),
-              'logName => logText (John)',
+              'logName: $tags => logText (John)',
             );
             expect(
               message.toString(time: false, type: false, title: false),
-              '(5) => logText (John)',
+              '(5) $tags => logText (John)',
             );
           });
 
@@ -259,27 +260,27 @@ Future<void> main() async {
 
             expect(
               message.toString(),
-              'TestMode: 2 Log: logName:(5) => logText ({})',
+              'TestMode: 2 Log: logName:(5) $tags => logText ({})',
             );
             expect(
               message.toString(time: false),
-              'Log: logName:(5) => logText ({})',
+              'Log: logName:(5) $tags => logText ({})',
             );
             expect(
               message.toString(time: false, type: false),
-              'logName:(5) => logText ({})',
+              'logName:(5) $tags => logText ({})',
             );
             expect(
               message.toString(time: false, type: false, level: false),
-              'logName => logText ({})',
+              'logName: $tags => logText ({})',
             );
             expect(
               message.toString(time: false, type: false, title: false),
-              '(5) => logText ({})',
+              '(5) $tags => logText ({})',
             );
             expect(
               message.toString(type: false, title: false, level: false),
-              'TestMode: 2 => logText ({})',
+              'TestMode: 2 $tags => logText ({})',
             );
           });
         });
@@ -295,27 +296,27 @@ Future<void> main() async {
 
             expect(
               message.toString(),
-              'TestMode: 2 Info: infoName:(9) => infoText (John)',
+              'TestMode: 2 Info: infoName:(9) $tags => infoText (John)',
             );
             expect(
               message.toString(time: false),
-              'Info: infoName:(9) => infoText (John)',
+              'Info: infoName:(9) $tags => infoText (John)',
             );
             expect(
               message.toString(time: false, type: false),
-              'infoName:(9) => infoText (John)',
+              'infoName:(9) $tags => infoText (John)',
             );
             expect(
               message.toString(time: false, type: false, level: false),
-              'infoName => infoText (John)',
+              'infoName: $tags => infoText (John)',
             );
             expect(
               message.toString(time: false, type: false, title: false),
-              '(9) => infoText (John)',
+              '(9) $tags => infoText (John)',
             );
             expect(
               message.toString(type: false, title: false, level: false),
-              'TestMode: 2 => infoText (John)',
+              'TestMode: 2 $tags => infoText (John)',
             );
           });
 
@@ -328,27 +329,27 @@ Future<void> main() async {
 
             expect(
               message.toString(),
-              'TestMode: 2 Info: infoName:(9) => infoText (<name>)',
+              'TestMode: 2 Info: infoName:(9) $tags => infoText (<name>)',
             );
             expect(
               message.toString(time: false),
-              'Info: infoName:(9) => infoText (<name>)',
+              'Info: infoName:(9) $tags => infoText (<name>)',
             );
             expect(
               message.toString(time: false, type: false),
-              'infoName:(9) => infoText (<name>)',
+              'infoName:(9) $tags => infoText (<name>)',
             );
             expect(
               message.toString(time: false, type: false, level: false),
-              'infoName => infoText (<name>)',
+              'infoName: $tags => infoText (<name>)',
             );
             expect(
               message.toString(time: false, type: false, title: false),
-              '(9) => infoText (<name>)',
+              '(9) $tags => infoText (<name>)',
             );
             expect(
               message.toString(time: false, type: false, text: false),
-              'infoName:(9)',
+              'infoName:(9) $tags',
             );
           });
 
@@ -362,27 +363,27 @@ Future<void> main() async {
 
             expect(
               message.toString(),
-              'TestMode: 2 Info: infoName:(9) => infoText (John, 30)',
+              'TestMode: 2 Info: infoName:(9) $tags => infoText (John, 30)',
             );
             expect(
               message.toString(time: false),
-              'Info: infoName:(9) => infoText (John, 30)',
+              'Info: infoName:(9) $tags => infoText (John, 30)',
             );
             expect(
               message.toString(time: false, type: false),
-              'infoName:(9) => infoText (John, 30)',
+              'infoName:(9) $tags => infoText (John, 30)',
             );
             expect(
               message.toString(time: false, type: false, level: false),
-              'infoName => infoText (John, 30)',
+              'infoName: $tags => infoText (John, 30)',
             );
             expect(
               message.toString(time: false, type: false, title: false),
-              '(9) => infoText (John, 30)',
+              '(9) $tags => infoText (John, 30)',
             );
             expect(
               message.toString(time: false, type: false, text: false),
-              'infoName:(9)',
+              'infoName:(9) $tags',
             );
           });
 
@@ -396,27 +397,27 @@ Future<void> main() async {
 
             expect(
               message.toString(),
-              'TestMode: 2 Info: infoName:(9) => infoText (John)',
+              'TestMode: 2 Info: infoName:(9) $tags => infoText (John)',
             );
             expect(
               message.toString(time: false),
-              'Info: infoName:(9) => infoText (John)',
+              'Info: infoName:(9) $tags => infoText (John)',
             );
             expect(
               message.toString(time: false, type: false),
-              'infoName:(9) => infoText (John)',
+              'infoName:(9) $tags => infoText (John)',
             );
             expect(
               message.toString(time: false, type: false, level: false),
-              'infoName => infoText (John)',
+              'infoName: $tags => infoText (John)',
             );
             expect(
               message.toString(time: false, type: false, title: false),
-              '(9) => infoText (John)',
+              '(9) $tags => infoText (John)',
             );
             expect(
               message.toString(time: false, type: false, text: false),
-              'infoName:(9)',
+              'infoName:(9) $tags',
             );
           });
         });
@@ -432,27 +433,27 @@ Future<void> main() async {
 
             expect(
               message.toString(),
-              'TestMode: 2 Warning: warningName:(2) => warningText (John)',
+              'TestMode: 2 Warning: warningName:(2) $tags => warningText (John)',
             );
             expect(
               message.toString(time: false),
-              'Warning: warningName:(2) => warningText (John)',
+              'Warning: warningName:(2) $tags => warningText (John)',
             );
             expect(
               message.toString(time: false, type: false),
-              'warningName:(2) => warningText (John)',
+              'warningName:(2) $tags => warningText (John)',
             );
             expect(
               message.toString(time: false, type: false, level: false),
-              'warningName => warningText (John)',
+              'warningName: $tags => warningText (John)',
             );
             expect(
               message.toString(time: false, type: false, title: false),
-              '(2) => warningText (John)',
+              '(2) $tags => warningText (John)',
             );
             expect(
               message.toString(type: false, title: false, level: false),
-              'TestMode: 2 => warningText (John)',
+              'TestMode: 2 $tags => warningText (John)',
             );
           });
 
@@ -465,27 +466,27 @@ Future<void> main() async {
 
             expect(
               message.toString(),
-              'TestMode: 2 Warning: warningName:(2) => warningText (<name>)',
+              'TestMode: 2 Warning: warningName:(2) $tags => warningText (<name>)',
             );
             expect(
               message.toString(time: false),
-              'Warning: warningName:(2) => warningText (<name>)',
+              'Warning: warningName:(2) $tags => warningText (<name>)',
             );
             expect(
               message.toString(time: false, type: false),
-              'warningName:(2) => warningText (<name>)',
+              'warningName:(2) $tags => warningText (<name>)',
             );
             expect(
               message.toString(time: false, type: false, level: false),
-              'warningName => warningText (<name>)',
+              'warningName: $tags => warningText (<name>)',
             );
             expect(
               message.toString(time: false, type: false, title: false),
-              '(2) => warningText (<name>)',
+              '(2) $tags => warningText (<name>)',
             );
             expect(
               message.toString(time: false, type: false, text: false),
-              'warningName:(2)',
+              'warningName:(2) $tags',
             );
           });
 
@@ -499,27 +500,27 @@ Future<void> main() async {
 
             expect(
               message.toString(),
-              'TestMode: 2 Warning: warningName:(2) => warningText (John, 30)',
+              'TestMode: 2 Warning: warningName:(2) $tags => warningText (John, 30)',
             );
             expect(
               message.toString(time: false),
-              'Warning: warningName:(2) => warningText (John, 30)',
+              'Warning: warningName:(2) $tags => warningText (John, 30)',
             );
             expect(
               message.toString(time: false, type: false),
-              'warningName:(2) => warningText (John, 30)',
+              'warningName:(2) $tags => warningText (John, 30)',
             );
             expect(
               message.toString(time: false, type: false, level: false),
-              'warningName => warningText (John, 30)',
+              'warningName: $tags => warningText (John, 30)',
             );
             expect(
               message.toString(time: false, type: false, title: false),
-              '(2) => warningText (John, 30)',
+              '(2) $tags => warningText (John, 30)',
             );
             expect(
               message.toString(time: false, type: false, text: false),
-              'warningName:(2)',
+              'warningName:(2) $tags',
             );
           });
 
@@ -533,27 +534,27 @@ Future<void> main() async {
 
             expect(
               message.toString(),
-              'TestMode: 2 Warning: warningName:(2) => warningText (John)',
+              'TestMode: 2 Warning: warningName:(2) $tags => warningText (John)',
             );
             expect(
               message.toString(time: false),
-              'Warning: warningName:(2) => warningText (John)',
+              'Warning: warningName:(2) $tags => warningText (John)',
             );
             expect(
               message.toString(time: false, type: false),
-              'warningName:(2) => warningText (John)',
+              'warningName:(2) $tags => warningText (John)',
             );
             expect(
               message.toString(time: false, type: false, level: false),
-              'warningName => warningText (John)',
+              'warningName: $tags => warningText (John)',
             );
             expect(
               message.toString(time: false, type: false, title: false),
-              '(2) => warningText (John)',
+              '(2) $tags => warningText (John)',
             );
             expect(
               message.toString(time: false, type: false, text: false),
-              'warningName:(2)',
+              'warningName:(2) $tags',
             );
           });
         });
@@ -569,27 +570,27 @@ Future<void> main() async {
 
             expect(
               message.toString(),
-              'TestMode: 2 Error: errorName:(4) => errorText (John)',
+              'TestMode: 2 Error: errorName:(4) $tags => errorText (John)',
             );
             expect(
               message.toString(time: false),
-              'Error: errorName:(4) => errorText (John)',
+              'Error: errorName:(4) $tags => errorText (John)',
             );
             expect(
               message.toString(time: false, type: false),
-              'errorName:(4) => errorText (John)',
+              'errorName:(4) $tags => errorText (John)',
             );
             expect(
               message.toString(time: false, type: false, level: false),
-              'errorName => errorText (John)',
+              'errorName: $tags => errorText (John)',
             );
             expect(
               message.toString(time: false, type: false, title: false),
-              '(4) => errorText (John)',
+              '(4) $tags => errorText (John)',
             );
             expect(
               message.toString(type: false, title: false, level: false),
-              'TestMode: 2 => errorText (John)',
+              'TestMode: 2 $tags => errorText (John)',
             );
           });
 
@@ -602,27 +603,27 @@ Future<void> main() async {
 
             expect(
               message.toString(),
-              'TestMode: 2 Error: errorName:(4) => errorText (<name>)',
+              'TestMode: 2 Error: errorName:(4) $tags => errorText (<name>)',
             );
             expect(
               message.toString(time: false),
-              'Error: errorName:(4) => errorText (<name>)',
+              'Error: errorName:(4) $tags => errorText (<name>)',
             );
             expect(
               message.toString(time: false, type: false),
-              'errorName:(4) => errorText (<name>)',
+              'errorName:(4) $tags => errorText (<name>)',
             );
             expect(
               message.toString(time: false, type: false, level: false),
-              'errorName => errorText (<name>)',
+              'errorName: $tags => errorText (<name>)',
             );
             expect(
               message.toString(time: false, type: false, title: false),
-              '(4) => errorText (<name>)',
+              '(4) $tags => errorText (<name>)',
             );
             expect(
               message.toString(time: false, type: false, text: false),
-              'errorName:(4)',
+              'errorName:(4) $tags',
             );
           });
 
@@ -636,27 +637,27 @@ Future<void> main() async {
 
             expect(
               message.toString(),
-              'TestMode: 2 Error: errorName:(4) => errorText (John, 30)',
+              'TestMode: 2 Error: errorName:(4) $tags => errorText (John, 30)',
             );
             expect(
               message.toString(time: false),
-              'Error: errorName:(4) => errorText (John, 30)',
+              'Error: errorName:(4) $tags => errorText (John, 30)',
             );
             expect(
               message.toString(time: false, type: false),
-              'errorName:(4) => errorText (John, 30)',
+              'errorName:(4) $tags => errorText (John, 30)',
             );
             expect(
               message.toString(time: false, type: false, level: false),
-              'errorName => errorText (John, 30)',
+              'errorName: $tags => errorText (John, 30)',
             );
             expect(
               message.toString(time: false, type: false, title: false),
-              '(4) => errorText (John, 30)',
+              '(4) $tags => errorText (John, 30)',
             );
             expect(
               message.toString(time: false, type: false, text: false),
-              'errorName:(4)',
+              'errorName:(4) $tags',
             );
           });
 
@@ -670,27 +671,27 @@ Future<void> main() async {
 
             expect(
               message.toString(),
-              'TestMode: 2 Error: errorName:(4) => errorText (John)',
+              'TestMode: 2 Error: errorName:(4) $tags => errorText (John)',
             );
             expect(
               message.toString(time: false),
-              'Error: errorName:(4) => errorText (John)',
+              'Error: errorName:(4) $tags => errorText (John)',
             );
             expect(
               message.toString(time: false, type: false),
-              'errorName:(4) => errorText (John)',
+              'errorName:(4) $tags => errorText (John)',
             );
             expect(
               message.toString(time: false, type: false, level: false),
-              'errorName => errorText (John)',
+              'errorName: $tags => errorText (John)',
             );
             expect(
               message.toString(time: false, type: false, title: false),
-              '(4) => errorText (John)',
+              '(4) $tags => errorText (John)',
             );
             expect(
               message.toString(time: false, type: false, text: false),
-              'errorName:(4)',
+              'errorName:(4) $tags',
             );
           });
         });

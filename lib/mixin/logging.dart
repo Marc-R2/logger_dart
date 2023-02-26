@@ -15,28 +15,29 @@ mixin Logging {
     final newLog = Log(
       parent: context,
       function: function,
+      id: context != null ? context.id + 1 : 0,
       klasse: this,
       tags: ['FunctionStart'],
+      session: context?.session ?? currentSession,
     );
 
     return newLog;
   }
-}
 
-class Log extends MessageTemplate {
-  const Log({
-    this.id = 0,
-    this.parent,
-    super.function,
-    super.klasse,
-    super.tags,
-  })  : assert(id >= 0, 'Log id must be greater than or equal to 0'),
-        assert(
-          parent == null || parent == id - 1,
-          'Log id must be one greater than parent id',
-        );
+  static String? _session;
 
-  final int id;
+  static String get runtimeSession {
+    if (_session != null) return _session!;
 
-  final Log? parent;
+    final now = DateTime.now();
+    final minSinceEpoch = now.millisecondsSinceEpoch ~/ 60000;
+    return _session = minify(minSinceEpoch * 10 + now.second + now.millisecond);
+  }
+
+  static String get currentSession {
+    final now = DateTime.now();
+    return minify(now.millisecond * 100 + now.microsecond);
+  }
+
+  static String minify(int id) => id.toRadixString(36);
 }

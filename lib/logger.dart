@@ -4,6 +4,8 @@ import 'dart:developer' as developer;
 
 part 'mixin/logging.dart';
 
+part 'log.dart';
+
 part 'error_message.dart';
 
 part 'messages.dart';
