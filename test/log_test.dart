@@ -85,6 +85,39 @@ void main() {
         expect(msg.tags, contains('class:LoggingMock'));
       });
     });
+
+    group('Log tests', () {
+      test('Creating a log with valid id and session should not throw an error',
+          () {
+        expect(() => const Log(id: 1, session: '123'), returnsNormally);
+      });
+
+      test('Creating a log with negative id should throw an error', () {
+        expect(() => Log(id: -1), throwsA(isA<AssertionError>()));
+      });
+
+      test('Creating a log without session and parent should throw an error',
+          () {
+        expect(() => Log(id: 1), throwsA(isA<AssertionError>()));
+      });
+
+      test('Log session should be inherited from parent if not defined', () {
+        const parent = Log(id: 1, session: 'parent_session');
+        const child = Log(id: 2, parent: parent);
+        expect(child.session, equals('parent_session'));
+      });
+
+      test('Log tags should contain session and id', () {
+        const log = Log(id: 1, session: 'test_session');
+        expect(log.tags, containsAll(['session:test_session', 'id:1']));
+      });
+
+      test('Log tags should not contain null session', () {
+        const log = Log(id: 1, parent: Log(id: 2, session: 'parent_session'));
+        expect(log.tags, isNot(contains('session:null')));
+        expect(log.tags, contains('session:parent_session'));
+      });
+    });
   });
 }
 
