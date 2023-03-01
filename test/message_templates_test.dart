@@ -10,7 +10,9 @@ void main() {
       expect(message.title, equals('Test title'));
       expect(message.text, equals('Test message'));
       expect(message.level, equals(0));
-      expect(message.tags, equals(['tag1', 'tag2']));
+      expect(message.tags, equals(contains('tag1')));
+      expect(message.tags, equals(contains('tag2')));
+      expect(message.tags, equals(hasLength(3)));
       expect(message.templateValues, equals({}));
     });
 
@@ -39,7 +41,7 @@ void main() {
       expect(message.type, equals(0));
       expect(message.title, equals('Test message'));
 
-      expect(message.tags.length, equals(3));
+      expect(message.tags.length, equals(4));
       expect(message.tags, contains('test'));
       expect(message.tags, contains('class:TestClass'));
       expect(message.tags, contains('func:testFunction'));

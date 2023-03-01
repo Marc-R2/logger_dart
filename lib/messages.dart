@@ -198,6 +198,7 @@ class Message {
       }
     }
     if (function != null) tags.add('func:$function');
+    tags.add('runtime:${Logging.runtimeSession}');
   }
 
   /// Turns the message into a map

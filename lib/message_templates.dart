@@ -13,7 +13,8 @@ class MessageTemplate {
     this.tags = const [],
     Object? klasse,
     String? function,
-  }) : _classValue = klasse, _functionValue = function;
+  })  : _classValue = klasse,
+        _functionValue = function;
 
   /// Groups
   final List<String> tags;
@@ -56,6 +57,31 @@ class MessageTemplate {
 
   Map<String, String> _templateValues(Map<String, dynamic> templateValues) {
     return templateValues.map((key, value) => MapEntry(key, value.toString()));
+  }
+
+  /// Create a trace message
+  Message trace({
+    required String title,
+    String message = '',
+    int level = 0,
+    StackTrace? trace,
+    bool log = true,
+    List<String>? tags,
+    Object? klasse,
+    String? function,
+    Map<String, dynamic> values = const {},
+  }) {
+    return Message.trace(
+      title: title,
+      text: message,
+      level: level,
+      stackTrace: trace,
+      log: log,
+      tags: _tags(tags),
+      klasse: _class(klasse),
+      function: _function(function),
+      templateValues: _templateValues(values),
+    );
   }
 
   /// Create a log message
@@ -147,6 +173,31 @@ class MessageTemplate {
   }) {
     return Message.error(
       title: title,
+      text: message,
+      level: level,
+      stackTrace: trace,
+      log: log,
+      tags: _tags(tags),
+      klasse: _class(klasse),
+      function: _function(function),
+      templateValues: _templateValues(values),
+    );
+  }
+
+  /// Create a throwable error message
+  ErrorMessage exception({
+    required String title,
+    String message = '',
+    int level = 0,
+    StackTrace? trace,
+    bool log = true,
+    List<String>? tags,
+    Object? klasse,
+    String? function,
+    Map<String, dynamic> values = const {},
+  }) {
+    return ErrorMessage(
+      title,
       text: message,
       level: level,
       stackTrace: trace,

@@ -179,8 +179,8 @@ Future<void> main() async {
         expect(map['time'], isA<int>());
         expect(map['level'], isA<int>());
         expect(map['type'], isA<int>());
-        expect(map['templates'], isA<Map>());
-        expect(map['tags'], isA<List>());
+        expect(map['templates'], isA<Map<String, String>>());
+        expect(map['tags'], isA<List<String>>());
       });
     });
 
@@ -342,7 +342,8 @@ Future<void> main() async {
     group('toString', () {
       test('toString() with tags=true', () {
         final message = Message.log(title: 'Test message', tags: ['tag1']);
-        const expectedString = 'TestMode: 2 Log: Test message:(0) [tag1]';
+        final expectedString = 'TestMode: 2 Log: Test message:(0) '
+            '[tag1, runtime:${Logging.runtimeSession}]';
         expect(message.toString(), equals(expectedString));
       });
 

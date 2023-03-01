@@ -14,10 +14,6 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      # Note: This workflow uses the latest stable version of the Dart SDK.
-      # You can specify other versions if desired, see documentation here:
-      # https://github.com/dart-lang/setup-dart/blob/main/README.md
-      # - uses: dart-lang/setup-dart@v1
       - uses: dart-lang/setup-dart@v1.3
         with:
           sdk: "2.19.0-146.2.beta"
@@ -25,22 +21,10 @@ jobs:
       - name: Install dependencies
         run: dart pub get
 
-  #lint:
-  #  runs-on: ubuntu-latest
-  #  needs: build
-  #  steps:
-      # Uncomment this step to verify the use of 'dart format' on each commit.
-      # - name: Verify formatting
-      #   run: dart format --output=none --set-exit-if-changed .
-
       # Consider passing '--fatal-infos' for slightly stricter analysis.
       - name: Analyze project source
         run: dart analyze
 
-  #test:
-  #  runs-on: ubuntu-latest
-  #  needs: build
-  #  steps:
       # Get a list of all test files
       - name: Get test files
         run: tests=$(find test -name "*_test.dart")
@@ -52,17 +36,76 @@ jobs:
         run: dart pub run test ${{ steps.test_files.outputs.tests }}
         shell: bash
 
-  #coverage:
-  #  runs-on: ubuntu-latest
-  #  needs: build
-  #  steps:
       - name: Coverage information
         run: |
           dart pub global activate coverage
           dart pub global run coverage:test_with_coverage
+
+      - name: Print coverage
+        run: cat ./coverage/lcov.info
+
+      - name: Print coverage %
+        run: |
+          #!/bin/bash
+
+          # Get the sum of numbers in lines with 'LF:'
+          lines_executed=$(grep -o 'LH:[^,]*' ./coverage/lcov.info | awk -F: '{s+=$2} END {print s}')
+          echo "Lines executed: $lines_executed"          
+          
+          # Get the sum of numbers in lines with 'LH:'
+          lines_total=$(grep -o 'LF:[^,]*' ./coverage/lcov.info | awk -F: '{s+=$2} END {print s}')
+          echo "Lines total: $lines_total"
+            
+          if [[ $lines_total -eq 0 ]]
+          then
+            echo "Coverage percentage: 0%"
+          exit 0
+          else
+            # Calculate the coverage percentage
+            coverage=$(echo "scale=2; $lines_executed / $lines_total * 100" | bc)
+            echo "Coverage percentage: $coverage%"
+          fi
 
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v3
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
           files: ./coverage/lcov.info
+
+      - name: Check if code coverage is above 95% and branch is not a protected one
+        run: |
+          coverage=$env.coverage
+          branch_name=${{ github.ref }}
+          author_name=$(git log -1 --pretty=format:'%an')
+          author_email=$(git log -1 --pretty=format:'%ae')
+          author_date=$(git log -1 --pretty=format:'%ad')
+          changed_files=$(git diff --name-only HEAD)
+          create_pr=false
+          if (( $(echo "$coverage > 95" | bc -l) )) && ! echo "$branch_name" | grep -q "master\|alpha\|beta\|stable\|release" && ! echo "$commit_message" | grep -q 'Merge'; then
+            echo "Conditions met, creating pull request"
+            create_pr=true
+          else
+            echo "Conditions not met, skipping pull request creation"
+          fi
+
+      - name: Download Pull Request template
+        shell: bash
+        run: |
+            mkdir -p .tmp
+            curl -LsS https://raw.githubusercontent.com/devops-infra/.github/master/PULL_REQUEST_TEMPLATE.md -o .tmp/PULL_REQUEST_TEMPLATE.md
+
+      - name: Extract branch name
+        shell: bash
+        run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
+        id: extract_branch
+
+      - name: Run the Action
+        if: ${{ env.create_pr }} == 'true'
+        uses: devops-infra/action-pull-request@v0.5.3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          assignee: ${{ github.actor }}
+          label: great-coverage, auto-merge
+          template: .tmp/PULL_REQUEST_TEMPLATE.md
+
+
