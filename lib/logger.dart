@@ -104,7 +104,10 @@ class Logger {
     if (!_activeLogging) return;
     if (queue) messages[message.time.millisecondsSinceEpoch] = message;
     if (notifyListeners) _controller.sink.add(message);
+
+    // ignore: avoid_print
     if (println) print(message.prettyString(stackTrace: true));
+
     if (devLog) {
       developer.log(
         message.prettyString(stackTrace: true),

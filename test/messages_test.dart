@@ -179,8 +179,8 @@ Future<void> main() async {
         expect(map['time'], isA<int>());
         expect(map['level'], isA<int>());
         expect(map['type'], isA<int>());
-        expect(map['templates'], isA<Map>());
-        expect(map['tags'], isA<List>());
+        expect(map['templates'], isA<Map<String, String>>());
+        expect(map['tags'], isA<List<String>>());
       });
     });
 

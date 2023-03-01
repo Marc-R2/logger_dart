@@ -11,6 +11,8 @@ mixin Logging {
   /// Create a child template with the given [className]
   MessageTemplate classLog(Object className) => log.klasse(className);
 
+  /// Create a Log with the given [function] and [context]
+  /// at the start of the function
   Log functionStart(String function, [Log? context]) {
     final newLog = Log(
       parent: context,
@@ -26,6 +28,9 @@ mixin Logging {
 
   static String? _session;
 
+  /// Get the current session id
+  ///
+  /// This is unique to each runtime
   static String get runtimeSession {
     if (_session != null) return _session!;
 
@@ -34,10 +39,14 @@ mixin Logging {
     return _session = minify(minSinceEpoch * 10 + now.second + now.millisecond);
   }
 
+  /// Get the current session id
+  ///
+  /// This is based on the current time
   static String get currentSession {
     final now = DateTime.now();
     return minify(now.millisecond * 100 + now.microsecond);
   }
 
+  /// Minify the given [id] to a string
   static String minify(int id) => id.toRadixString(36);
 }

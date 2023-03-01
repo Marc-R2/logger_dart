@@ -433,7 +433,8 @@ Future<void> main() async {
 
             expect(
               message.toString(),
-              'TestMode: 2 Warning: warningName:(2) $tags => warningText (John)',
+              'TestMode: 2 Warning: warningName:(2) '
+              '$tags => warningText (John)',
             );
             expect(
               message.toString(time: false),
@@ -466,7 +467,8 @@ Future<void> main() async {
 
             expect(
               message.toString(),
-              'TestMode: 2 Warning: warningName:(2) $tags => warningText (<name>)',
+              'TestMode: 2 Warning: warningName:(2) '
+              '$tags => warningText (<name>)',
             );
             expect(
               message.toString(time: false),
@@ -500,7 +502,8 @@ Future<void> main() async {
 
             expect(
               message.toString(),
-              'TestMode: 2 Warning: warningName:(2) $tags => warningText (John, 30)',
+              'TestMode: 2 Warning: warningName:(2) '
+              '$tags => warningText (John, 30)',
             );
             expect(
               message.toString(time: false),
@@ -534,7 +537,8 @@ Future<void> main() async {
 
             expect(
               message.toString(),
-              'TestMode: 2 Warning: warningName:(2) $tags => warningText (John)',
+              'TestMode: 2 Warning: warningName:(2) '
+              '$tags => warningText (John)',
             );
             expect(
               message.toString(time: false),
