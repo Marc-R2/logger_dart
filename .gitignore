@@ -6,3 +6,4 @@
 build/
 /logger_dart.iml
 /.idea/
+/mutation-test-report/
