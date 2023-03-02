@@ -4,7 +4,7 @@ import 'package:test/test.dart';
 void main() {
   group('Log', () {
     test('Test log method', () {
-      const log = Log(session: '123');
+      final log = Log(session: '123');
       final message = log.log(title: 'Test title', message: 'Test message');
       expect(message.title, equals('Test title'));
       expect(message.text, equals('Test message'));
@@ -16,16 +16,18 @@ void main() {
     });
 
     test('Test child method', () {
-      const log = Log(session: 'abc');
+      final log = Log(session: 'abc');
       final childLog = log.child(tags: ['tag3']);
       expect(childLog.tags, equals(contains('session:abc')));
       expect(childLog.tags, equals(contains('id:0')));
       expect(childLog.tags, equals(contains('tag3')));
       expect(childLog.tags, equals(hasLength(3)));
+
+      log.finish();
     });
 
     test('child() should inherit template values from parent', () {
-      const log = Log(session: 'xyz');
+      final log = Log(session: 'xyz');
       final childLog = log.child(tags: ['child']);
 
       expect(childLog.tags, hasLength(3));
@@ -35,7 +37,7 @@ void main() {
     });
 
     test('log() should create a log message with the template values', () {
-      const log = Log(
+      final log = Log(
         tags: ['test'],
         klasse: 'TestClass',
         function: 'testFunction',
@@ -56,13 +58,13 @@ void main() {
     });
 
     test('Test creating a message with a child template', () {
-      const log = Log(tags: ['Test'], session: '123');
+      final log = Log(tags: ['Test'], session: '123');
       final message = log.log(title: 'Test message', message: 'Test');
       expect(message.tags, contains('Test'));
     });
 
     test('Test creating a message with a child template and class', () {
-      const log = Log(klasse: 'Log', session: '123');
+      final log = Log(klasse: 'Log', session: '123');
       final message = log.log(title: 'Test message', message: 'Test');
       expect(message.tags, contains('class:Log'));
     });
@@ -89,7 +91,7 @@ void main() {
     group('Log tests', () {
       test('Creating a log with valid id and session should not throw an error',
           () {
-        expect(() => const Log(id: 1, session: '123'), returnsNormally);
+        expect(() => Log(id: 1, session: '123'), returnsNormally);
       });
 
       test('Creating a log with negative id should throw an error', () {
@@ -102,18 +104,18 @@ void main() {
       });
 
       test('Log session should be inherited from parent if not defined', () {
-        const parent = Log(id: 1, session: 'parent_session');
-        const child = Log(id: 2, parent: parent);
+        final parent = Log(id: 1, session: 'parent_session');
+        final child = Log(id: 2, parent: parent);
         expect(child.session, equals('parent_session'));
       });
 
       test('Log tags should contain session and id', () {
-        const log = Log(id: 1, session: 'test_session');
+        final log = Log(id: 1, session: 'test_session');
         expect(log.tags, containsAll(['session:test_session', 'id:1']));
       });
 
       test('Log tags should not contain null session', () {
-        const log = Log(id: 1, parent: Log(id: 2, session: 'parent_session'));
+        final log = Log(id: 1, parent: Log(id: 2, session: 'parent_session'));
         expect(log.tags, isNot(contains('session:null')));
         expect(log.tags, contains('session:parent_session'));
       });

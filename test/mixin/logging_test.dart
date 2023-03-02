@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:isolate';
 
 import 'package:log_message/logger.dart';
 import 'package:test/test.dart';
@@ -127,18 +126,20 @@ void main() {
         expect(log.id, equals(parentLog.id + 1));
       });
 
-      test('functionStart returns new log with correct session from parent log',
-              () {
-            final logging = LoggingMock();
-            final parentLog = Log(
-              function: 'parent',
-              klasse: logging,
-              session: 'parentSession',
-            );
-            final log = logging.functionStart('testFunction', parentLog);
+      test(
+        'functionStart returns new log with correct session from parent log',
+        () {
+          final logging = LoggingMock();
+          final parentLog = Log(
+            function: 'parent',
+            klasse: logging,
+            session: 'parentSession',
+          );
+          final log = logging.functionStart('testFunction', parentLog);
 
-            expect(log.session, equals(parentLog.session));
-          });
+          expect(log.session, equals(parentLog.session));
+        },
+      );
     });
 
     group('static', () {
@@ -184,8 +185,8 @@ void main() {
         });
 
         test(
-            'currentSession returns non-null and non-empty string in separate zones',
-            () async {
+            'currentSession returns non-null '
+            'and non-empty string in separate zones', () async {
           final zone = Zone.current.fork();
           final session = zone.run(() => Logging.currentSession);
           expect(session, isNotNull);
