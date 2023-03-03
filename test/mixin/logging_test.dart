@@ -176,12 +176,20 @@ void main() {
         test('currentSession returns string with correct format', () {
           final pattern = RegExp(r'^[a-z0-9]+$');
           expect(Logging.currentSession, matches(pattern));
+          expect(Logging.currentSession, hasLength(lessThan(4)));
         });
 
-        test('currentSession returns different strings on multiple calls', () {
-          final session1 = Logging.currentSession;
-          final session2 = Logging.currentSession;
-          expect(session1, isNot(equals(session2)));
+        group('currentSession returns different strings on multiple calls', () {
+          Message.log(title: 'currentSession returns different strings');
+          for (var i = 0; i < 1024 * 2; i++) {
+            test('currentSession $i', () {
+              final session1 = Logging.currentSession;
+              final session2 = Logging.currentSession;
+              expect(session1, isNot(equals(session2)));
+              expect(session1, hasLength(lessThan(4)));
+              expect(session2, hasLength(lessThan(4)));
+            });
+          }
         });
 
         test(

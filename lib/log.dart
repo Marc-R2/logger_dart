@@ -33,8 +33,16 @@ class Log extends MessageTemplate {
   /// The start time of the log
   final DateTime startTime = DateTime.now();
 
+  /// The local threshold for this log
+  ///
+  /// This can be overridden by the threshold parameter
+  /// of [finish] and [finishWithReturn]
   final Duration? localThreshold;
 
+  /// The global threshold for all logs by default
+  ///
+  /// This can be overridden by [localThreshold]
+  /// and the threshold parameter of [finish] and [finishWithReturn]
   static Duration globalThreshold = const Duration(microseconds: 2000);
 
   /// Get the session id
