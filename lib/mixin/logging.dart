@@ -35,18 +35,37 @@ mixin Logging {
     if (_session != null) return _session!;
 
     final now = DateTime.now();
-    final minSinceEpoch = now.millisecondsSinceEpoch ~/ 60000;
-    return _session = minify(minSinceEpoch * 10 + now.second + now.millisecond);
+    final minSinceEpoch = now.millisecondsSinceEpoch ~/ 6000;
+    return _session = minify(minSinceEpoch + now.second + now.millisecond);
   }
+
+  static int _sessionCounter = 0;
 
   /// Get the current session id
   ///
   /// This is based on the current time
   static String get currentSession {
-    final now = DateTime.now();
-    return minify(now.millisecond * 100 + now.microsecond);
+    _sessionCounter++;
+    if (_sessionCounter > 46655) resetRuntime();
+    return minify(_sessionCounter);
   }
 
   /// Minify the given [id] to a string
   static String minify(int id) => id.toRadixString(36);
+
+  /// Reset the [runtimeSession]
+  ///
+  /// This will create a new [runtimeSession] id and
+  /// reset the [currentSession] counter
+  static Message resetRuntime() {
+    final oldRuntime = runtimeSession;
+    _session = null;
+    _sessionCounter = 0;
+    final newRuntime = runtimeSession;
+
+    return Message.info(
+      title: 'Reset Runtime',
+      tags: ['o_r:$oldRuntime', 'n_r:$newRuntime'],
+    );
+  }
 }

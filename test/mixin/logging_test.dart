@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:isolate';
 
 import 'package:log_message/logger.dart';
 import 'package:test/test.dart';
@@ -127,18 +126,20 @@ void main() {
         expect(log.id, equals(parentLog.id + 1));
       });
 
-      test('functionStart returns new log with correct session from parent log',
-              () {
-            final logging = LoggingMock();
-            final parentLog = Log(
-              function: 'parent',
-              klasse: logging,
-              session: 'parentSession',
-            );
-            final log = logging.functionStart('testFunction', parentLog);
+      test(
+        'functionStart returns new log with correct session from parent log',
+        () {
+          final logging = LoggingMock();
+          final parentLog = Log(
+            function: 'parent',
+            klasse: logging,
+            session: 'parentSession',
+          );
+          final log = logging.functionStart('testFunction', parentLog);
 
-            expect(log.session, equals(parentLog.session));
-          });
+          expect(log.session, equals(parentLog.session));
+        },
+      );
     });
 
     group('static', () {
@@ -175,17 +176,25 @@ void main() {
         test('currentSession returns string with correct format', () {
           final pattern = RegExp(r'^[a-z0-9]+$');
           expect(Logging.currentSession, matches(pattern));
+          expect(Logging.currentSession, hasLength(lessThan(4)));
         });
 
-        test('currentSession returns different strings on multiple calls', () {
-          final session1 = Logging.currentSession;
-          final session2 = Logging.currentSession;
-          expect(session1, isNot(equals(session2)));
+        group('currentSession returns different strings on multiple calls', () {
+          Message.log(title: 'currentSession returns different strings');
+          for (var i = 0; i < 64 * 2; i++) {
+            test('currentSession $i', () {
+              final session1 = Logging.currentSession;
+              final session2 = Logging.currentSession;
+              expect(session1, isNot(equals(session2)));
+              expect(session1, hasLength(lessThan(4)));
+              expect(session2, hasLength(lessThan(4)));
+            });
+          }
         });
 
         test(
-            'currentSession returns non-null and non-empty string in separate zones',
-            () async {
+            'currentSession returns non-null '
+            'and non-empty string in separate zones', () async {
           final zone = Zone.current.fork();
           final session = zone.run(() => Logging.currentSession);
           expect(session, isNotNull);
