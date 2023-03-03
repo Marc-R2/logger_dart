@@ -67,7 +67,7 @@ void main() {
       expect(message.tags, contains('class:Log'));
     });
 
-    group('finish group', (){
+    group('finish group', () {
       test('with no delay', () async {
         final log = Log(session: '123');
 
@@ -102,8 +102,43 @@ void main() {
       });
     });
 
-    group('finish with result group', (){
+    group('finish with return group', () {
+      group('include result', () {});
 
+      group('exclude result', () {
+        test('with no delay', () async {
+          final log = Log(session: '123');
+
+          final res = log.finishWithReturn('1234');
+          expect(res, '1234');
+        });
+
+        test('with not enough delay', () async {
+          final log = Log(session: '123');
+
+          await Future<void>.delayed(const Duration(milliseconds: 50));
+
+          final res = log.finishWithReturn(
+            1234,
+            threshold: const Duration(milliseconds: 100),
+          );
+          expect(res, 1234);
+        });
+
+        test('with enough delay', () async {
+          final log = Log(session: '123');
+
+          await Future<void>.delayed(const Duration(milliseconds: 50));
+
+          final res = log.finishWithReturn(
+            true,
+            threshold: const Duration(milliseconds: 10),
+          );
+          expect(res, isNotNull);
+
+          expect(res, isTrue);
+        });
+      });
     });
 
     group('parenting', () {

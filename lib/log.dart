@@ -6,6 +6,7 @@ class Log extends MessageTemplate {
   Log({
     this.id = 0,
     this.parent,
+    this.localThreshold,
     String? session,
     super.function,
     super.klasse,
@@ -32,6 +33,10 @@ class Log extends MessageTemplate {
   /// The start time of the log
   final DateTime startTime = DateTime.now();
 
+  final Duration? localThreshold;
+
+  static Duration globalThreshold = const Duration(microseconds: 2000);
+
   /// Get the session id
   ///
   /// either from the current log or from the parent
@@ -48,9 +53,11 @@ class Log extends MessageTemplate {
   /// This will log the duration of the log if it is greater than [threshold]
   ///
   /// By default the [threshold] is 2000 microseconds (2 milliseconds)
-  Message? finish({Duration threshold = const Duration(microseconds: 2000)}) {
+  Message? finish({Duration? threshold}) {
     final endTime = DateTime.now();
     final duration = endTime.difference(startTime).inMicroseconds;
+
+    threshold ??= localThreshold ?? globalThreshold;
 
     if (duration > threshold.inMicroseconds) {
       return info(
@@ -81,13 +88,15 @@ class Log extends MessageTemplate {
   /// It is recommended to only include short results
   T finishWithReturn<T>(
     T result, {
-    int threshold = 2000,
+    Duration? threshold,
     bool includeResult = false,
   }) {
     final endTime = DateTime.now();
     final duration = endTime.difference(startTime).inMicroseconds;
 
-    if (duration > threshold || includeResult) {
+    threshold ??= localThreshold ?? globalThreshold;
+
+    if (duration > threshold.inMicroseconds || includeResult) {
       if (includeResult) {
         info(
           title: 'Execution Result',
