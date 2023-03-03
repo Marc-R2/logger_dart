@@ -48,21 +48,20 @@ class Log extends MessageTemplate {
   /// This will log the duration of the log if it is greater than [threshold]
   ///
   /// By default the [threshold] is 2000 microseconds (2 milliseconds)
-  bool finish({int threshold = 2000}) {
+  Message? finish({Duration threshold = const Duration(microseconds: 2000)}) {
     final endTime = DateTime.now();
     final duration = endTime.difference(startTime).inMicroseconds;
 
-    if (duration > threshold) {
-      info(
+    if (duration > threshold.inMicroseconds) {
+      return info(
         title: 'Execution time',
         message: 'Took {ms}ms',
         values: {'ms': duration ~/ 1000},
         tags: ['duration', 'ex_mc:$duration'], // ex_mc: execution microsecond
       );
-      return true;
     }
 
-    return false;
+    return null;
   }
 
   /// ## Finish the log with return

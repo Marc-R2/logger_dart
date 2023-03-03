@@ -22,8 +22,6 @@ void main() {
       expect(childLog.tags, equals(contains('id:0')));
       expect(childLog.tags, equals(contains('tag3')));
       expect(childLog.tags, equals(hasLength(3)));
-
-      log.finish();
     });
 
     test('child() should inherit template values from parent', () {
@@ -67,6 +65,45 @@ void main() {
       final log = Log(klasse: 'Log', session: '123');
       final message = log.log(title: 'Test message', message: 'Test');
       expect(message.tags, contains('class:Log'));
+    });
+
+    group('finish group', (){
+      test('with no delay', () async {
+        final log = Log(session: '123');
+
+        final res = log.finish();
+        expect(res, isNull);
+      });
+
+      test('with not enough delay', () async {
+        final log = Log(session: '123');
+
+        await Future<void>.delayed(const Duration(milliseconds: 50));
+
+        final res = log.finish(threshold: const Duration(milliseconds: 100));
+        expect(res, isNull);
+      });
+
+      test('with enough delay', () async {
+        final log = Log(session: '123');
+
+        await Future<void>.delayed(const Duration(milliseconds: 50));
+
+        final res = log.finish(threshold: const Duration(milliseconds: 10));
+        expect(res, isNotNull);
+
+        expect(res!.tags, contains('duration'));
+        expect(res.tags, contains(startsWith('ex_mc:5')));
+        expect(res.text, contains('ms'));
+        expect(res.text, contains('{ms}'));
+        expect(res.templateValues['ms'], isNotNull);
+        expect(res.templateValues['ms'], startsWith('5'));
+        expect(res.templateValues['ms'], hasLength(2));
+      });
+    });
+
+    group('finish with result group', (){
+
     });
 
     group('parenting', () {
