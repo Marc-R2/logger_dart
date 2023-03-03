@@ -103,7 +103,42 @@ void main() {
     });
 
     group('finish with return group', () {
-      group('include result', () {});
+      group('include result', () {
+        test('with no delay', () async {
+          final log = Log(session: '123');
+
+          final res = log.finishWithReturn('1234', includeResult: true);
+          expect(res, '1234');
+        });
+
+        test('with not enough delay', () async {
+          final log = Log(session: '123');
+
+          await Future<void>.delayed(const Duration(milliseconds: 50));
+
+          final res = log.finishWithReturn(
+            1234,
+            threshold: const Duration(milliseconds: 100),
+            includeResult: true,
+          );
+          expect(res, 1234);
+        });
+
+        test('with enough delay', () async {
+          final log = Log(session: '123');
+
+          await Future<void>.delayed(const Duration(milliseconds: 50));
+
+          final res = log.finishWithReturn(
+            true,
+            threshold: const Duration(milliseconds: 10),
+            includeResult: true,
+          );
+          expect(res, isNotNull);
+
+          expect(res, isTrue);
+        });
+      });
 
       group('exclude result', () {
         test('with no delay', () async {

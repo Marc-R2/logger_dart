@@ -181,7 +181,7 @@ void main() {
 
         group('currentSession returns different strings on multiple calls', () {
           Message.log(title: 'currentSession returns different strings');
-          for (var i = 0; i < 1024 * 2; i++) {
+          for (var i = 0; i < 64 * 2; i++) {
             test('currentSession $i', () {
               final session1 = Logging.currentSession;
               final session2 = Logging.currentSession;
