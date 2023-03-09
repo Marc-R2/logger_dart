@@ -102,7 +102,7 @@ class Logger {
     bool println = true,
   }) {
     if (!_activeLogging) return;
-    if (queue) messages[message.time.millisecondsSinceEpoch] = message;
+    if (queue) messages[message.time.microsecondsSinceEpoch] = message;
     if (notifyListeners) _controller.sink.add(message);
 
     // ignore: avoid_print
