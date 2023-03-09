@@ -36,7 +36,7 @@ void main() {
     test('log method should add message to messages map', () {
       final message = Message.log(title: 'Test message', log: false);
       Logger.log(message);
-      final logMessage = Logger.messages[message.time.millisecondsSinceEpoch];
+      final logMessage = Logger.messages[message.time.microsecondsSinceEpoch];
       expect(logMessage?.title, message.title);
     });
 
