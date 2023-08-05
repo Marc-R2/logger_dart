@@ -2,6 +2,8 @@ import 'dart:async';
 
 import 'dart:developer' as developer;
 
+import 'package:log_message/message_details.dart';
+
 part 'mixin/logging.dart';
 
 part 'log.dart';
@@ -9,6 +11,8 @@ part 'log.dart';
 part 'error_message.dart';
 
 part 'messages.dart';
+
+part 'message_type.dart';
 
 part 'message_templates.dart';
 
