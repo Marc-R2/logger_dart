@@ -20,24 +20,29 @@ class MessageStorage {
     );
   }
 
-  factory MessageStorage.fromMessage(Message message) => MessageStorage(
-        base: MessageBase(
-          type: message.type,
-          title: message.title,
-          sourceFunction: message.sourceFunction,
-          sourceClass: message.sourceClass,
-          text: message.text,
-          level: message.level,
-        ),
-        details: MessageDetails(
-          time: message.time,
-          tags: message.tags,
-          templateValues: message.templateValues,
-          runtimeSession: message.runtimeSession,
-          logId: message.logId,
-          parentLogId: message.parentLogId,
-        ),
-      );
+  factory MessageStorage.fromMessage(Message message) {
+    final base = MessageBase(
+      messageCode: message.messageCode,
+      type: message.type,
+      title: message.title,
+      sourceFunction: message.sourceFunction,
+      sourceClass: message.sourceClass,
+      text: message.text,
+      level: message.level,
+    );
+
+    final details = MessageDetails(
+      messageCode: base.messageCode,
+      time: message.time,
+      tags: message.tags,
+      templateValues: message.templateValues,
+      runtimeSession: message.runtimeSession,
+      logId: message.logId,
+      parentLogId: message.parentLogId,
+    );
+
+    return MessageStorage(base: base, details: details);
+  }
 
   final MessageBase base;
 
@@ -68,7 +73,9 @@ class MessageStorage {
 @freezed
 class MessageBase with _$MessageBase {
   ///
+  @JsonSerializable(explicitToJson: true, includeIfNull: false)
   const factory MessageBase({
+    required String messageCode,
     required MessageType type,
     required String title,
     String? sourceFunction,
@@ -87,7 +94,9 @@ class MessageBase with _$MessageBase {
 @freezed
 class MessageDetails with _$MessageDetails {
   ///
+  @JsonSerializable(explicitToJson: true, includeIfNull: false)
   const factory MessageDetails({
+    required String messageCode,
     required DateTime time,
     required List<String> tags,
     required Map<String, String> templateValues,

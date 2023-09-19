@@ -20,6 +20,7 @@ MessageBase _$MessageBaseFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$MessageBase {
+  String get messageCode => throw _privateConstructorUsedError;
   MessageType get type => throw _privateConstructorUsedError;
   String get title => throw _privateConstructorUsedError;
   String? get sourceFunction => throw _privateConstructorUsedError;
@@ -40,7 +41,8 @@ abstract class $MessageBaseCopyWith<$Res> {
       _$MessageBaseCopyWithImpl<$Res, MessageBase>;
   @useResult
   $Res call(
-      {MessageType type,
+      {String messageCode,
+      MessageType type,
       String title,
       String? sourceFunction,
       String? sourceClass,
@@ -61,6 +63,7 @@ class _$MessageBaseCopyWithImpl<$Res, $Val extends MessageBase>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? messageCode = null,
     Object? type = null,
     Object? title = null,
     Object? sourceFunction = freezed,
@@ -69,6 +72,10 @@ class _$MessageBaseCopyWithImpl<$Res, $Val extends MessageBase>
     Object? level = freezed,
   }) {
     return _then(_value.copyWith(
+      messageCode: null == messageCode
+          ? _value.messageCode
+          : messageCode // ignore: cast_nullable_to_non_nullable
+              as String,
       type: null == type
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
@@ -106,7 +113,8 @@ abstract class _$$_MessageBaseCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {MessageType type,
+      {String messageCode,
+      MessageType type,
       String title,
       String? sourceFunction,
       String? sourceClass,
@@ -125,6 +133,7 @@ class __$$_MessageBaseCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? messageCode = null,
     Object? type = null,
     Object? title = null,
     Object? sourceFunction = freezed,
@@ -133,6 +142,10 @@ class __$$_MessageBaseCopyWithImpl<$Res>
     Object? level = freezed,
   }) {
     return _then(_$_MessageBase(
+      messageCode: null == messageCode
+          ? _value.messageCode
+          : messageCode // ignore: cast_nullable_to_non_nullable
+              as String,
       type: null == type
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
@@ -162,10 +175,12 @@ class __$$_MessageBaseCopyWithImpl<$Res>
 }
 
 /// @nodoc
-@JsonSerializable()
+
+@JsonSerializable(explicitToJson: true, includeIfNull: false)
 class _$_MessageBase extends _MessageBase {
   const _$_MessageBase(
-      {required this.type,
+      {required this.messageCode,
+      required this.type,
       required this.title,
       this.sourceFunction,
       this.sourceClass,
@@ -176,6 +191,8 @@ class _$_MessageBase extends _MessageBase {
   factory _$_MessageBase.fromJson(Map<String, dynamic> json) =>
       _$$_MessageBaseFromJson(json);
 
+  @override
+  final String messageCode;
   @override
   final MessageType type;
   @override
@@ -191,7 +208,7 @@ class _$_MessageBase extends _MessageBase {
 
   @override
   String toString() {
-    return 'MessageBase(type: $type, title: $title, sourceFunction: $sourceFunction, sourceClass: $sourceClass, text: $text, level: $level)';
+    return 'MessageBase(messageCode: $messageCode, type: $type, title: $title, sourceFunction: $sourceFunction, sourceClass: $sourceClass, text: $text, level: $level)';
   }
 
   @override
@@ -199,6 +216,8 @@ class _$_MessageBase extends _MessageBase {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_MessageBase &&
+            (identical(other.messageCode, messageCode) ||
+                other.messageCode == messageCode) &&
             (identical(other.type, type) || other.type == type) &&
             (identical(other.title, title) || other.title == title) &&
             (identical(other.sourceFunction, sourceFunction) ||
@@ -211,8 +230,8 @@ class _$_MessageBase extends _MessageBase {
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType, type, title, sourceFunction, sourceClass, text, level);
+  int get hashCode => Object.hash(runtimeType, messageCode, type, title,
+      sourceFunction, sourceClass, text, level);
 
   @JsonKey(ignore: true)
   @override
@@ -230,7 +249,8 @@ class _$_MessageBase extends _MessageBase {
 
 abstract class _MessageBase extends MessageBase {
   const factory _MessageBase(
-      {required final MessageType type,
+      {required final String messageCode,
+      required final MessageType type,
       required final String title,
       final String? sourceFunction,
       final String? sourceClass,
@@ -241,6 +261,8 @@ abstract class _MessageBase extends MessageBase {
   factory _MessageBase.fromJson(Map<String, dynamic> json) =
       _$_MessageBase.fromJson;
 
+  @override
+  String get messageCode;
   @override
   MessageType get type;
   @override
@@ -265,6 +287,7 @@ MessageDetails _$MessageDetailsFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$MessageDetails {
+  String get messageCode => throw _privateConstructorUsedError;
   DateTime get time => throw _privateConstructorUsedError;
   List<String> get tags => throw _privateConstructorUsedError;
   Map<String, String> get templateValues => throw _privateConstructorUsedError;
@@ -285,7 +308,8 @@ abstract class $MessageDetailsCopyWith<$Res> {
       _$MessageDetailsCopyWithImpl<$Res, MessageDetails>;
   @useResult
   $Res call(
-      {DateTime time,
+      {String messageCode,
+      DateTime time,
       List<String> tags,
       Map<String, String> templateValues,
       String runtimeSession,
@@ -306,6 +330,7 @@ class _$MessageDetailsCopyWithImpl<$Res, $Val extends MessageDetails>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? messageCode = null,
     Object? time = null,
     Object? tags = null,
     Object? templateValues = null,
@@ -314,6 +339,10 @@ class _$MessageDetailsCopyWithImpl<$Res, $Val extends MessageDetails>
     Object? parentLogId = freezed,
   }) {
     return _then(_value.copyWith(
+      messageCode: null == messageCode
+          ? _value.messageCode
+          : messageCode // ignore: cast_nullable_to_non_nullable
+              as String,
       time: null == time
           ? _value.time
           : time // ignore: cast_nullable_to_non_nullable
@@ -351,7 +380,8 @@ abstract class _$$_MessageDetailsCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {DateTime time,
+      {String messageCode,
+      DateTime time,
       List<String> tags,
       Map<String, String> templateValues,
       String runtimeSession,
@@ -370,6 +400,7 @@ class __$$_MessageDetailsCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? messageCode = null,
     Object? time = null,
     Object? tags = null,
     Object? templateValues = null,
@@ -378,6 +409,10 @@ class __$$_MessageDetailsCopyWithImpl<$Res>
     Object? parentLogId = freezed,
   }) {
     return _then(_$_MessageDetails(
+      messageCode: null == messageCode
+          ? _value.messageCode
+          : messageCode // ignore: cast_nullable_to_non_nullable
+              as String,
       time: null == time
           ? _value.time
           : time // ignore: cast_nullable_to_non_nullable
@@ -407,10 +442,12 @@ class __$$_MessageDetailsCopyWithImpl<$Res>
 }
 
 /// @nodoc
-@JsonSerializable()
+
+@JsonSerializable(explicitToJson: true, includeIfNull: false)
 class _$_MessageDetails extends _MessageDetails {
   const _$_MessageDetails(
-      {required this.time,
+      {required this.messageCode,
+      required this.time,
       required final List<String> tags,
       required final Map<String, String> templateValues,
       required this.runtimeSession,
@@ -423,6 +460,8 @@ class _$_MessageDetails extends _MessageDetails {
   factory _$_MessageDetails.fromJson(Map<String, dynamic> json) =>
       _$$_MessageDetailsFromJson(json);
 
+  @override
+  final String messageCode;
   @override
   final DateTime time;
   final List<String> _tags;
@@ -451,7 +490,7 @@ class _$_MessageDetails extends _MessageDetails {
 
   @override
   String toString() {
-    return 'MessageDetails(time: $time, tags: $tags, templateValues: $templateValues, runtimeSession: $runtimeSession, logId: $logId, parentLogId: $parentLogId)';
+    return 'MessageDetails(messageCode: $messageCode, time: $time, tags: $tags, templateValues: $templateValues, runtimeSession: $runtimeSession, logId: $logId, parentLogId: $parentLogId)';
   }
 
   @override
@@ -459,6 +498,8 @@ class _$_MessageDetails extends _MessageDetails {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_MessageDetails &&
+            (identical(other.messageCode, messageCode) ||
+                other.messageCode == messageCode) &&
             (identical(other.time, time) || other.time == time) &&
             const DeepCollectionEquality().equals(other._tags, _tags) &&
             const DeepCollectionEquality()
@@ -474,6 +515,7 @@ class _$_MessageDetails extends _MessageDetails {
   @override
   int get hashCode => Object.hash(
       runtimeType,
+      messageCode,
       time,
       const DeepCollectionEquality().hash(_tags),
       const DeepCollectionEquality().hash(_templateValues),
@@ -497,7 +539,8 @@ class _$_MessageDetails extends _MessageDetails {
 
 abstract class _MessageDetails extends MessageDetails {
   const factory _MessageDetails(
-      {required final DateTime time,
+      {required final String messageCode,
+      required final DateTime time,
       required final List<String> tags,
       required final Map<String, String> templateValues,
       required final String runtimeSession,
@@ -508,6 +551,8 @@ abstract class _MessageDetails extends MessageDetails {
   factory _MessageDetails.fromJson(Map<String, dynamic> json) =
       _$_MessageDetails.fromJson;
 
+  @override
+  String get messageCode;
   @override
   DateTime get time;
   @override
