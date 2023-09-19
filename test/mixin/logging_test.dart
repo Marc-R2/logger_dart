@@ -11,7 +11,7 @@ void main() {
         final message = log.log.log(title: 'Test message');
 
         expect(message.title, equals('Test message'));
-        expect(message.type, equals(0));
+        expect(message.type, equals(MessageType.log));
       });
 
       test('info method creates an info message', () {
@@ -19,7 +19,7 @@ void main() {
         final message = log.log.info(title: 'Test message');
 
         expect(message.title, equals('Test message'));
-        expect(message.type, equals(1));
+        expect(message.type, equals(MessageType.info));
       });
 
       test('warn method creates a warning message', () {
@@ -27,7 +27,7 @@ void main() {
         final message = log.log.warn(title: 'Test message');
 
         expect(message.title, equals('Test message'));
-        expect(message.type, equals(2));
+        expect(message.type, equals(MessageType.warning));
       });
 
       test('error method creates an error message', () {
@@ -35,7 +35,7 @@ void main() {
         final message = log.log.error(title: 'Test message');
 
         expect(message.title, equals('Test message'));
-        expect(message.type, equals(3));
+        expect(message.type, equals(MessageType.error));
       });
 
       // Trace
@@ -44,7 +44,7 @@ void main() {
         final message = log.log.trace(title: 'Test message');
 
         expect(message.title, equals('Test message'));
-        expect(message.type, equals(9));
+        expect(message.type, equals(MessageType.trace));
       });
 
       // Exception
@@ -53,7 +53,7 @@ void main() {
         final message = log.log.exception(title: 'Test message');
 
         expect(message.title, equals('Test message'));
-        expect(message.type, equals(3));
+        expect(message.type, equals(MessageType.error));
       });
     });
 
@@ -65,8 +65,8 @@ void main() {
         expect(message.title, equals('Test title'));
         expect(message.text, equals('Test message'));
         expect(message.level, equals(0));
-        expect(message.tags, equals(hasLength(2)));
-        expect(message.tags, equals(contains('class:LoggingMock')));
+        expect(message.tags, equals(hasLength(0)));
+        expect(message.sourceClass, equals('LoggingMock'));
         expect(message.templateValues, equals({}));
       });
     });
@@ -82,9 +82,9 @@ void main() {
         expect(message.title, equals('Test title'));
         expect(message.text, equals('Test message'));
         expect(message.level, equals(0));
-        expect(message.tags, equals(hasLength(3)));
-        expect(message.tags, equals(contains('class:LoggingMock')));
-        expect(message.tags, equals(contains('func:testFunction')));
+        expect(message.tags, equals(hasLength(0)));
+        expect(message.sourceClass, equals('LoggingMock'));
+        expect(message.sourceFunction, equals('testFunction'));
         expect(message.templateValues, equals({}));
       });
     });
@@ -100,8 +100,8 @@ void main() {
         expect(message.title, equals('Test title'));
         expect(message.text, equals('Test message'));
         expect(message.level, equals(0));
-        expect(message.tags, equals(hasLength(2)));
-        expect(message.tags, equals(contains('class:Logger')));
+        expect(message.tags, equals(hasLength(0)));
+        expect(message.sourceClass, equals('Logger'));
         expect(message.templateValues, equals({}));
       });
     });
@@ -114,7 +114,7 @@ void main() {
         expect(log.tags.contains('FunctionStart'), isTrue);
         expect(log.parent, isNull);
         expect(log.session, isNot(equals(Logging.currentSession)));
-        expect(log.id, equals(0));
+        expect(log.logId, equals(0));
       });
 
       test('functionStart returns new log with correct parent log', () {
@@ -123,7 +123,7 @@ void main() {
         final log = logging.functionStart('testFunction', parentLog);
 
         expect(log.parent, equals(parentLog));
-        expect(log.id, equals(parentLog.id + 1));
+        expect(log.logId, equals(parentLog.logId + 1));
       });
 
       test(

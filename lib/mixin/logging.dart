@@ -14,16 +14,13 @@ mixin Logging {
   /// Create a Log with the given [function] and [context]
   /// at the start of the function
   Log functionStart(String function, [Log? context]) {
-    final newLog = Log(
+    return Log(
       parent: context,
       function: function,
-      id: context != null ? context.id + 1 : 0,
       klasse: this,
       tags: ['FunctionStart'],
       session: context?.session ?? currentSession,
     );
-
-    return newLog;
   }
 
   static String? _session;

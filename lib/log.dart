@@ -2,28 +2,28 @@ part of 'logger.dart';
 
 /// Log with context
 class Log extends MessageTemplate {
-  /// Creates a log with [parent] context and [id]
+  /// Creates a log with [parent] context and [logId]
   Log({
-    this.id = 0,
     this.parent,
     this.localThreshold,
     String? session,
     super.function,
     super.klasse,
     super.tags,
-  })  : assert(id >= 0, 'Log id must be greater than or equal to 0'),
+  })  : logId = parent?.createId() ?? 0,
         assert(
           session != null || parent != null,
           'Log session must not be null if parent is null',
         ),
-        _session = session {
+        logParentId = parent?.logId ?? 0,
+        super(runtimeSession: session) {
     parent?.addChild(this);
   }
 
   /// The id of the log
-  final int id;
+  final int logId;
 
-  final String? _session;
+  final int logParentId;
 
   /// The parent log
   final Log? parent;
@@ -48,10 +48,14 @@ class Log extends MessageTemplate {
   /// Get the session id
   ///
   /// either from the current log or from the parent
-  String get session => _session ?? parent!.session;
+  String get session => runtimeSession ?? parent!.session;
 
-  @override
-  List<String> get tags => [...super.tags, 'session:$session', 'id:$id'];
+  int idCounter = 1;
+
+  int createId() {
+    if (parent == null) return idCounter++;
+    return parent!.createId();
+  }
 
   /// Add a child log
   void addChild(Log child) => _children.add(child);

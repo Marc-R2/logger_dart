@@ -2,8 +2,37 @@ part of 'logger.dart';
 
 // TODO(me): const constructors for better performance
 
+extension on Object {
+  /// Returns the name of the class
+  String get className {
+    if (this is Type) return (this as Type).toString();
+    if (this is String) return this as String;
+    return runtimeType.toString();
+  }
+}
+
 /// Message
 class Message {
+  ///
+  Message({
+    required this.title,
+    required this.time,
+    required this.type,
+    this.text = '',
+    this.level = 0,
+    this.stackTrace,
+    bool log = true,
+    this.tags = const [],
+    this.sourceFunction,
+    this.sourceClass,
+    this.templateValues = const {},
+    String? runtimeSession,
+    this.logId = 0,
+    this.parentLogId,
+  }) : runtimeSession = runtimeSession ?? Logging.runtimeSession {
+    if (log) Logger.log(this);
+  }
+
   /// Creates a message of type log
   Message.log({
     required this.title,
@@ -11,14 +40,17 @@ class Message {
     this.level = 0,
     this.stackTrace,
     bool log = true,
-    List<String>? tags,
+    this.tags = const [],
     Object? klasse,
-    String? function,
+    this.sourceFunction,
     this.templateValues = const {},
-  })  : type = 0,
-        tags = tags ?? [],
-        time = DateTime.now() {
-    _handleClassFunc(klasse, function);
+    String? runtimeSession,
+    this.logId = 0,
+    this.parentLogId,
+  })  : type = MessageType.log,
+        time = DateTime.now(),
+        sourceClass = klasse?.className,
+        runtimeSession = runtimeSession ?? Logging.runtimeSession {
     if (log) Logger.log(this);
   }
 
@@ -29,14 +61,17 @@ class Message {
     this.level = 0,
     this.stackTrace,
     bool log = true,
-    List<String>? tags,
+    this.tags = const [],
     Object? klasse,
-    String? function,
+    this.sourceFunction,
     this.templateValues = const {},
-  })  : type = 1,
-        tags = tags ?? [],
-        time = DateTime.now() {
-    _handleClassFunc(klasse, function);
+    String? runtimeSession,
+    this.logId = 0,
+    this.parentLogId,
+  })  : type = MessageType.info,
+        time = DateTime.now(),
+        sourceClass = klasse?.className,
+        runtimeSession = runtimeSession ?? Logging.runtimeSession {
     if (log) Logger.log(this);
   }
 
@@ -47,14 +82,17 @@ class Message {
     this.level = 0,
     this.stackTrace,
     bool log = true,
-    List<String>? tags,
+    this.tags = const [],
     Object? klasse,
-    String? function,
+    this.sourceFunction,
     this.templateValues = const {},
-  })  : type = 2,
-        tags = tags ?? [],
-        time = DateTime.now() {
-    _handleClassFunc(klasse, function);
+    String? runtimeSession,
+    this.logId = 0,
+    this.parentLogId,
+  })  : type = MessageType.warning,
+        time = DateTime.now(),
+        sourceClass = klasse?.className,
+        runtimeSession = runtimeSession ?? Logging.runtimeSession {
     if (log) Logger.log(this);
   }
 
@@ -65,14 +103,17 @@ class Message {
     this.level = 0,
     this.stackTrace,
     bool log = true,
-    List<String>? tags,
-    Object? klasse,
-    String? function,
+    this.tags = const [],
+    Object? sourceClass,
+    this.sourceFunction,
     this.templateValues = const {},
-  })  : type = 3,
-        tags = tags ?? [],
-        time = DateTime.now() {
-    _handleClassFunc(klasse, function);
+    String? runtimeSession,
+    this.logId = 0,
+    this.parentLogId,
+  })  : type = MessageType.error,
+        time = DateTime.now(),
+        sourceClass = sourceClass?.className,
+        runtimeSession = runtimeSession ?? Logging.runtimeSession {
     if (log) Logger.log(this);
   }
 
@@ -83,33 +124,23 @@ class Message {
     this.level = -1,
     this.stackTrace,
     bool log = false,
-    List<String>? tags,
+    this.tags = const [],
     Object? klasse,
-    String? function,
+    this.sourceFunction,
     this.templateValues = const {},
-  })  : type = 9,
-        tags = tags ?? [],
-        time = DateTime.now() {
-    _handleClassFunc(klasse, function);
-    //print(toString());
+    String? runtimeSession,
+    this.logId = 0,
+    this.parentLogId,
+  })  : type = MessageType.trace,
+        time = DateTime.now(),
+        sourceClass = klasse?.className,
+        runtimeSession = runtimeSession ?? Logging.runtimeSession {
     if (log) Logger.log(this);
   }
 
   /// Rebuilds a message based on a [map]
-  Message.fromMap(Map<dynamic, dynamic> map)
-      : title = (map['title'] ?? 'Error') as String,
-        text = (map['text'] ?? '') as String,
-        time = DateTime.fromMillisecondsSinceEpoch((map['time'] ?? 0) as int),
-        level = (map['level'] ?? 0) as int,
-        type = (map['type'] ?? 0) as int,
-        templateValues = ((map['templates'] ?? <dynamic, dynamic>{}) as Map)
-            .map((key, value) => MapEntry(key.toString(), value.toString())),
-        tags = ((map['tags'] ?? <String>[]) as List)
-            .map<String>((dynamic e) => e.toString())
-            .toList(),
-        stackTrace = map['stackTrace'] != null
-            ? StackTrace.fromString(map['stackTrace'] as String)
-            : null;
+  factory Message.fromMap(Map<String, dynamic> map) =>
+      MessageStorage.fromJson(map).toMessage();
 
   /// Name or Title of the message
   ///
@@ -159,7 +190,7 @@ class Message {
   final int level;
 
   /// 0: log, 1: info, 2: warning, 3: error
-  final int type;
+  final MessageType type;
 
   /// Groups
   List<String> tags;
@@ -176,65 +207,23 @@ class Message {
   /// toString with type-matching color
   String prettyString({bool stackTrace = false}) {
     final string = toString(stackTrace: stackTrace);
-    switch (type) {
-      case 0:
-        return '\x1B[37m$string$_endColorMarker';
-      case 1:
-        return '\x1B[34m$string$_endColorMarker';
-      case 2:
-        return '\x1B[33m$string$_endColorMarker';
-      case 3:
-        return '\x1B[31m$string$_endColorMarker';
-    }
-    return string;
+    return '${type.terminalColor}$string$_endColorMarker';
   }
 
-  void _handleClassFunc(Object? klasse, String? function) {
-    if (klasse != null) {
-      if (klasse is String) {
-        tags.add('class:$klasse');
-      } else {
-        tags.add('class:${klasse.runtimeType}');
-      }
-    }
-    if (function != null) tags.add('func:$function');
-    tags.add('runtime:${Logging.runtimeSession}');
-  }
+  final String? sourceClass;
+
+  final String? sourceFunction;
+
+  final String runtimeSession;
+
+  final int logId;
+
+  final int? parentLogId;
 
   /// Turns the message into a map
   ///
   /// This can later be used to recreate the message via fromMap
-  Map<String, dynamic> toMap({bool includeStackTrace = false}) {
-    final map = <String, dynamic>{};
-    map['title'] = title;
-    map['text'] = text;
-    map['type'] = type;
-    map['level'] = level;
-    map['tags'] = tags;
-    map['time'] = time.millisecondsSinceEpoch;
-    map['templates'] = templateValues;
-
-    if (includeStackTrace && stackTrace != null) {
-      map['stackTrace'] = stackTrace.toString();
-    }
-
-    return map;
-  }
-
-  /// Turns the type of the message into a string
-  String typeToString() {
-    switch (type) {
-      case 0:
-        return 'Log:';
-      case 1:
-        return 'Info:';
-      case 2:
-        return 'Warning:';
-      case 3:
-        return 'Error:';
-    }
-    return '';
-  }
+  Map<String, dynamic> toMap() => MessageStorage.fromMessage(this).toJson();
 
   /// Replaces the templates in a given [text]
   /// with the values in [templateValues]
@@ -280,7 +269,7 @@ class Message {
 
     if (type) {
       if (str.isNotEmpty) str.write(' ');
-      str.write(typeToString());
+      str.write(this.type.stringName);
     }
 
     if (title && this.title.isNotEmpty) {

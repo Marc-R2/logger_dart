@@ -13,8 +13,10 @@ class MessageTemplate {
     this.tags = const [],
     Object? klasse,
     String? function,
+    String? runtimeSession,
   })  : _classValue = klasse,
-        _functionValue = function;
+        _functionValue = function,
+        _runtimeSession = runtimeSession;
 
   /// Groups
   final List<String> tags;
@@ -24,6 +26,11 @@ class MessageTemplate {
 
   /// Function
   final String? _functionValue;
+
+  /// Runtime session
+  final String? _runtimeSession;
+
+  String? get runtimeSession => _runtimeSession;
 
   /// Create a MessageTemplate with the given values
   /// and inherit the template values of the parent template.
@@ -40,6 +47,7 @@ class MessageTemplate {
       tags: [...this.tags, ...tags],
       klasse: klasse ?? _classValue,
       function: function ?? _functionValue,
+      runtimeSession: _runtimeSession,
     );
   }
 
@@ -54,6 +62,8 @@ class MessageTemplate {
   List<String> _tags(List<String>? tags) => [...this.tags, ...tags ?? []];
 
   String? _function(String? function) => function ?? _functionValue;
+
+  String? _runtime(String? session) => session ?? _runtimeSession;
 
   Map<String, String> _templateValues(Map<String, dynamic> templateValues) {
     return templateValues.map((key, value) => MapEntry(key, value.toString()));
@@ -70,6 +80,9 @@ class MessageTemplate {
     Object? klasse,
     String? function,
     Map<String, dynamic> values = const {},
+    String? runtimeSession,
+    int logId = 0,
+    int? parentLogId,
   }) {
     return Message.trace(
       title: title,
@@ -79,8 +92,11 @@ class MessageTemplate {
       log: log,
       tags: _tags(tags),
       klasse: _class(klasse),
-      function: _function(function),
+      sourceFunction: _function(function),
       templateValues: _templateValues(values),
+      runtimeSession: _runtime(runtimeSession),
+      logId: logId,
+      parentLogId: parentLogId,
     );
   }
 
@@ -95,6 +111,9 @@ class MessageTemplate {
     Object? klasse,
     String? function,
     Map<String, dynamic> values = const {},
+    String? runtimeSession,
+    int logId = 0,
+    int? parentLogId,
   }) {
     return Message.log(
       title: title,
@@ -104,8 +123,11 @@ class MessageTemplate {
       log: log,
       tags: _tags(tags),
       klasse: _class(klasse),
-      function: _function(function),
+      sourceFunction: _function(function),
       templateValues: _templateValues(values),
+      runtimeSession: _runtime(runtimeSession),
+      logId: logId,
+      parentLogId: parentLogId,
     );
   }
 
@@ -120,6 +142,9 @@ class MessageTemplate {
     Object? klasse,
     String? function,
     Map<String, dynamic> values = const {},
+    String? runtimeSession,
+    int logId = 0,
+    int? parentLogId,
   }) {
     return Message.info(
       title: title,
@@ -129,8 +154,11 @@ class MessageTemplate {
       log: log,
       tags: _tags(tags),
       klasse: _class(klasse),
-      function: _function(function),
+      sourceFunction: _function(function),
       templateValues: _templateValues(values),
+      runtimeSession: _runtime(runtimeSession),
+      logId: logId,
+      parentLogId: parentLogId,
     );
   }
 
@@ -145,6 +173,9 @@ class MessageTemplate {
     Object? klasse,
     String? function,
     Map<String, dynamic> values = const {},
+    String? runtimeSession,
+    int logId = 0,
+    int? parentLogId,
   }) {
     return Message.warning(
       title: title,
@@ -154,8 +185,11 @@ class MessageTemplate {
       log: log,
       tags: _tags(tags),
       klasse: _class(klasse),
-      function: _function(function),
+      sourceFunction: _function(function),
       templateValues: _templateValues(values),
+      runtimeSession: _runtime(runtimeSession),
+      logId: logId,
+      parentLogId: parentLogId,
     );
   }
 
@@ -170,6 +204,9 @@ class MessageTemplate {
     Object? klasse,
     String? function,
     Map<String, dynamic> values = const {},
+    String? runtimeSession,
+    int logId = 0,
+    int? parentLogId,
   }) {
     return Message.error(
       title: title,
@@ -178,9 +215,12 @@ class MessageTemplate {
       stackTrace: trace,
       log: log,
       tags: _tags(tags),
-      klasse: _class(klasse),
-      function: _function(function),
+      sourceClass: _class(klasse),
+      sourceFunction: _function(function),
       templateValues: _templateValues(values),
+      runtimeSession: _runtime(runtimeSession),
+      logId: logId,
+      parentLogId: parentLogId,
     );
   }
 
@@ -192,9 +232,12 @@ class MessageTemplate {
     StackTrace? trace,
     bool log = true,
     List<String>? tags,
-    Object? klasse,
-    String? function,
+    Object? sourceClass,
+    String? sourceFunction,
     Map<String, dynamic> values = const {},
+    String? runtimeSession,
+    int logId = 0,
+    int? parentLogId,
   }) {
     return ErrorMessage(
       title,
@@ -203,9 +246,12 @@ class MessageTemplate {
       stackTrace: trace,
       log: log,
       tags: _tags(tags),
-      klasse: _class(klasse),
-      function: _function(function),
+      sourceClass: _class(sourceClass),
+      sourceFunction: _function(sourceFunction),
       templateValues: _templateValues(values),
+      runtimeSession: _runtime(runtimeSession),
+      logId: logId,
+      parentLogId: parentLogId,
     );
   }
 }

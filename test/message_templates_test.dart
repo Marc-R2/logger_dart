@@ -12,7 +12,7 @@ void main() {
       expect(message.level, equals(0));
       expect(message.tags, equals(contains('tag1')));
       expect(message.tags, equals(contains('tag2')));
-      expect(message.tags, equals(hasLength(3)));
+      expect(message.tags, equals(hasLength(2)));
       expect(message.templateValues, equals({}));
     });
 
@@ -38,13 +38,13 @@ void main() {
 
       final message = template.log(title: 'Test message');
 
-      expect(message.type, equals(0));
+      expect(message.type, equals(MessageType.log));
       expect(message.title, equals('Test message'));
 
-      expect(message.tags.length, equals(4));
+      expect(message.tags.length, equals(1));
       expect(message.tags, contains('test'));
-      expect(message.tags, contains('class:TestClass'));
-      expect(message.tags, contains('func:testFunction'));
+      expect(message.sourceClass, equals('TestClass'));
+      expect(message.sourceFunction, equals('testFunction'));
     });
 
     test('Test creating a message with a child template', () {
@@ -56,7 +56,7 @@ void main() {
     test('Test creating a message with a child template and class', () {
       final template = MessageTemplate(klasse: Logger());
       final message = template.log(title: 'Test message', message: 'Test');
-      expect(message.tags, contains('class:Logger'));
+      expect(message.sourceClass, contains('Logger'));
     });
 
     group('klasse(Object klasse)', () {
@@ -65,7 +65,7 @@ void main() {
         final message = template
             .klasse('Logger')
             .log(title: 'Test message', message: 'Test');
-        expect(message.tags, contains('class:Logger'));
+        expect(message.sourceClass, equals('Logger'));
       });
 
       test('Test creating a message with klasse() method and class', () {
@@ -73,20 +73,20 @@ void main() {
         final message = template
             .klasse(Logger())
             .log(title: 'Test message', message: 'Test');
-        expect(message.tags, contains('class:Logger'));
+        expect(message.sourceClass, equals('Logger'));
       });
 
       test('Test creating a message with a child template and class', () {
         final template = MessageTemplate(klasse: Logger());
         final message = template.log(title: 'Test message', message: 'Test');
-        expect(message.tags, contains('class:Logger'));
+        expect(message.sourceClass, equals('Logger'));
       });
 
       test('klasse() should override the parent template', () {
         final parent = MessageTemplate(klasse: Logger());
         final child = parent.klasse(Object());
         final message = child.log(title: 'Test message', message: 'Test');
-        expect(message.tags, contains('class:Object'));
+        expect(message.sourceClass, equals('Object'));
       });
     });
 
@@ -96,7 +96,7 @@ void main() {
         final message = template
             .function('testFunction')
             .log(title: 'Test message', message: 'Test');
-        expect(message.tags, contains('func:testFunction'));
+        expect(message.sourceFunction, equals('testFunction'));
       });
 
       test('Test creating a message with function() method and class', () {
@@ -105,15 +105,15 @@ void main() {
             .function('testFunction')
             .klasse(Logger())
             .log(title: 'Test message', message: 'Test');
-        expect(message.tags, contains('func:testFunction'));
-        expect(message.tags, contains('class:Logger'));
+        expect(message.sourceFunction, equals('testFunction'));
+        expect(message.sourceClass, equals('Logger'));
       });
 
       test('function() should override value of the parent template', () {
         const parent = MessageTemplate(function: 'parentFunction');
         final child = parent.function('childFunction');
         final message = child.log(title: 'Test message', message: 'Test');
-        expect(message.tags, contains('func:childFunction'));
+        expect(message.sourceFunction, equals('childFunction'));
       });
     });
 

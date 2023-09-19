@@ -9,28 +9,24 @@ void main() {
       expect(message.title, equals('Test title'));
       expect(message.text, equals('Test message'));
       expect(message.level, equals(0));
-      expect(message.tags, equals(contains('session:123')));
-      expect(message.tags, equals(contains('id:0')));
-      expect(message.tags, equals(hasLength(3)));
+      expect(message.runtimeSession, equals('123'));
+      expect(message.logId, equals(0));
       expect(message.templateValues, equals({}));
     });
 
     test('Test child method', () {
       final log = Log(session: 'abc');
       final childLog = log.child(tags: ['tag3']);
-      expect(childLog.tags, equals(contains('session:abc')));
-      expect(childLog.tags, equals(contains('id:0')));
+      expect(childLog.runtimeSession, equals('abc'));
       expect(childLog.tags, equals(contains('tag3')));
-      expect(childLog.tags, equals(hasLength(3)));
+      expect(childLog.tags, equals(hasLength(1)));
     });
 
     test('child() should inherit template values from parent', () {
       final log = Log(session: 'xyz');
       final childLog = log.child(tags: ['child']);
 
-      expect(childLog.tags, hasLength(3));
-      expect(childLog.tags, contains('session:xyz'));
-      expect(childLog.tags, contains('id:0'));
+      expect(childLog.tags, hasLength(1));
       expect(childLog.tags, contains('child'));
     });
 
@@ -44,15 +40,15 @@ void main() {
 
       final message = log.log(title: 'Test message');
 
-      expect(message.type, equals(0));
+      expect(message.type, equals(MessageType.log));
       expect(message.title, equals('Test message'));
 
-      expect(message.tags.length, equals(6));
+      expect(message.tags.length, equals(1));
       expect(message.tags, contains('test'));
-      expect(message.tags, contains('class:TestClass'));
-      expect(message.tags, contains('func:testFunction'));
-      expect(message.tags, contains('session:123'));
-      expect(message.tags, contains('id:0'));
+      expect(message.sourceClass, equals('TestClass'));
+      expect(message.sourceFunction, equals('testFunction'));
+      expect(message.runtimeSession, equals('123'));
+      expect(message.logId, equals(0));
     });
 
     test('Test creating a message with a child template', () {
@@ -64,7 +60,7 @@ void main() {
     test('Test creating a message with a child template and class', () {
       final log = Log(klasse: 'Log', session: '123');
       final message = log.log(title: 'Test message', message: 'Test');
-      expect(message.tags, contains('class:Log'));
+      expect(message.sourceClass, equals('Log'));
     });
 
     group('finish group', () {
@@ -182,49 +178,39 @@ void main() {
         final log1 = mock.functionStart('testFunc1');
         final log2 = mock.functionStart('testFunc2', log1);
 
-        expect(log1.tags, contains('id:0'));
+        expect(log1.logId, equals(0));
         expect(log1.tags, contains('FunctionStart'));
-        expect(log2.tags, contains('id:1'));
+        expect(log2.logId, equals(1));
         expect(log2.tags, contains('FunctionStart'));
 
         final msg = log2.warn(title: 'Test message', message: 'Test');
 
         expect(msg.tags, contains('FunctionStart'));
-        expect(msg.tags, contains('func:testFunc2'));
-        expect(msg.tags, contains('class:LoggingMock'));
+        expect(msg.sourceFunction, equals('testFunc2'));
+        expect(msg.sourceClass, equals('LoggingMock'));
       });
     });
 
     group('Log tests', () {
-      test('Creating a log with valid id and session should not throw an error',
-          () {
-        expect(() => Log(id: 1, session: '123'), returnsNormally);
-      });
-
-      test('Creating a log with negative id should throw an error', () {
-        expect(() => Log(id: -1), throwsA(isA<AssertionError>()));
-      });
-
-      test('Creating a log without session and parent should throw an error',
-          () {
-        expect(() => Log(id: 1), throwsA(isA<AssertionError>()));
-      });
-
       test('Log session should be inherited from parent if not defined', () {
-        final parent = Log(id: 1, session: 'parent_session');
-        final child = Log(id: 2, parent: parent);
+        final parent = Log(session: 'parent_session');
+        final child = Log(parent: parent);
         expect(child.session, equals('parent_session'));
       });
 
       test('Log tags should contain session and id', () {
-        final log = Log(id: 1, session: 'test_session');
-        expect(log.tags, containsAll(['session:test_session', 'id:1']));
+        final log = Log(session: 'test_session');
+        expect(log.session, equals('test_session'));
+        expect(log.logId, equals(0));
       });
 
       test('Log tags should not contain null session', () {
-        final log = Log(id: 1, parent: Log(id: 2, session: 'parent_session'));
-        expect(log.tags, isNot(contains('session:null')));
-        expect(log.tags, contains('session:parent_session'));
+        final log1 = Log(session: 'parent_session');
+        final log2 = Log(parent: log1);
+        expect(log1.logId, equals(0));
+        expect(log1.session, equals('parent_session'));
+        expect(log2.logId, equals(1));
+        expect(log2.session, equals('parent_session'));
       });
     });
   });
