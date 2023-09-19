@@ -92,6 +92,7 @@ Future<void> main() async {
     group('fromMap', () {
       test('fromMap error message when invalid data types are passed', () {
         final testMap = <String, dynamic>{
+          'messageCode': 'invalid messageCode',
           'title': 'Test Title',
           'text': 'Test Text',
           'time': 'invalid time',
