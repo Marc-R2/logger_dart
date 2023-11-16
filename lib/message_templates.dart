@@ -69,7 +69,9 @@ class MessageTemplate {
 
   String? _function(String? function) => function ?? _functionValue;
 
-  String? _runtime(String? session) => session ?? _runtimeId;
+  String? _runtime(String? runtime) => runtime ?? _runtimeId;
+
+  String? _session(String? session) => session ?? _sessionId;
 
   Map<String, String> _templateValues(Map<String, dynamic> templateValues) {
     return templateValues.map((key, value) => MapEntry(key, value.toString()));
@@ -103,6 +105,7 @@ class MessageTemplate {
     String? function,
     Map<String, dynamic> values = const {},
     String? runtimeSession,
+    String? sessionId,
   }) {
     final msg = Message.trace(
       title: title,
@@ -115,6 +118,7 @@ class MessageTemplate {
       sourceFunction: _function(function),
       templateValues: _templateValues(values),
       runtimeSession: _runtime(runtimeSession),
+      sessionId: _session(sessionId),
       logId: _getLogId(),
       parentLogId: _getParentLogId(),
     );
@@ -133,6 +137,7 @@ class MessageTemplate {
     String? function,
     Map<String, dynamic> values = const {},
     String? runtimeSession,
+    String? sessionId,
   }) {
     final msg = Message.log(
       title: title,
@@ -145,6 +150,7 @@ class MessageTemplate {
       sourceFunction: _function(function),
       templateValues: _templateValues(values),
       runtimeSession: _runtime(runtimeSession),
+      sessionId: _session(sessionId),
       logId: _getLogId(),
       parentLogId: _getParentLogId(),
     );
@@ -163,6 +169,7 @@ class MessageTemplate {
     String? function,
     Map<String, dynamic> values = const {},
     String? runtimeSession,
+    String? sessionId,
   }) {
     final msg = Message.info(
       title: title,
@@ -175,6 +182,7 @@ class MessageTemplate {
       sourceFunction: _function(function),
       templateValues: _templateValues(values),
       runtimeSession: _runtime(runtimeSession),
+      sessionId: _session(sessionId),
       logId: _getLogId(),
       parentLogId: _getParentLogId(),
     );
@@ -193,6 +201,7 @@ class MessageTemplate {
     String? function,
     Map<String, dynamic> values = const {},
     String? runtimeSession,
+    String? sessionId,
   }) {
     final msg = Message.warning(
       title: title,
@@ -205,6 +214,7 @@ class MessageTemplate {
       sourceFunction: _function(function),
       templateValues: _templateValues(values),
       runtimeSession: _runtime(runtimeSession),
+      sessionId: _session(sessionId),
       logId: _getLogId(),
       parentLogId: _getParentLogId(),
     );
@@ -222,7 +232,8 @@ class MessageTemplate {
     Object? klasse,
     String? function,
     Map<String, dynamic> values = const {},
-    String? runtimeSession,
+    String? runtimeId,
+    String? sessionId,
   }) {
     final msg = Message.error(
       title: title,
@@ -234,7 +245,8 @@ class MessageTemplate {
       sourceClass: _class(klasse),
       sourceFunction: _function(function),
       templateValues: _templateValues(values),
-      runtimeSession: _runtime(runtimeSession),
+      runtimeId: _runtime(runtimeId),
+      sessionId: _session(sessionId),
       logId: _getLogId(),
       parentLogId: _getParentLogId(),
     );
@@ -253,6 +265,7 @@ class MessageTemplate {
     String? sourceFunction,
     Map<String, dynamic> values = const {},
     String? runtimeSession,
+    String? sessionId,
   }) {
     final msg = ErrorMessage(
       title,
@@ -264,7 +277,8 @@ class MessageTemplate {
       sourceClass: _class(sourceClass),
       sourceFunction: _function(sourceFunction),
       templateValues: _templateValues(values),
-      runtimeSession: _runtime(runtimeSession),
+      runtimeId: _runtime(runtimeSession),
+      sessionId: _session(sessionId),
       logId: _getLogId(),
       parentLogId: _getParentLogId(),
     );

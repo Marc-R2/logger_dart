@@ -27,9 +27,11 @@ class Message {
     this.sourceClass,
     this.templateValues = const {},
     String? runtimeSession,
+    String? sessionId,
     this.logId,
     this.parentLogId,
-  }) : runtimeSession = runtimeSession ?? Logging.runtimeSession {
+  })  : runtimeId = runtimeSession ?? Logging.runtimeSession,
+        sessionId = sessionId ?? Logging.currentSession {
     if (log) Logger.log(this);
   }
 
@@ -45,12 +47,14 @@ class Message {
     this.sourceFunction,
     this.templateValues = const {},
     String? runtimeSession,
+    String? sessionId,
     this.logId,
     this.parentLogId,
   })  : type = MessageType.log,
         time = DateTime.now(),
         sourceClass = klasse?.className,
-        runtimeSession = runtimeSession ?? Logging.runtimeSession {
+        runtimeId = runtimeSession ?? Logging.runtimeSession,
+        sessionId = sessionId ?? Logging.currentSession {
     if (log) Logger.log(this);
   }
 
@@ -66,12 +70,14 @@ class Message {
     this.sourceFunction,
     this.templateValues = const {},
     String? runtimeSession,
+    String? sessionId,
     this.logId,
     this.parentLogId,
   })  : type = MessageType.info,
         time = DateTime.now(),
         sourceClass = klasse?.className,
-        runtimeSession = runtimeSession ?? Logging.runtimeSession {
+        runtimeId = runtimeSession ?? Logging.runtimeSession,
+        sessionId = sessionId ?? Logging.currentSession {
     if (log) Logger.log(this);
   }
 
@@ -87,12 +93,14 @@ class Message {
     this.sourceFunction,
     this.templateValues = const {},
     String? runtimeSession,
+    String? sessionId,
     this.logId,
     this.parentLogId,
   })  : type = MessageType.warning,
         time = DateTime.now(),
         sourceClass = klasse?.className,
-        runtimeSession = runtimeSession ?? Logging.runtimeSession {
+        runtimeId = runtimeSession ?? Logging.runtimeSession,
+        sessionId = sessionId ?? Logging.currentSession {
     if (log) Logger.log(this);
   }
 
@@ -107,13 +115,15 @@ class Message {
     Object? sourceClass,
     this.sourceFunction,
     this.templateValues = const {},
-    String? runtimeSession,
+    String? runtimeId,
+    String? sessionId,
     this.logId,
     this.parentLogId,
   })  : type = MessageType.error,
         time = DateTime.now(),
         sourceClass = sourceClass?.className,
-        runtimeSession = runtimeSession ?? Logging.runtimeSession {
+        runtimeId = runtimeId ?? Logging.runtimeSession,
+        sessionId = sessionId ?? Logging.currentSession {
     if (log) Logger.log(this);
   }
 
@@ -129,12 +139,14 @@ class Message {
     this.sourceFunction,
     this.templateValues = const {},
     String? runtimeSession,
+    String? sessionId,
     this.logId = 0,
     this.parentLogId,
   })  : type = MessageType.trace,
         time = DateTime.now(),
         sourceClass = klasse?.className,
-        runtimeSession = runtimeSession ?? Logging.runtimeSession {
+        runtimeId = runtimeSession ?? Logging.runtimeSession,
+        sessionId = sessionId ?? Logging.currentSession {
     if (log) Logger.log(this);
   }
 
@@ -214,7 +226,9 @@ class Message {
 
   final String? sourceFunction;
 
-  final String runtimeSession;
+  final String runtimeId;
+
+  final String sessionId;
 
   final int? logId;
 

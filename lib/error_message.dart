@@ -13,7 +13,8 @@ class ErrorMessage extends Message implements Exception {
     super.sourceFunction,
     super.templateValues,
     List<String>? tags,
-    super.runtimeSession,
+    super.runtimeId,
+    super.sessionId,
     super.logId,
     super.parentLogId,
   }) : super.error(title: title, tags: [...?tags, 'Exception']);

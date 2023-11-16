@@ -48,7 +48,8 @@ _$_MessageDetails _$$_MessageDetailsFromJson(Map<String, dynamic> json) =>
       time: DateTime.parse(json['time'] as String),
       tags: (json['tags'] as List<dynamic>).map((e) => e as String).toList(),
       templateValues: Map<String, String>.from(json['templateValues'] as Map),
-      runtimeSession: json['runtimeSession'] as String,
+      runtimeId: json['runtimeId'] as String,
+      sessionId: json['sessionId'] as String,
       logId: json['logId'] as int?,
       parentLogId: json['parentLogId'] as int?,
     );
@@ -58,7 +59,8 @@ Map<String, dynamic> _$$_MessageDetailsToJson(_$_MessageDetails instance) {
     'time': instance.time.toIso8601String(),
     'tags': instance.tags,
     'templateValues': instance.templateValues,
-    'runtimeSession': instance.runtimeSession,
+    'runtimeId': instance.runtimeId,
+    'sessionId': instance.sessionId,
   };
 
   void writeNotNull(String key, dynamic value) {

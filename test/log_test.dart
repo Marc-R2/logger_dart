@@ -9,7 +9,7 @@ void main() {
       expect(message.title, equals('Test title'));
       expect(message.text, equals('Test message'));
       expect(message.level, equals(0));
-      expect(message.runtimeSession, equals('123'));
+      expect(message.runtimeId, equals('123'));
       expect(message.logId, equals(0));
       expect(message.templateValues, equals({}));
     });
@@ -47,7 +47,7 @@ void main() {
       expect(message.tags, contains('test'));
       expect(message.sourceClass, equals('TestClass'));
       expect(message.sourceFunction, equals('testFunction'));
-      expect(message.runtimeSession, equals('123'));
+      expect(message.runtimeId, equals('123'));
       expect(message.logId, equals(0));
     });
 

@@ -269,7 +269,8 @@ mixin _$MessageDetails {
   DateTime get time => throw _privateConstructorUsedError;
   List<String> get tags => throw _privateConstructorUsedError;
   Map<String, String> get templateValues => throw _privateConstructorUsedError;
-  String get runtimeSession => throw _privateConstructorUsedError;
+  String get runtimeId => throw _privateConstructorUsedError;
+  String get sessionId => throw _privateConstructorUsedError;
   int? get logId => throw _privateConstructorUsedError;
   int? get parentLogId => throw _privateConstructorUsedError;
 
@@ -289,7 +290,8 @@ abstract class $MessageDetailsCopyWith<$Res> {
       {DateTime time,
       List<String> tags,
       Map<String, String> templateValues,
-      String runtimeSession,
+      String runtimeId,
+      String sessionId,
       int? logId,
       int? parentLogId});
 }
@@ -310,7 +312,8 @@ class _$MessageDetailsCopyWithImpl<$Res, $Val extends MessageDetails>
     Object? time = null,
     Object? tags = null,
     Object? templateValues = null,
-    Object? runtimeSession = null,
+    Object? runtimeId = null,
+    Object? sessionId = null,
     Object? logId = freezed,
     Object? parentLogId = freezed,
   }) {
@@ -327,9 +330,13 @@ class _$MessageDetailsCopyWithImpl<$Res, $Val extends MessageDetails>
           ? _value.templateValues
           : templateValues // ignore: cast_nullable_to_non_nullable
               as Map<String, String>,
-      runtimeSession: null == runtimeSession
-          ? _value.runtimeSession
-          : runtimeSession // ignore: cast_nullable_to_non_nullable
+      runtimeId: null == runtimeId
+          ? _value.runtimeId
+          : runtimeId // ignore: cast_nullable_to_non_nullable
+              as String,
+      sessionId: null == sessionId
+          ? _value.sessionId
+          : sessionId // ignore: cast_nullable_to_non_nullable
               as String,
       logId: freezed == logId
           ? _value.logId
@@ -355,7 +362,8 @@ abstract class _$$_MessageDetailsCopyWith<$Res>
       {DateTime time,
       List<String> tags,
       Map<String, String> templateValues,
-      String runtimeSession,
+      String runtimeId,
+      String sessionId,
       int? logId,
       int? parentLogId});
 }
@@ -374,7 +382,8 @@ class __$$_MessageDetailsCopyWithImpl<$Res>
     Object? time = null,
     Object? tags = null,
     Object? templateValues = null,
-    Object? runtimeSession = null,
+    Object? runtimeId = null,
+    Object? sessionId = null,
     Object? logId = freezed,
     Object? parentLogId = freezed,
   }) {
@@ -391,9 +400,13 @@ class __$$_MessageDetailsCopyWithImpl<$Res>
           ? _value._templateValues
           : templateValues // ignore: cast_nullable_to_non_nullable
               as Map<String, String>,
-      runtimeSession: null == runtimeSession
-          ? _value.runtimeSession
-          : runtimeSession // ignore: cast_nullable_to_non_nullable
+      runtimeId: null == runtimeId
+          ? _value.runtimeId
+          : runtimeId // ignore: cast_nullable_to_non_nullable
+              as String,
+      sessionId: null == sessionId
+          ? _value.sessionId
+          : sessionId // ignore: cast_nullable_to_non_nullable
               as String,
       logId: freezed == logId
           ? _value.logId
@@ -415,7 +428,8 @@ class _$_MessageDetails extends _MessageDetails {
       {required this.time,
       required final List<String> tags,
       required final Map<String, String> templateValues,
-      required this.runtimeSession,
+      required this.runtimeId,
+      required this.sessionId,
       this.logId,
       this.parentLogId})
       : _tags = tags,
@@ -444,7 +458,9 @@ class _$_MessageDetails extends _MessageDetails {
   }
 
   @override
-  final String runtimeSession;
+  final String runtimeId;
+  @override
+  final String sessionId;
   @override
   final int? logId;
   @override
@@ -452,7 +468,7 @@ class _$_MessageDetails extends _MessageDetails {
 
   @override
   String toString() {
-    return 'MessageDetails(time: $time, tags: $tags, templateValues: $templateValues, runtimeSession: $runtimeSession, logId: $logId, parentLogId: $parentLogId)';
+    return 'MessageDetails(time: $time, tags: $tags, templateValues: $templateValues, runtimeId: $runtimeId, sessionId: $sessionId, logId: $logId, parentLogId: $parentLogId)';
   }
 
   @override
@@ -464,8 +480,10 @@ class _$_MessageDetails extends _MessageDetails {
             const DeepCollectionEquality().equals(other._tags, _tags) &&
             const DeepCollectionEquality()
                 .equals(other._templateValues, _templateValues) &&
-            (identical(other.runtimeSession, runtimeSession) ||
-                other.runtimeSession == runtimeSession) &&
+            (identical(other.runtimeId, runtimeId) ||
+                other.runtimeId == runtimeId) &&
+            (identical(other.sessionId, sessionId) ||
+                other.sessionId == sessionId) &&
             (identical(other.logId, logId) || other.logId == logId) &&
             (identical(other.parentLogId, parentLogId) ||
                 other.parentLogId == parentLogId));
@@ -478,7 +496,8 @@ class _$_MessageDetails extends _MessageDetails {
       time,
       const DeepCollectionEquality().hash(_tags),
       const DeepCollectionEquality().hash(_templateValues),
-      runtimeSession,
+      runtimeId,
+      sessionId,
       logId,
       parentLogId);
 
@@ -501,7 +520,8 @@ abstract class _MessageDetails extends MessageDetails {
       {required final DateTime time,
       required final List<String> tags,
       required final Map<String, String> templateValues,
-      required final String runtimeSession,
+      required final String runtimeId,
+      required final String sessionId,
       final int? logId,
       final int? parentLogId}) = _$_MessageDetails;
   const _MessageDetails._() : super._();
@@ -516,7 +536,9 @@ abstract class _MessageDetails extends MessageDetails {
   @override
   Map<String, String> get templateValues;
   @override
-  String get runtimeSession;
+  String get runtimeId;
+  @override
+  String get sessionId;
   @override
   int? get logId;
   @override
