@@ -6,15 +6,16 @@ class Log extends MessageTemplate {
   Log({
     this.parent,
     this.localThreshold,
-    String? session,
+    LogRuntime? runtime,
+    LogSession? session,
     super.function,
     super.klasse,
     super.tags,
   })  : assert(
-          session != null || parent != null,
-          'Log session must not be null if parent is null',
+          (runtime != null && session != null) || parent != null,
+          'Log runtime must not be null if parent is null',
         ),
-        super(runtimeSession: session) {
+        super(runtimeSession: runtime, sessionId: session) {
     parent?.addChild(this);
   }
 
@@ -41,7 +42,7 @@ class Log extends MessageTemplate {
   /// Get the session id
   ///
   /// either from the current log or from the parent
-  String get runtime => runtimeId ?? parent!.runtime;
+  LogRuntime get runtime => runtimeId ?? parent!.runtime;
 
   int idCounter = 0;
 

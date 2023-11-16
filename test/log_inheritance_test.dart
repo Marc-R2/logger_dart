@@ -5,7 +5,10 @@ void main() {
   group('Log inheritance', () {
     test('_', () {
       final dummy = DummyClass();
-      final log0 = Log(session: 'session');
+      final log0 = Log(
+        runtime: const LogRuntime('runtime'),
+        session: const LogSession('session'),
+      );
       {
         // Sample 1
         final log0_1 = dummy.functionStart('sample 1', log0);

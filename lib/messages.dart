@@ -26,8 +26,8 @@ class Message {
     this.sourceFunction,
     this.sourceClass,
     this.templateValues = const {},
-    String? runtimeSession,
-    String? sessionId,
+    LogRuntime? runtimeSession,
+    LogSession? sessionId,
     this.logId,
     this.parentLogId,
   })  : runtimeId = runtimeSession ?? Logging.runtimeSession,
@@ -46,8 +46,8 @@ class Message {
     Object? klasse,
     this.sourceFunction,
     this.templateValues = const {},
-    String? runtimeSession,
-    String? sessionId,
+    LogRuntime? runtimeSession,
+    LogSession? sessionId,
     this.logId,
     this.parentLogId,
   })  : type = MessageType.log,
@@ -69,8 +69,8 @@ class Message {
     Object? klasse,
     this.sourceFunction,
     this.templateValues = const {},
-    String? runtimeSession,
-    String? sessionId,
+    LogRuntime? runtimeSession,
+    LogSession? sessionId,
     this.logId,
     this.parentLogId,
   })  : type = MessageType.info,
@@ -92,8 +92,8 @@ class Message {
     Object? klasse,
     this.sourceFunction,
     this.templateValues = const {},
-    String? runtimeSession,
-    String? sessionId,
+    LogRuntime? runtimeSession,
+    LogSession? sessionId,
     this.logId,
     this.parentLogId,
   })  : type = MessageType.warning,
@@ -115,8 +115,8 @@ class Message {
     Object? sourceClass,
     this.sourceFunction,
     this.templateValues = const {},
-    String? runtimeId,
-    String? sessionId,
+    LogRuntime? runtimeId,
+    LogSession? sessionId,
     this.logId,
     this.parentLogId,
   })  : type = MessageType.error,
@@ -138,8 +138,8 @@ class Message {
     Object? klasse,
     this.sourceFunction,
     this.templateValues = const {},
-    String? runtimeSession,
-    String? sessionId,
+    LogRuntime? runtimeSession,
+    LogSession? sessionId,
     this.logId = 0,
     this.parentLogId,
   })  : type = MessageType.trace,
@@ -226,9 +226,9 @@ class Message {
 
   final String? sourceFunction;
 
-  final String runtimeId;
+  final LogRuntime runtimeId;
 
-  final String sessionId;
+  final LogSession sessionId;
 
   final int? logId;
 

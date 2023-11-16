@@ -119,7 +119,12 @@ void main() {
 
       test('functionStart returns new log with correct parent log', () {
         final logging = LoggingMock();
-        final parentLog = Log(function: 'parent', klasse: logging, session: '');
+        final parentLog = Log(
+          function: 'parent',
+          klasse: logging,
+          runtime: const LogRuntime(''),
+          session: const LogSession(''),
+        );
         final log = logging.functionStart('testFunction', parentLog);
 
         expect(log.parent, equals(parentLog));
@@ -133,7 +138,8 @@ void main() {
           final parentLog = Log(
             function: 'parent',
             klasse: logging,
-            session: 'parentSession',
+            runtime: const LogRuntime('parentSession'),
+            session: const LogSession(''),
           );
           final log = logging.functionStart('testFunction', parentLog);
 
@@ -169,22 +175,22 @@ void main() {
 
       group('currentSession group', () {
         test('currentSession returns non-null string', () {
-          expect(Logging.currentSession, isNotNull);
-          expect(Logging.currentSession, isNotEmpty);
+          expect(Logging.currentSession.sessionId, isNotNull);
+          expect(Logging.currentSession.sessionId, isNotEmpty);
         });
 
         test('currentSession returns string with correct format', () {
           final pattern = RegExp(r'^[a-z0-9]+$');
-          expect(Logging.currentSession, matches(pattern));
-          expect(Logging.currentSession, hasLength(lessThan(4)));
+          expect(Logging.currentSession.sessionId, matches(pattern));
+          expect(Logging.currentSession.sessionId, hasLength(lessThan(4)));
         });
 
         group('currentSession returns different strings on multiple calls', () {
           Message.log(title: 'currentSession returns different strings');
           for (var i = 0; i < 64 * 2; i++) {
             test('currentSession $i', () {
-              final session1 = Logging.currentSession;
-              final session2 = Logging.currentSession;
+              final session1 = Logging.currentSession.sessionId;
+              final session2 = Logging.currentSession.sessionId;
               expect(session1, isNot(equals(session2)));
               expect(session1, hasLength(lessThan(4)));
               expect(session2, hasLength(lessThan(4)));
@@ -196,7 +202,7 @@ void main() {
             'currentSession returns non-null '
             'and non-empty string in separate zones', () async {
           final zone = Zone.current.fork();
-          final session = zone.run(() => Logging.currentSession);
+          final session = zone.run(() => Logging.currentSession.sessionId);
           expect(session, isNotNull);
           expect(session, isNotEmpty);
         });
@@ -219,11 +225,11 @@ void main() {
 
         test('runtimeSession returns string with correct format', () {
           final pattern = RegExp(r'^[a-z0-9]+$');
-          expect(Logging.runtimeSession, matches(pattern));
+          expect(Logging.runtimeSession.runtimeId, matches(pattern));
         });
 
         test('runtimeSession returns non-null and non-empty string', () {
-          final session = Logging.runtimeSession;
+          final session = Logging.runtimeSession.runtimeId;
           expect(session, isNotNull);
           expect(session, isNotEmpty);
         });
