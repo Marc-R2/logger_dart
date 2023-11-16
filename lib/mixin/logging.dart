@@ -19,7 +19,7 @@ mixin Logging {
       function: function,
       klasse: this,
       tags: ['FunctionStart'],
-      session: context?.session ?? currentSession,
+      session: context?.runtime ?? currentSession,
     );
   }
 

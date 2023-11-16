@@ -68,6 +68,7 @@ class MessageStorage {
 @freezed
 class MessageBase with _$MessageBase {
   ///
+  @JsonSerializable(explicitToJson: true, includeIfNull: false)
   const factory MessageBase({
     required MessageType type,
     required String title,
@@ -87,12 +88,13 @@ class MessageBase with _$MessageBase {
 @freezed
 class MessageDetails with _$MessageDetails {
   ///
+  @JsonSerializable(explicitToJson: true, includeIfNull: false)
   const factory MessageDetails({
     required DateTime time,
     required List<String> tags,
     required Map<String, String> templateValues,
     required String runtimeSession,
-    @Default(0) int logId,
+    int? logId,
     int? parentLogId,
   }) = _MessageDetails;
 

@@ -27,7 +27,7 @@ class Message {
     this.sourceClass,
     this.templateValues = const {},
     String? runtimeSession,
-    this.logId = 0,
+    this.logId,
     this.parentLogId,
   }) : runtimeSession = runtimeSession ?? Logging.runtimeSession {
     if (log) Logger.log(this);
@@ -45,7 +45,7 @@ class Message {
     this.sourceFunction,
     this.templateValues = const {},
     String? runtimeSession,
-    this.logId = 0,
+    this.logId,
     this.parentLogId,
   })  : type = MessageType.log,
         time = DateTime.now(),
@@ -66,7 +66,7 @@ class Message {
     this.sourceFunction,
     this.templateValues = const {},
     String? runtimeSession,
-    this.logId = 0,
+    this.logId,
     this.parentLogId,
   })  : type = MessageType.info,
         time = DateTime.now(),
@@ -87,7 +87,7 @@ class Message {
     this.sourceFunction,
     this.templateValues = const {},
     String? runtimeSession,
-    this.logId = 0,
+    this.logId,
     this.parentLogId,
   })  : type = MessageType.warning,
         time = DateTime.now(),
@@ -108,7 +108,7 @@ class Message {
     this.sourceFunction,
     this.templateValues = const {},
     String? runtimeSession,
-    this.logId = 0,
+    this.logId,
     this.parentLogId,
   })  : type = MessageType.error,
         time = DateTime.now(),
@@ -216,7 +216,7 @@ class Message {
 
   final String runtimeSession;
 
-  final int logId;
+  final int? logId;
 
   final int? parentLogId;
 

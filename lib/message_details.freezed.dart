@@ -162,7 +162,8 @@ class __$$_MessageBaseCopyWithImpl<$Res>
 }
 
 /// @nodoc
-@JsonSerializable()
+
+@JsonSerializable(explicitToJson: true, includeIfNull: false)
 class _$_MessageBase extends _MessageBase {
   const _$_MessageBase(
       {required this.type,
@@ -269,7 +270,7 @@ mixin _$MessageDetails {
   List<String> get tags => throw _privateConstructorUsedError;
   Map<String, String> get templateValues => throw _privateConstructorUsedError;
   String get runtimeSession => throw _privateConstructorUsedError;
-  int get logId => throw _privateConstructorUsedError;
+  int? get logId => throw _privateConstructorUsedError;
   int? get parentLogId => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -289,7 +290,7 @@ abstract class $MessageDetailsCopyWith<$Res> {
       List<String> tags,
       Map<String, String> templateValues,
       String runtimeSession,
-      int logId,
+      int? logId,
       int? parentLogId});
 }
 
@@ -310,7 +311,7 @@ class _$MessageDetailsCopyWithImpl<$Res, $Val extends MessageDetails>
     Object? tags = null,
     Object? templateValues = null,
     Object? runtimeSession = null,
-    Object? logId = null,
+    Object? logId = freezed,
     Object? parentLogId = freezed,
   }) {
     return _then(_value.copyWith(
@@ -330,10 +331,10 @@ class _$MessageDetailsCopyWithImpl<$Res, $Val extends MessageDetails>
           ? _value.runtimeSession
           : runtimeSession // ignore: cast_nullable_to_non_nullable
               as String,
-      logId: null == logId
+      logId: freezed == logId
           ? _value.logId
           : logId // ignore: cast_nullable_to_non_nullable
-              as int,
+              as int?,
       parentLogId: freezed == parentLogId
           ? _value.parentLogId
           : parentLogId // ignore: cast_nullable_to_non_nullable
@@ -355,7 +356,7 @@ abstract class _$$_MessageDetailsCopyWith<$Res>
       List<String> tags,
       Map<String, String> templateValues,
       String runtimeSession,
-      int logId,
+      int? logId,
       int? parentLogId});
 }
 
@@ -374,7 +375,7 @@ class __$$_MessageDetailsCopyWithImpl<$Res>
     Object? tags = null,
     Object? templateValues = null,
     Object? runtimeSession = null,
-    Object? logId = null,
+    Object? logId = freezed,
     Object? parentLogId = freezed,
   }) {
     return _then(_$_MessageDetails(
@@ -394,10 +395,10 @@ class __$$_MessageDetailsCopyWithImpl<$Res>
           ? _value.runtimeSession
           : runtimeSession // ignore: cast_nullable_to_non_nullable
               as String,
-      logId: null == logId
+      logId: freezed == logId
           ? _value.logId
           : logId // ignore: cast_nullable_to_non_nullable
-              as int,
+              as int?,
       parentLogId: freezed == parentLogId
           ? _value.parentLogId
           : parentLogId // ignore: cast_nullable_to_non_nullable
@@ -407,14 +408,15 @@ class __$$_MessageDetailsCopyWithImpl<$Res>
 }
 
 /// @nodoc
-@JsonSerializable()
+
+@JsonSerializable(explicitToJson: true, includeIfNull: false)
 class _$_MessageDetails extends _MessageDetails {
   const _$_MessageDetails(
       {required this.time,
       required final List<String> tags,
       required final Map<String, String> templateValues,
       required this.runtimeSession,
-      this.logId = 0,
+      this.logId,
       this.parentLogId})
       : _tags = tags,
         _templateValues = templateValues,
@@ -444,8 +446,7 @@ class _$_MessageDetails extends _MessageDetails {
   @override
   final String runtimeSession;
   @override
-  @JsonKey()
-  final int logId;
+  final int? logId;
   @override
   final int? parentLogId;
 
@@ -501,7 +502,7 @@ abstract class _MessageDetails extends MessageDetails {
       required final List<String> tags,
       required final Map<String, String> templateValues,
       required final String runtimeSession,
-      final int logId,
+      final int? logId,
       final int? parentLogId}) = _$_MessageDetails;
   const _MessageDetails._() : super._();
 
@@ -517,7 +518,7 @@ abstract class _MessageDetails extends MessageDetails {
   @override
   String get runtimeSession;
   @override
-  int get logId;
+  int? get logId;
   @override
   int? get parentLogId;
   @override

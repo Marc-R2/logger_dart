@@ -16,15 +16,24 @@ _$_MessageBase _$$_MessageBaseFromJson(Map<String, dynamic> json) =>
       level: json['level'] as int?,
     );
 
-Map<String, dynamic> _$$_MessageBaseToJson(_$_MessageBase instance) =>
-    <String, dynamic>{
-      'type': _$MessageTypeEnumMap[instance.type]!,
-      'title': instance.title,
-      'sourceFunction': instance.sourceFunction,
-      'sourceClass': instance.sourceClass,
-      'text': instance.text,
-      'level': instance.level,
-    };
+Map<String, dynamic> _$$_MessageBaseToJson(_$_MessageBase instance) {
+  final val = <String, dynamic>{
+    'type': _$MessageTypeEnumMap[instance.type]!,
+    'title': instance.title,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('sourceFunction', instance.sourceFunction);
+  writeNotNull('sourceClass', instance.sourceClass);
+  writeNotNull('text', instance.text);
+  writeNotNull('level', instance.level);
+  return val;
+}
 
 const _$MessageTypeEnumMap = {
   MessageType.log: 'log',
@@ -40,16 +49,25 @@ _$_MessageDetails _$$_MessageDetailsFromJson(Map<String, dynamic> json) =>
       tags: (json['tags'] as List<dynamic>).map((e) => e as String).toList(),
       templateValues: Map<String, String>.from(json['templateValues'] as Map),
       runtimeSession: json['runtimeSession'] as String,
-      logId: json['logId'] as int? ?? 0,
+      logId: json['logId'] as int?,
       parentLogId: json['parentLogId'] as int?,
     );
 
-Map<String, dynamic> _$$_MessageDetailsToJson(_$_MessageDetails instance) =>
-    <String, dynamic>{
-      'time': instance.time.toIso8601String(),
-      'tags': instance.tags,
-      'templateValues': instance.templateValues,
-      'runtimeSession': instance.runtimeSession,
-      'logId': instance.logId,
-      'parentLogId': instance.parentLogId,
-    };
+Map<String, dynamic> _$$_MessageDetailsToJson(_$_MessageDetails instance) {
+  final val = <String, dynamic>{
+    'time': instance.time.toIso8601String(),
+    'tags': instance.tags,
+    'templateValues': instance.templateValues,
+    'runtimeSession': instance.runtimeSession,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('logId', instance.logId);
+  writeNotNull('parentLogId', instance.parentLogId);
+  return val;
+}
