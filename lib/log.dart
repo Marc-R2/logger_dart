@@ -136,7 +136,6 @@ class Log extends MessageTemplate {
     Log? context,
     Object? klasse,
   ]) {
-    if (context != null) return context.functionStart(function, klasse: klasse);
     return Log(
       parent: context,
       function: function,
