@@ -130,4 +130,23 @@ class Log extends MessageTemplate {
     if (parent != null) return parent!.getLastMessage();
     return null;
   }
+
+  static Log globalFunctionStart(
+    String function, [
+    Log? context,
+    Object? klasse,
+  ]) {
+    if (context != null) return context.functionStart(function, klasse: klasse);
+    return Log(
+      parent: context,
+      function: function,
+      klasse: klasse,
+      tags: ['FunctionStart'],
+      session: context?.sessionId ?? Logging.currentSession,
+      runtime: context?.runtimeId ?? Logging.runtimeSession,
+    );
+  }
+
+  Log functionStart(String function, {Object? klasse}) =>
+      globalFunctionStart(function, this, klasse);
 }

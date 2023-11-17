@@ -13,16 +13,8 @@ mixin Logging {
 
   /// Create a Log with the given [function] and [context]
   /// at the start of the function
-  Log functionStart(String function, [Log? context]) {
-    return Log(
-      parent: context,
-      function: function,
-      klasse: this,
-      tags: ['FunctionStart'],
-      session: context?.sessionId ?? currentSession,
-      runtime: context?.runtimeId ?? runtimeSession,
-    );
-  }
+  Log functionStart(String function, [Log? context]) =>
+      Log.globalFunctionStart(function, context, this);
 
   static LogRuntime? _session;
 
