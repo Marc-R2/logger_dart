@@ -8,11 +8,14 @@ name: Dart
 on: [push, pull_request]
 
 jobs:
-  build:
+  test_and_coverage:
     runs-on: ubuntu-latest
 
     steps:
       - uses: actions/checkout@v3
+
+      - name: Auth GitHub
+        run: git config --global url."https://${{ secrets.MANU_GITHUB_TOKEN }}@github.com/".insteadOf "https://github.com/"
 
       - uses: dart-lang/setup-dart@v1.3
         with:
