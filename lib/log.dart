@@ -6,24 +6,18 @@ class Log extends MessageTemplate {
   Log({
     this.parent,
     this.localThreshold,
-    String? session,
+    LogRuntime? runtime,
+    LogSession? session,
     super.function,
     super.klasse,
     super.tags,
-  })  : logId = parent?.createId() ?? 0,
-        assert(
-          session != null || parent != null,
-          'Log session must not be null if parent is null',
+  })  : assert(
+          (runtime != null && session != null) || parent != null,
+          'Log runtime must not be null if parent is null',
         ),
-        logParentId = parent?.logId ?? 0,
-        super(runtimeSession: session) {
+        super(runtimeSession: runtime, sessionId: session) {
     parent?.addChild(this);
   }
-
-  /// The id of the log
-  final int logId;
-
-  final int logParentId;
 
   /// The parent log
   final Log? parent;
@@ -48,9 +42,11 @@ class Log extends MessageTemplate {
   /// Get the session id
   ///
   /// either from the current log or from the parent
-  String get session => runtimeSession ?? parent!.session;
+  LogRuntime get runtime => runtimeId ?? parent!.runtime;
 
-  int idCounter = 1;
+  int idCounter = 0;
+
+  List<Message> messages = [];
 
   int createId() {
     if (parent == null) return idCounter++;
@@ -127,5 +123,11 @@ class Log extends MessageTemplate {
     }
 
     return result;
+  }
+
+  Message? getLastMessage() {
+    if (messages.isNotEmpty) return messages.last;
+    if (parent != null) return parent!.getLastMessage();
+    return null;
   }
 }

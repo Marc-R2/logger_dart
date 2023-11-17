@@ -6,8 +6,8 @@ part of 'message_details.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_MessageBase _$$_MessageBaseFromJson(Map<String, dynamic> json) =>
-    _$_MessageBase(
+_$MessageBaseImpl _$$MessageBaseImplFromJson(Map<String, dynamic> json) =>
+    _$MessageBaseImpl(
       messageCode: json['messageCode'] as String,
       type: $enumDecode(_$MessageTypeEnumMap, json['type']),
       title: json['title'] as String,
@@ -17,7 +17,7 @@ _$_MessageBase _$$_MessageBaseFromJson(Map<String, dynamic> json) =>
       level: json['level'] as int?,
     );
 
-Map<String, dynamic> _$$_MessageBaseToJson(_$_MessageBase instance) {
+Map<String, dynamic> _$$MessageBaseImplToJson(_$MessageBaseImpl instance) {
   final val = <String, dynamic>{
     'messageCode': instance.messageCode,
     'type': _$MessageTypeEnumMap[instance.type]!,
@@ -45,25 +45,27 @@ const _$MessageTypeEnumMap = {
   MessageType.trace: 'trace',
 };
 
-_$_MessageDetails _$$_MessageDetailsFromJson(Map<String, dynamic> json) =>
-    _$_MessageDetails(
+_$MessageDetailsImpl _$$MessageDetailsImplFromJson(Map<String, dynamic> json) =>
+    _$MessageDetailsImpl(
       messageCode: json['messageCode'] as String,
       time: DateTime.parse(json['time'] as String),
       tags: (json['tags'] as List<dynamic>).map((e) => e as String).toList(),
       templateValues: Map<String, String>.from(json['templateValues'] as Map),
-      runtimeSession: json['runtimeSession'] as String,
-      logId: json['logId'] as int? ?? 0,
+      runtimeId: json['runtimeId'] as String,
+      sessionId: json['sessionId'] as String,
+      logId: json['logId'] as int?,
       parentLogId: json['parentLogId'] as int?,
     );
 
-Map<String, dynamic> _$$_MessageDetailsToJson(_$_MessageDetails instance) {
+Map<String, dynamic> _$$MessageDetailsImplToJson(
+    _$MessageDetailsImpl instance) {
   final val = <String, dynamic>{
     'messageCode': instance.messageCode,
     'time': instance.time.toIso8601String(),
     'tags': instance.tags,
     'templateValues': instance.templateValues,
-    'runtimeSession': instance.runtimeSession,
-    'logId': instance.logId,
+    'runtimeId': instance.runtimeId,
+    'sessionId': instance.sessionId,
   };
 
   void writeNotNull(String key, dynamic value) {
@@ -72,6 +74,7 @@ Map<String, dynamic> _$$_MessageDetailsToJson(_$_MessageDetails instance) {
     }
   }
 
+  writeNotNull('logId', instance.logId);
   writeNotNull('parentLogId', instance.parentLogId);
   return val;
 }

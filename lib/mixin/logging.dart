@@ -19,21 +19,23 @@ mixin Logging {
       function: function,
       klasse: this,
       tags: ['FunctionStart'],
-      session: context?.session ?? currentSession,
+      session: context?.sessionId ?? currentSession,
+      runtime: context?.runtimeId ?? runtimeSession,
     );
   }
 
-  static String? _session;
+  static LogRuntime? _session;
 
   /// Get the current session id
   ///
   /// This is unique to each runtime
-  static String get runtimeSession {
+  static LogRuntime get runtimeSession {
     if (_session != null) return _session!;
 
     final now = DateTime.now();
     final minSinceEpoch = now.millisecondsSinceEpoch ~/ 6000;
-    return _session = minify(minSinceEpoch + now.second + now.millisecond);
+    final id = minify(minSinceEpoch + now.second + now.millisecond);
+    return _session = LogRuntime(id);
   }
 
   static int _sessionCounter = 0;
@@ -41,10 +43,10 @@ mixin Logging {
   /// Get the current session id
   ///
   /// This is based on the current time
-  static String get currentSession {
+  static LogSession get currentSession {
     _sessionCounter++;
     if (_sessionCounter > 46655) resetRuntime();
-    return minify(_sessionCounter);
+    return LogSession(minify(_sessionCounter));
   }
 
   /// Minify the given [id] to a string
@@ -65,4 +67,42 @@ mixin Logging {
       tags: ['o_r:$oldRuntime', 'n_r:$newRuntime'],
     );
   }
+}
+
+class LogRuntime {
+  const LogRuntime(this.runtimeId);
+
+  final String runtimeId;
+
+  @override
+  String toString() => runtimeId;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is LogRuntime &&
+          runtimeType == other.runtimeType &&
+          runtimeId == other.runtimeId;
+
+  @override
+  int get hashCode => runtimeId.hashCode;
+}
+
+class LogSession {
+  const LogSession(this.sessionId);
+
+  final String sessionId;
+
+  @override
+  String toString() => sessionId;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is LogSession &&
+          runtimeType == other.runtimeType &&
+          sessionId == other.sessionId;
+
+  @override
+  int get hashCode => sessionId.hashCode;
 }

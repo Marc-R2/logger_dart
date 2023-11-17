@@ -36,7 +36,8 @@ class MessageStorage {
       time: message.time,
       tags: message.tags,
       templateValues: message.templateValues,
-      runtimeSession: message.runtimeSession,
+      runtimeId: message.runtimeId.runtimeId,
+      sessionId: message.sessionId.sessionId,
       logId: message.logId,
       parentLogId: message.parentLogId,
     );
@@ -58,7 +59,8 @@ class MessageStorage {
         time: details.time,
         tags: details.tags,
         templateValues: details.templateValues,
-        runtimeSession: details.runtimeSession,
+        runtimeSession: LogRuntime(details.runtimeId),
+        sessionId: LogSession(details.sessionId),
         logId: details.logId,
         parentLogId: details.parentLogId,
       );
@@ -100,8 +102,9 @@ class MessageDetails with _$MessageDetails {
     required DateTime time,
     required List<String> tags,
     required Map<String, String> templateValues,
-    required String runtimeSession,
-    @Default(0) int logId,
+    required String runtimeId,
+    required String sessionId,
+    int? logId,
     int? parentLogId,
   }) = _MessageDetails;
 

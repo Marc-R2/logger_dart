@@ -1,3 +1,4 @@
+import 'log_inheritance_test.dart' as log_inheritance_test;
 import 'log_test.dart' as log_test;
 import 'logger_test.dart' as logger_test;
 import 'message_template_values_test.dart' as message_template_values_test;
@@ -7,6 +8,7 @@ import 'mixin/logging_test.dart' as logging_test;
 
 void main() {
   log_test.main();
+  log_inheritance_test.main();
   logger_test.main();
   logging_test.main();
   messages_test.main();

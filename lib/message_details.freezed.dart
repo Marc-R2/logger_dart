@@ -105,11 +105,11 @@ class _$MessageBaseCopyWithImpl<$Res, $Val extends MessageBase>
 }
 
 /// @nodoc
-abstract class _$$_MessageBaseCopyWith<$Res>
+abstract class _$$MessageBaseImplCopyWith<$Res>
     implements $MessageBaseCopyWith<$Res> {
-  factory _$$_MessageBaseCopyWith(
-          _$_MessageBase value, $Res Function(_$_MessageBase) then) =
-      __$$_MessageBaseCopyWithImpl<$Res>;
+  factory _$$MessageBaseImplCopyWith(
+          _$MessageBaseImpl value, $Res Function(_$MessageBaseImpl) then) =
+      __$$MessageBaseImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -123,11 +123,11 @@ abstract class _$$_MessageBaseCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_MessageBaseCopyWithImpl<$Res>
-    extends _$MessageBaseCopyWithImpl<$Res, _$_MessageBase>
-    implements _$$_MessageBaseCopyWith<$Res> {
-  __$$_MessageBaseCopyWithImpl(
-      _$_MessageBase _value, $Res Function(_$_MessageBase) _then)
+class __$$MessageBaseImplCopyWithImpl<$Res>
+    extends _$MessageBaseCopyWithImpl<$Res, _$MessageBaseImpl>
+    implements _$$MessageBaseImplCopyWith<$Res> {
+  __$$MessageBaseImplCopyWithImpl(
+      _$MessageBaseImpl _value, $Res Function(_$MessageBaseImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -141,7 +141,7 @@ class __$$_MessageBaseCopyWithImpl<$Res>
     Object? text = freezed,
     Object? level = freezed,
   }) {
-    return _then(_$_MessageBase(
+    return _then(_$MessageBaseImpl(
       messageCode: null == messageCode
           ? _value.messageCode
           : messageCode // ignore: cast_nullable_to_non_nullable
@@ -177,8 +177,8 @@ class __$$_MessageBaseCopyWithImpl<$Res>
 /// @nodoc
 
 @JsonSerializable(explicitToJson: true, includeIfNull: false)
-class _$_MessageBase extends _MessageBase {
-  const _$_MessageBase(
+class _$MessageBaseImpl extends _MessageBase {
+  const _$MessageBaseImpl(
       {required this.messageCode,
       required this.type,
       required this.title,
@@ -188,8 +188,8 @@ class _$_MessageBase extends _MessageBase {
       this.level})
       : super._();
 
-  factory _$_MessageBase.fromJson(Map<String, dynamic> json) =>
-      _$$_MessageBaseFromJson(json);
+  factory _$MessageBaseImpl.fromJson(Map<String, dynamic> json) =>
+      _$$MessageBaseImplFromJson(json);
 
   @override
   final String messageCode;
@@ -215,7 +215,7 @@ class _$_MessageBase extends _MessageBase {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_MessageBase &&
+            other is _$MessageBaseImpl &&
             (identical(other.messageCode, messageCode) ||
                 other.messageCode == messageCode) &&
             (identical(other.type, type) || other.type == type) &&
@@ -236,12 +236,12 @@ class _$_MessageBase extends _MessageBase {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_MessageBaseCopyWith<_$_MessageBase> get copyWith =>
-      __$$_MessageBaseCopyWithImpl<_$_MessageBase>(this, _$identity);
+  _$$MessageBaseImplCopyWith<_$MessageBaseImpl> get copyWith =>
+      __$$MessageBaseImplCopyWithImpl<_$MessageBaseImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_MessageBaseToJson(
+    return _$$MessageBaseImplToJson(
       this,
     );
   }
@@ -255,11 +255,11 @@ abstract class _MessageBase extends MessageBase {
       final String? sourceFunction,
       final String? sourceClass,
       final String? text,
-      final int? level}) = _$_MessageBase;
+      final int? level}) = _$MessageBaseImpl;
   const _MessageBase._() : super._();
 
   factory _MessageBase.fromJson(Map<String, dynamic> json) =
-      _$_MessageBase.fromJson;
+      _$MessageBaseImpl.fromJson;
 
   @override
   String get messageCode;
@@ -277,7 +277,7 @@ abstract class _MessageBase extends MessageBase {
   int? get level;
   @override
   @JsonKey(ignore: true)
-  _$$_MessageBaseCopyWith<_$_MessageBase> get copyWith =>
+  _$$MessageBaseImplCopyWith<_$MessageBaseImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -291,8 +291,9 @@ mixin _$MessageDetails {
   DateTime get time => throw _privateConstructorUsedError;
   List<String> get tags => throw _privateConstructorUsedError;
   Map<String, String> get templateValues => throw _privateConstructorUsedError;
-  String get runtimeSession => throw _privateConstructorUsedError;
-  int get logId => throw _privateConstructorUsedError;
+  String get runtimeId => throw _privateConstructorUsedError;
+  String get sessionId => throw _privateConstructorUsedError;
+  int? get logId => throw _privateConstructorUsedError;
   int? get parentLogId => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -312,8 +313,9 @@ abstract class $MessageDetailsCopyWith<$Res> {
       DateTime time,
       List<String> tags,
       Map<String, String> templateValues,
-      String runtimeSession,
-      int logId,
+      String runtimeId,
+      String sessionId,
+      int? logId,
       int? parentLogId});
 }
 
@@ -334,8 +336,9 @@ class _$MessageDetailsCopyWithImpl<$Res, $Val extends MessageDetails>
     Object? time = null,
     Object? tags = null,
     Object? templateValues = null,
-    Object? runtimeSession = null,
-    Object? logId = null,
+    Object? runtimeId = null,
+    Object? sessionId = null,
+    Object? logId = freezed,
     Object? parentLogId = freezed,
   }) {
     return _then(_value.copyWith(
@@ -355,14 +358,18 @@ class _$MessageDetailsCopyWithImpl<$Res, $Val extends MessageDetails>
           ? _value.templateValues
           : templateValues // ignore: cast_nullable_to_non_nullable
               as Map<String, String>,
-      runtimeSession: null == runtimeSession
-          ? _value.runtimeSession
-          : runtimeSession // ignore: cast_nullable_to_non_nullable
+      runtimeId: null == runtimeId
+          ? _value.runtimeId
+          : runtimeId // ignore: cast_nullable_to_non_nullable
               as String,
-      logId: null == logId
+      sessionId: null == sessionId
+          ? _value.sessionId
+          : sessionId // ignore: cast_nullable_to_non_nullable
+              as String,
+      logId: freezed == logId
           ? _value.logId
           : logId // ignore: cast_nullable_to_non_nullable
-              as int,
+              as int?,
       parentLogId: freezed == parentLogId
           ? _value.parentLogId
           : parentLogId // ignore: cast_nullable_to_non_nullable
@@ -372,11 +379,11 @@ class _$MessageDetailsCopyWithImpl<$Res, $Val extends MessageDetails>
 }
 
 /// @nodoc
-abstract class _$$_MessageDetailsCopyWith<$Res>
+abstract class _$$MessageDetailsImplCopyWith<$Res>
     implements $MessageDetailsCopyWith<$Res> {
-  factory _$$_MessageDetailsCopyWith(
-          _$_MessageDetails value, $Res Function(_$_MessageDetails) then) =
-      __$$_MessageDetailsCopyWithImpl<$Res>;
+  factory _$$MessageDetailsImplCopyWith(_$MessageDetailsImpl value,
+          $Res Function(_$MessageDetailsImpl) then) =
+      __$$MessageDetailsImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -384,17 +391,18 @@ abstract class _$$_MessageDetailsCopyWith<$Res>
       DateTime time,
       List<String> tags,
       Map<String, String> templateValues,
-      String runtimeSession,
-      int logId,
+      String runtimeId,
+      String sessionId,
+      int? logId,
       int? parentLogId});
 }
 
 /// @nodoc
-class __$$_MessageDetailsCopyWithImpl<$Res>
-    extends _$MessageDetailsCopyWithImpl<$Res, _$_MessageDetails>
-    implements _$$_MessageDetailsCopyWith<$Res> {
-  __$$_MessageDetailsCopyWithImpl(
-      _$_MessageDetails _value, $Res Function(_$_MessageDetails) _then)
+class __$$MessageDetailsImplCopyWithImpl<$Res>
+    extends _$MessageDetailsCopyWithImpl<$Res, _$MessageDetailsImpl>
+    implements _$$MessageDetailsImplCopyWith<$Res> {
+  __$$MessageDetailsImplCopyWithImpl(
+      _$MessageDetailsImpl _value, $Res Function(_$MessageDetailsImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -404,11 +412,12 @@ class __$$_MessageDetailsCopyWithImpl<$Res>
     Object? time = null,
     Object? tags = null,
     Object? templateValues = null,
-    Object? runtimeSession = null,
-    Object? logId = null,
+    Object? runtimeId = null,
+    Object? sessionId = null,
+    Object? logId = freezed,
     Object? parentLogId = freezed,
   }) {
-    return _then(_$_MessageDetails(
+    return _then(_$MessageDetailsImpl(
       messageCode: null == messageCode
           ? _value.messageCode
           : messageCode // ignore: cast_nullable_to_non_nullable
@@ -425,14 +434,18 @@ class __$$_MessageDetailsCopyWithImpl<$Res>
           ? _value._templateValues
           : templateValues // ignore: cast_nullable_to_non_nullable
               as Map<String, String>,
-      runtimeSession: null == runtimeSession
-          ? _value.runtimeSession
-          : runtimeSession // ignore: cast_nullable_to_non_nullable
+      runtimeId: null == runtimeId
+          ? _value.runtimeId
+          : runtimeId // ignore: cast_nullable_to_non_nullable
               as String,
-      logId: null == logId
+      sessionId: null == sessionId
+          ? _value.sessionId
+          : sessionId // ignore: cast_nullable_to_non_nullable
+              as String,
+      logId: freezed == logId
           ? _value.logId
           : logId // ignore: cast_nullable_to_non_nullable
-              as int,
+              as int?,
       parentLogId: freezed == parentLogId
           ? _value.parentLogId
           : parentLogId // ignore: cast_nullable_to_non_nullable
@@ -444,21 +457,22 @@ class __$$_MessageDetailsCopyWithImpl<$Res>
 /// @nodoc
 
 @JsonSerializable(explicitToJson: true, includeIfNull: false)
-class _$_MessageDetails extends _MessageDetails {
-  const _$_MessageDetails(
+class _$MessageDetailsImpl extends _MessageDetails {
+  const _$MessageDetailsImpl(
       {required this.messageCode,
       required this.time,
       required final List<String> tags,
       required final Map<String, String> templateValues,
-      required this.runtimeSession,
-      this.logId = 0,
+      required this.runtimeId,
+      required this.sessionId,
+      this.logId,
       this.parentLogId})
       : _tags = tags,
         _templateValues = templateValues,
         super._();
 
-  factory _$_MessageDetails.fromJson(Map<String, dynamic> json) =>
-      _$$_MessageDetailsFromJson(json);
+  factory _$MessageDetailsImpl.fromJson(Map<String, dynamic> json) =>
+      _$$MessageDetailsImplFromJson(json);
 
   @override
   final String messageCode;
@@ -481,31 +495,34 @@ class _$_MessageDetails extends _MessageDetails {
   }
 
   @override
-  final String runtimeSession;
+  final String runtimeId;
   @override
-  @JsonKey()
-  final int logId;
+  final String sessionId;
+  @override
+  final int? logId;
   @override
   final int? parentLogId;
 
   @override
   String toString() {
-    return 'MessageDetails(messageCode: $messageCode, time: $time, tags: $tags, templateValues: $templateValues, runtimeSession: $runtimeSession, logId: $logId, parentLogId: $parentLogId)';
+    return 'MessageDetails(messageCode: $messageCode, time: $time, tags: $tags, templateValues: $templateValues, runtimeId: $runtimeId, sessionId: $sessionId, logId: $logId, parentLogId: $parentLogId)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_MessageDetails &&
+            other is _$MessageDetailsImpl &&
             (identical(other.messageCode, messageCode) ||
                 other.messageCode == messageCode) &&
             (identical(other.time, time) || other.time == time) &&
             const DeepCollectionEquality().equals(other._tags, _tags) &&
             const DeepCollectionEquality()
                 .equals(other._templateValues, _templateValues) &&
-            (identical(other.runtimeSession, runtimeSession) ||
-                other.runtimeSession == runtimeSession) &&
+            (identical(other.runtimeId, runtimeId) ||
+                other.runtimeId == runtimeId) &&
+            (identical(other.sessionId, sessionId) ||
+                other.sessionId == sessionId) &&
             (identical(other.logId, logId) || other.logId == logId) &&
             (identical(other.parentLogId, parentLogId) ||
                 other.parentLogId == parentLogId));
@@ -519,19 +536,21 @@ class _$_MessageDetails extends _MessageDetails {
       time,
       const DeepCollectionEquality().hash(_tags),
       const DeepCollectionEquality().hash(_templateValues),
-      runtimeSession,
+      runtimeId,
+      sessionId,
       logId,
       parentLogId);
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_MessageDetailsCopyWith<_$_MessageDetails> get copyWith =>
-      __$$_MessageDetailsCopyWithImpl<_$_MessageDetails>(this, _$identity);
+  _$$MessageDetailsImplCopyWith<_$MessageDetailsImpl> get copyWith =>
+      __$$MessageDetailsImplCopyWithImpl<_$MessageDetailsImpl>(
+          this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_MessageDetailsToJson(
+    return _$$MessageDetailsImplToJson(
       this,
     );
   }
@@ -543,13 +562,14 @@ abstract class _MessageDetails extends MessageDetails {
       required final DateTime time,
       required final List<String> tags,
       required final Map<String, String> templateValues,
-      required final String runtimeSession,
-      final int logId,
-      final int? parentLogId}) = _$_MessageDetails;
+      required final String runtimeId,
+      required final String sessionId,
+      final int? logId,
+      final int? parentLogId}) = _$MessageDetailsImpl;
   const _MessageDetails._() : super._();
 
   factory _MessageDetails.fromJson(Map<String, dynamic> json) =
-      _$_MessageDetails.fromJson;
+      _$MessageDetailsImpl.fromJson;
 
   @override
   String get messageCode;
@@ -560,13 +580,15 @@ abstract class _MessageDetails extends MessageDetails {
   @override
   Map<String, String> get templateValues;
   @override
-  String get runtimeSession;
+  String get runtimeId;
   @override
-  int get logId;
+  String get sessionId;
+  @override
+  int? get logId;
   @override
   int? get parentLogId;
   @override
   @JsonKey(ignore: true)
-  _$$_MessageDetailsCopyWith<_$_MessageDetails> get copyWith =>
+  _$$MessageDetailsImplCopyWith<_$MessageDetailsImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
