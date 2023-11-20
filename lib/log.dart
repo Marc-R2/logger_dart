@@ -15,7 +15,10 @@ class Log extends MessageTemplate {
           (runtime != null && session != null) || parent != null,
           'Log runtime must not be null if parent is null',
         ),
-        super(runtimeSession: runtime, sessionId: session) {
+        super(
+          runtimeSession: runtime ?? parent?.runtime,
+          sessionId: session ?? parent?.session,
+        ) {
     parent?.addChild(this);
   }
 
@@ -39,10 +42,15 @@ class Log extends MessageTemplate {
   /// and the threshold parameter of [finish] and [finishWithReturn]
   static Duration globalThreshold = const Duration(microseconds: 2000);
 
-  /// Get the session id
+  /// Get the runtime id
   ///
   /// either from the current log or from the parent
   LogRuntime get runtime => runtimeId ?? parent!.runtime;
+
+  /// Get the session id
+  ///
+  /// either from the current log or from the parent
+  LogSession get session => sessionId ?? parent!.session;
 
   int _idCounter = 0;
 

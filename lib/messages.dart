@@ -289,7 +289,7 @@ class Message {
 
     if (type) {
       if (str.isNotEmpty) str.write(' ');
-      str.write(this.type.stringName);
+      str..write(this.type.stringName)..write(':');
     }
 
     if (title && this.title.isNotEmpty) {
