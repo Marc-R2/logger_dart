@@ -82,17 +82,17 @@ class MessageTemplate {
 
   int? _getLogId() {
     if (this is! Log) return null;
-    return (this as Log).createId();
+    return (this as Log)._createId();
   }
 
   int? _getParentLogId() {
     if (this is! Log) return null;
-    return (this as Log).getLastMessage()?.logId;
+    return (this as Log)._getLatestMessageAbove()?.logId;
   }
 
   Message _addMessage(Message message) {
     if (this is! Log) return message;
-    (this as Log).messages.add(message);
+    (this as Log)._messages.add(message);
     return message;
   }
 

@@ -44,13 +44,43 @@ class Log extends MessageTemplate {
   /// either from the current log or from the parent
   LogRuntime get runtime => runtimeId ?? parent!.runtime;
 
-  int idCounter = 0;
+  int _idCounter = 0;
 
-  List<Message> messages = [];
+  final List<Message> _messages = [];
 
-  int createId() {
-    if (parent == null) return idCounter++;
-    return parent!.createId();
+  Iterable<Message> get messagesInContext sync* {
+    yield* _messages;
+  }
+
+  Iterable<Message> get messagesInContextAndAbove sync* {
+    yield* messagesAbove;
+    yield* messagesInContext;
+  }
+
+  Iterable<Message> get messagesAbove sync* {
+    if (parent != null) yield* parent!.messagesInContextAndAbove;
+  }
+
+  Iterable<Message> get messagesInContextAndBelow sync* {
+    yield* messagesInContext;
+    yield* messagesBelow;
+  }
+
+  Iterable<Message> get messagesBelow sync* {
+    for (final child in _children) {
+      yield* child.messagesInContextAndBelow;
+    }
+  }
+
+  Iterable<Message> get messagesAll sync* {
+    yield* messagesAbove;
+    yield* messagesInContext;
+    yield* messagesBelow;
+  }
+
+  int _createId() {
+    if (parent == null) return _idCounter++;
+    return parent!._createId();
   }
 
   /// Add a child log
@@ -125,9 +155,9 @@ class Log extends MessageTemplate {
     return result;
   }
 
-  Message? getLastMessage() {
-    if (messages.isNotEmpty) return messages.last;
-    if (parent != null) return parent!.getLastMessage();
+  Message? _getLatestMessageAbove() {
+    if (_messages.isNotEmpty) return _messages.last;
+    if (parent != null) return parent!._getLatestMessageAbove();
     return null;
   }
 
@@ -145,7 +175,9 @@ class Log extends MessageTemplate {
       runtime: context?.runtimeId ?? Logging.runtimeSession,
     );
   }
+}
 
-  Log functionStart(String function, {Object? klasse}) =>
-      globalFunctionStart(function, this, klasse);
+extension LogStartFunction on Log? {
+  Log functionStartStatic(String function, {Object? klasse}) =>
+      Log.globalFunctionStart(function, this, klasse);
 }
