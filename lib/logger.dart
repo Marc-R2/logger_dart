@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'dart:developer' as developer;
 
+import 'package:crypt/encrypt.dart';
 import 'package:log_message/message_details.dart';
 
 part 'mixin/logging.dart';

@@ -6,8 +6,9 @@ part of 'message_details.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_MessageBase _$$_MessageBaseFromJson(Map<String, dynamic> json) =>
-    _$_MessageBase(
+_$MessageBaseImpl _$$MessageBaseImplFromJson(Map<String, dynamic> json) =>
+    _$MessageBaseImpl(
+      messageCode: json['messageCode'] as String,
       type: $enumDecode(_$MessageTypeEnumMap, json['type']),
       title: json['title'] as String,
       sourceFunction: json['sourceFunction'] as String?,
@@ -16,8 +17,9 @@ _$_MessageBase _$$_MessageBaseFromJson(Map<String, dynamic> json) =>
       level: json['level'] as int?,
     );
 
-Map<String, dynamic> _$$_MessageBaseToJson(_$_MessageBase instance) {
+Map<String, dynamic> _$$MessageBaseImplToJson(_$MessageBaseImpl instance) {
   final val = <String, dynamic>{
+    'messageCode': instance.messageCode,
     'type': _$MessageTypeEnumMap[instance.type]!,
     'title': instance.title,
   };
@@ -43,8 +45,9 @@ const _$MessageTypeEnumMap = {
   MessageType.trace: 'trace',
 };
 
-_$_MessageDetails _$$_MessageDetailsFromJson(Map<String, dynamic> json) =>
-    _$_MessageDetails(
+_$MessageDetailsImpl _$$MessageDetailsImplFromJson(Map<String, dynamic> json) =>
+    _$MessageDetailsImpl(
+      messageCode: json['messageCode'] as String,
       time: DateTime.parse(json['time'] as String),
       tags: (json['tags'] as List<dynamic>).map((e) => e as String).toList(),
       templateValues: Map<String, String>.from(json['templateValues'] as Map),
@@ -54,8 +57,10 @@ _$_MessageDetails _$$_MessageDetailsFromJson(Map<String, dynamic> json) =>
       parentLogId: json['parentLogId'] as int?,
     );
 
-Map<String, dynamic> _$$_MessageDetailsToJson(_$_MessageDetails instance) {
+Map<String, dynamic> _$$MessageDetailsImplToJson(
+    _$MessageDetailsImpl instance) {
   final val = <String, dynamic>{
+    'messageCode': instance.messageCode,
     'time': instance.time.toIso8601String(),
     'tags': instance.tags,
     'templateValues': instance.templateValues,

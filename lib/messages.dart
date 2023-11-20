@@ -234,6 +234,12 @@ class Message {
 
   final int? parentLogId;
 
+  String get messageCode {
+    final statics = '$type;$title;$sourceFunction;$sourceClass;$text;$level';
+    final hash = Hash.sha256(statics);
+    return hash.substring(0, 8);
+  }
+
   /// Turns the message into a map
   ///
   /// This can later be used to recreate the message via fromMap
