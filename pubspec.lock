@@ -165,8 +165,8 @@ packages:
     dependency: "direct main"
     description:
       path: "."
-      ref: "8cf39659"
-      resolved-ref: "8cf39659a0b56a05da1c481eaae496feafa2a0d5"
+      ref: "22540803"
+      resolved-ref: "2254080324b35d5d43b3902bf2bb6b9d7cdaf312"
       url: "https://github.com/Marc-R2/encrypt_dart.git"
     source: git
     version: "0.1.1"
